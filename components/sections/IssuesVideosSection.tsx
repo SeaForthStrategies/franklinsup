@@ -20,10 +20,12 @@ export function IssuesVideosSection({
   items,
 }: IssuesVideosSectionProps) {
   return (
-    <section aria-labelledby="issues-videos-title" className="relative overflow-hidden bg-neutral-surface py-16 sm:py-20">
+    <section aria-labelledby="issues-videos-title" className="relative overflow-hidden py-16 sm:py-20">
+      {/* Soft gradient background with lighter blues */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 left-[-10%] h-[520px] w-[900px] rounded-full bg-accent-200/40 blur-3xl" />
-        <div className="absolute -top-40 right-[-10%] h-[480px] w-[820px] rounded-full bg-secondary-200/30 blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/80 via-cyan-50/60 to-white" />
+        <div className="absolute -top-24 left-[-10%] h-[520px] w-[900px] rounded-full bg-cyan-200/25 blur-3xl" />
+        <div className="absolute -top-40 right-[-10%] h-[480px] w-[820px] rounded-full bg-blue-200/20 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-content px-4 sm:px-6 lg:px-8">
@@ -40,7 +42,7 @@ export function IssuesVideosSection({
               href={volunteerUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-base font-black uppercase tracking-wide text-white shadow-card transition-all hover:-translate-y-0.5 hover:bg-primary-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto sm:px-6 sm:py-3"
+              className="site-cta site-cta--primary text-base sm:text-sm sm:py-3"
             >
               Volunteer
             </a>

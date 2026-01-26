@@ -32,12 +32,12 @@ export function PrioritiesSection({
   cards,
 }: PrioritiesSectionProps) {
   return (
-    <section aria-labelledby="priorities-title" className="relative overflow-hidden py-14 sm:py-16 lg:py-20">
-      {/* Background */}
+    <section aria-labelledby="priorities-title" className="relative overflow-hidden py-16 sm:py-20">
+      {/* Soft gradient background blending from news section */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-10%] top-[-10%] h-[420px] w-[720px] rounded-full bg-accent-200/40 blur-3xl" />
-        <div className="absolute right-[-10%] top-[-15%] h-[420px] w-[720px] rounded-full bg-secondary-200/25 blur-3xl" />
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-base/95 to-neutral-surface/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/60 via-indigo-50/40 to-slate-50/80" />
+        <div className="absolute left-[-10%] top-[-10%] h-[420px] w-[720px] rounded-full bg-blue-200/25 blur-3xl" />
+        <div className="absolute right-[-10%] top-[-15%] h-[420px] w-[720px] rounded-full bg-cyan-200/20 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-content px-4 sm:px-6 lg:px-8">
@@ -56,12 +56,12 @@ export function PrioritiesSection({
           </p>
         </header>
 
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:gap-5 md:mt-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <div className="mt-10 grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
           {cards.map((card) => (
             <article
               key={card.id}
               aria-labelledby={`priority-${card.id}-title`}
-              className="relative isolate flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base/90 p-5 shadow-card"
+              className="relative isolate flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base/90 p-6 shadow-card sm:p-7"
             >
               <div
                 aria-hidden="true"
@@ -69,7 +69,7 @@ export function PrioritiesSection({
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-[radial-gradient(680px_220px_at_10%_10%,rgba(219,174,59,.10),transparent_60%)]"
+                className="absolute inset-0 bg-[radial-gradient(680px_220px_at_10%_10%,rgba(25,183,255,.10),transparent_60%)]"
               />
 
               <h3

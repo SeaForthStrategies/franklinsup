@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IssuesVideosSection } from "@/components/sections/IssuesVideosSection";
 import { RecordNewsSection } from "@/components/sections/RecordNewsSection";
 import { PrioritiesSection } from "@/components/sections/PrioritiesSection";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 
 export const metadata: Metadata = {
   title: "John on the Issues | John Franklin for Supervisor 2026",
@@ -39,6 +40,8 @@ export default function IssuesPage() {
         volunteerUrl="https://secure.franklinforsupervisor.com/volunteer-web"
         items={[...ISSUE_VIDEOS]}
       />
+
+      <SectionDivider variant="wave1" />
 
       <RecordNewsSection
         donateUrl="https://secure.franklinforsupervisor.com/15?_gl=1*1jmx4dj*_gcl_au*NDI0MzU5NjY1LjE3NjQ2OTQ1NTM."
@@ -92,6 +95,8 @@ export default function IssuesPage() {
           },
         ]}
       />
+
+      <SectionDivider variant="wave2" />
 
       <PrioritiesSection
         cards={[

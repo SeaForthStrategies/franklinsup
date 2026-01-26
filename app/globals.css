@@ -48,12 +48,15 @@
   }
 
   .site-nav {
-    /* Mobile: stacked blocks (logo, links, CTAs). Tablet/Desktop: single row */
-    @apply flex flex-col gap-4 py-4 md:flex-row md:items-center md:justify-between md:gap-6;
+    @apply py-4;
+  }
+
+  .site-nav-top {
+    @apply flex items-center justify-between;
   }
 
   .site-brand {
-    @apply inline-flex items-center justify-center md:justify-start;
+    @apply inline-flex items-center justify-start;
   }
 
   .site-logo {
@@ -61,53 +64,188 @@
     @apply h-auto w-[180px] sm:w-[200px] md:w-[220px];
   }
 
+  /* Hamburger menu toggle button */
+  .site-menu-toggle {
+    @apply relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger-line {
+    @apply h-0.5 w-6 rounded-full bg-current transition-all duration-300;
+    color: var(--ffsv-navy);
+  }
+
+  .hamburger-line:nth-child(1) {
+    transform-origin: center;
+  }
+  
+  .hamburger-line.open:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+  }
+  
+  .hamburger-line.open:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  
+  .hamburger-line.open:nth-child(3) {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  /* Mobile menu overlay */
+  .site-nav-menu {
+    @apply flex flex-col gap-6 overflow-hidden transition-all duration-300;
+    max-height: 0;
+    opacity: 0;
+  }
+
+  .site-nav-menu.open {
+    @apply mt-6 pb-4;
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  /* Desktop: show menu inline */
+  @media (min-width: 768px) {
+    .site-nav {
+      @apply flex items-center justify-between gap-6;
+    }
+
+    .site-nav-menu {
+      @apply flex flex-row items-center gap-6 opacity-100;
+      max-height: none;
+    }
+
+    .site-nav-menu.open {
+      @apply m-0 p-0;
+    }
+  }
+
   .site-nav-links {
-    /*
-      Mobile: horizontal scroll (keeps header compact without JS).
-      Tablet/Desktop: normal wrap + centered.
-    */
-    @apply -mx-4 flex items-center gap-4 overflow-x-auto px-4 py-1 text-xs font-black uppercase tracking-widest;
-    @apply sm:text-sm;
-    @apply md:mx-0 md:flex-wrap md:justify-center md:overflow-visible md:px-0;
+    @apply flex flex-col items-stretch gap-4 text-sm font-black uppercase tracking-widest;
+    @apply md:flex-row md:items-center md:justify-center md:gap-6;
     color: var(--ffsv-text);
   }
 
   .site-nav-link {
-    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply rounded-lg px-3 py-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
     @apply whitespace-nowrap;
     color: var(--ffsv-text);
+    animation: fadeInUp 0.3s ease-out backwards;
   }
+  
   .site-nav-link:hover {
     color: var(--ffsv-ink);
+    transform: translateY(-1px);
   }
 
   .site-nav-ctas {
     /* Mobile: full-width buttons. Tablet/Desktop: inline buttons. */
-    @apply flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center md:justify-end;
+    @apply flex flex-col gap-3 md:flex-row md:items-center;
   }
 
+  /* LIQUID GLASS BUTTONS */
   .site-cta {
-    @apply inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-black uppercase tracking-wide;
+    @apply inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide;
     @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
-    @apply sm:w-auto sm:px-5 sm:py-2;
+    @apply md:w-auto md:px-6 md:py-2.5;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    animation: fadeInScale 0.5s ease-out backwards;
+  }
+
+  .site-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.4) 0%, 
+      rgba(255, 255, 255, 0.1) 50%, 
+      rgba(255, 255, 255, 0.4) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .site-cta:hover::before {
+    opacity: 1;
+  }
+
+  .site-cta::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+  }
+
+  .site-cta:active::after {
+    width: 300px;
+    height: 300px;
   }
 
   .site-cta--primary {
-    background: linear-gradient(135deg, var(--ffsv-navy), #123a7a 55%, var(--ffsv-accent));
+    background: linear-gradient(135deg, 
+      var(--ffsv-navy), 
+      #123a7a 55%, 
+      var(--ffsv-accent)
+    );
     color: #fff;
+    box-shadow: 
+      0 4px 15px rgba(27, 92, 255, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
   }
+
   .site-cta--primary:hover {
-    filter: saturate(1.05);
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 25px rgba(27, 92, 255, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    filter: saturate(1.1) brightness(1.05);
+  }
+
+  .site-cta--primary:active {
+    transform: translateY(0);
   }
 
   .site-cta--secondary {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px) saturate(150%);
     border: 2px solid var(--ffsv-navy);
     color: var(--ffsv-navy);
-    background: transparent;
+    box-shadow: 
+      0 4px 15px rgba(10, 31, 68, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.05);
   }
+
   .site-cta--secondary:hover {
     background: var(--ffsv-navy);
     color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 25px rgba(10, 31, 68, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .site-cta--secondary:active {
+    transform: translateY(0);
   }
 }
 
@@ -125,5 +263,37 @@
 
   .gradient-accent {
     background: linear-gradient(135deg, var(--ffsv-record-accent), var(--ffsv-accent));
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
   }
 }

@@ -21,11 +21,12 @@ interface RecordNewsSectionProps {
 
 export function RecordNewsSection({ donateUrl, lead, rail }: RecordNewsSectionProps) {
   return (
-    <section aria-labelledby="recordnews-title" className="relative overflow-hidden bg-neutral-base py-16 sm:py-20">
-      {/* Decorative background (light, SEO-safe, no JS) */}
+    <section aria-labelledby="recordnews-title" className="relative overflow-hidden py-16 sm:py-20">
+      {/* Soft gradient background blending with adjacent sections */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 left-[-10%] h-[360px] w-[850px] -skew-y-6 rounded-full bg-accent-100/70 blur-3xl" />
-        <div className="absolute -top-24 right-[-10%] h-[360px] w-[780px] -skew-y-6 rounded-full bg-secondary-100/60 blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-sky-50/40 to-blue-50/60" />
+        <div className="absolute -top-24 left-[-10%] h-[360px] w-[850px] -skew-y-6 rounded-full bg-sky-200/30 blur-3xl" />
+        <div className="absolute -top-24 right-[-10%] h-[360px] w-[780px] -skew-y-6 rounded-full bg-cyan-200/25 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-content px-4 sm:px-6 lg:px-8">
@@ -35,9 +36,9 @@ export function RecordNewsSection({ donateUrl, lead, rail }: RecordNewsSectionPr
             John on the Record
           </div>
 
-          <h1 id="recordnews-title" className="mt-3 text-4xl font-black uppercase tracking-tight md:text-5xl gradient-primary">
+          <h2 id="recordnews-title" className="mt-3 text-4xl font-black uppercase tracking-tight md:text-5xl gradient-primary">
             In the News &amp; Commentary
-          </h1>
+          </h2>
 
           <p className="mt-4 text-lg leading-relaxed text-neutral-muted">
             Op-eds and commentary where John lays out the case for common-sense policy — directly, clearly, and on the record.
@@ -48,17 +49,7 @@ export function RecordNewsSection({ donateUrl, lead, rail }: RecordNewsSectionPr
               href={donateUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={[
-                "relative inline-flex w-full items-center justify-center rounded-full px-7 py-4",
-                "text-lg font-black uppercase tracking-wide text-white",
-                "bg-gradient-to-br from-primary via-primary-700 to-accent shadow-card",
-                "transition-all hover:-translate-y-0.5 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-                // glossy sweep
-                "before:absolute before:inset-[-40%_-60%] before:rotate-[20deg] before:translate-x-[-70%]",
-                "before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent)] before:content-['']",
-                "before:transition-transform before:duration-700 hover:before:translate-x-[70%]",
-                "sm:w-auto sm:px-7 sm:py-4",
-              ].join(" ")}
+              className="site-cta site-cta--primary text-base sm:text-sm sm:py-3"
             >
               Donate
             </a>
@@ -118,6 +109,7 @@ export function RecordNewsSection({ donateUrl, lead, rail }: RecordNewsSectionPr
                 >
                   <span className="inline-flex items-center gap-2">
                     {/* Use <img> for SVG icons to avoid next/image SVG restrictions */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={lead.sourceIconUrl}
                       alt=""
@@ -150,7 +142,7 @@ export function RecordNewsSection({ donateUrl, lead, rail }: RecordNewsSectionPr
                 <article
                   key={item.url}
                   className={[
-                    "grid grid-cols-[96px_1fr] gap-3 rounded-xl p-3 transition-all hover:-translate-y-0.5 hover:bg-secondary-50/40",
+                    "grid grid-cols-[96px_1fr] gap-3 rounded-xl p-3 transition-all hover:-translate-y-0.5 hover:bg-sky-50/60",
                     idx > 0 ? "border-t border-neutral-border rounded-t-none" : "",
                     "sm:grid-cols-[110px_1fr]",
                   ].join(" ")}
@@ -181,6 +173,7 @@ export function RecordNewsSection({ donateUrl, lead, rail }: RecordNewsSectionPr
                       className="mt-2 inline-flex w-max items-center gap-2 border-b-2 border-primary/20 pb-0.5 text-sm font-black text-primary-800 transition-all hover:translate-x-0.5 hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     >
                       {/* Use <img> for SVG icons to avoid next/image SVG restrictions */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={item.sourceIconUrl}
                         alt=""
