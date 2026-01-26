@@ -21,7 +21,7 @@ export function HomeExperienceDonate({
       <div className="site-container">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-primary/80">
+            <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-neutral-slate/80">
               <span className="h-3 w-3 rounded bg-gradient-to-br from-accent-400 to-secondary-500 shadow-sm" aria-hidden="true" />
               Endorsements
             </div>
@@ -45,7 +45,7 @@ export function HomeExperienceDonate({
               <div className="h-2 gradient-patriot" aria-hidden="true" />
 
               <div className="p-7 sm:p-8">
-                <h3 className="text-2xl font-black uppercase tracking-tight text-primary-900">
+                <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-ink">
                   Donate
                 </h3>
                 <p className="mt-3 text-sm text-neutral-muted">
@@ -62,7 +62,7 @@ export function HomeExperienceDonate({
                       data-amount={a.value}
                       className={[
                         "inline-flex items-center justify-center rounded-xl border border-neutral-border bg-neutral-base px-4 py-3",
-                        "text-sm font-black uppercase tracking-wide text-primary transition-all duration-200",
+                        "text-sm font-black uppercase tracking-wide text-neutral-ink transition-all duration-200",
                         "hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-card focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
                       ].join(" ")}
                     >

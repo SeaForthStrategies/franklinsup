@@ -1,0 +1,30 @@
+---
+description: Prefer wide layouts while staying mobile-first (optimize for mobile, tablet, desktop)
+alwaysApply: true
+---
+
+# Responsive layout: wide-by-default, mobile-first
+
+## Core principles
+
+- Default to **wide width** sections (`w-full`) and **full-bleed** backgrounds where appropriate.
+- Keep **reading comfort**: constrain long-form text blocks (target ~60–75 characters/line) even inside wide sections.
+- Build **mobile-first**, then enhance at `sm`, `md`, `lg`, `xl` with consistent gutters and grids.
+
+## Implementation guidelines (Tailwind / Next.js)
+
+- Use a consistent page gutter pattern, e.g. `px-4 sm:px-6 lg:px-8`.
+- Prefer wide containers for layout: `mx-auto w-full max-w-7xl` (or `max-w-screen-2xl` if the design calls for it).
+- For full-bleed sections with centered inner content:
+  - Outer: `w-full`
+  - Inner: `mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8`
+- Use responsive grids instead of fixed widths:
+  - `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10`
+- Avoid desktop-only assumptions:
+  - Touch targets ≥ 44px (`h-11`, `py-3`, `px-5`)
+  - Headings and spacing must not overflow or wrap awkwardly on small screens
+
+## Quick checks before finishing UI work
+
+- Verify layout at **mobile**, **tablet**, **desktop** widths (no horizontal scroll, no cramped columns).
+- Ensure wide sections still feel aligned: consistent gutters, baseline alignment, and grid rhythm.

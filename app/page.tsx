@@ -1,26 +1,26 @@
 import { CallToAction } from "@/components/sections/CallToAction";
-import { HomeCommonSense } from "@/components/sections/HomeCommonSense";
-import { HomeExperienceDonate } from "@/components/sections/HomeExperienceDonate";
-import { Hero } from "@/components/sections/Hero";
+import { HomeCoverHero } from "@/components/sections/HomeCoverHero.client";
+import { HomeIconIssues } from "@/components/sections/HomeIconIssues";
+import { HomePressStrip } from "@/components/sections/HomePressStrip";
+import { HomeThreeColumnBand } from "@/components/sections/HomeThreeColumnBand";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 
 export default function Home() {
   return (
     <>
-      <Hero
-        title={
-          <>
-            A Safer, Cleaner
-            <br /> North County
-          </>
-        }
-        subtitle=""
-        donateUrl="https://secure.franklinforsupervisor.com/15"
-        volunteerUrl="https://secure.franklinforsupervisor.com/volunteer-web"
-      />
+      <HomeCoverHero donateUrl="https://secure.franklinforsupervisor.com/15" endorsementsHref="/endorsements" />
 
-      <HomeExperienceDonate donateUrl="https://secure.franklinforsupervisor.com/15" />
+      <SectionDivider variant="wave1" />
 
-      <HomeCommonSense learnMoreHref="/issues" />
+      <HomeThreeColumnBand donateUrl="https://secure.franklinforsupervisor.com/15" />
+
+      <SectionDivider variant="dots" />
+
+      <HomePressStrip />
+
+      <SectionDivider variant="wave2" />
+
+      <HomeIconIssues learnMoreHref="/issues" />
 
       <CallToAction
         title="Help us win in District 5"

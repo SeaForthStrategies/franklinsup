@@ -6,7 +6,7 @@ export function HomeCommonSense({ learnMoreHref = "/issues" }: HomeCommonSensePr
   return (
     <section aria-labelledby="commonsense-title" className="relative overflow-hidden py-16 sm:py-20">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-50/80 via-blue-50/60 to-neutral-base" />
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
         <div className="absolute left-[-10%] top-[-10%] h-[420px] w-[720px] rounded-full bg-blue-200/20 blur-3xl" />
         <div className="absolute right-[-10%] top-[-15%] h-[420px] w-[720px] rounded-full bg-cyan-200/18 blur-3xl" />
       </div>
@@ -30,7 +30,7 @@ export function HomeCommonSense({ learnMoreHref = "/issues" }: HomeCommonSensePr
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           <article className="relative overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base/90 p-6 shadow-card">
             <div className="absolute inset-x-0 top-0 h-2 bg-accent" aria-hidden="true" />
-            <h3 className="mt-2 font-heading text-xl font-black uppercase tracking-tight text-primary-800">
+            <h3 className="mt-2 font-heading text-xl font-black uppercase tracking-tight text-neutral-ink">
               Fire Prevention
             </h3>
             <p className="mt-3 text-sm text-neutral-muted">
@@ -39,7 +39,7 @@ export function HomeCommonSense({ learnMoreHref = "/issues" }: HomeCommonSensePr
             </p>
             <a
               href={learnMoreHref}
-              className="mt-5 inline-flex items-center justify-center rounded-full border-2 border-primary px-6 py-2.5 text-sm font-black uppercase tracking-wide text-primary transition-all duration-200 hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="mt-5 inline-flex items-center justify-center rounded-full border-2 border-secondary/70 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-ink transition-all duration-200 hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-neutral-base"
             >
               Learn More
             </a>
@@ -47,7 +47,7 @@ export function HomeCommonSense({ learnMoreHref = "/issues" }: HomeCommonSensePr
 
           <article className="relative overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base/90 p-6 shadow-card">
             <div className="absolute inset-x-0 top-0 h-2 bg-accent" aria-hidden="true" />
-            <h3 className="mt-2 font-heading text-xl font-black uppercase tracking-tight text-primary-800">
+            <h3 className="mt-2 font-heading text-xl font-black uppercase tracking-tight text-neutral-ink">
               Fix our Roads
             </h3>
             <p className="mt-3 text-sm text-neutral-muted">
@@ -56,7 +56,7 @@ export function HomeCommonSense({ learnMoreHref = "/issues" }: HomeCommonSensePr
             </p>
             <a
               href={learnMoreHref}
-              className="mt-5 inline-flex items-center justify-center rounded-full border-2 border-primary px-6 py-2.5 text-sm font-black uppercase tracking-wide text-primary transition-all duration-200 hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="mt-5 inline-flex items-center justify-center rounded-full border-2 border-secondary/70 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-ink transition-all duration-200 hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-neutral-base"
             >
               Learn More
             </a>
@@ -64,7 +64,7 @@ export function HomeCommonSense({ learnMoreHref = "/issues" }: HomeCommonSensePr
 
           <article className="relative overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base/90 p-6 shadow-card">
             <div className="absolute inset-x-0 top-0 h-2 bg-accent" aria-hidden="true" />
-            <h3 className="mt-2 font-heading text-xl font-black uppercase tracking-tight text-primary-800">
+            <h3 className="mt-2 font-heading text-xl font-black uppercase tracking-tight text-neutral-ink">
               Community
             </h3>
             <p className="mt-3 text-sm text-neutral-muted">
@@ -73,7 +73,7 @@ export function HomeCommonSense({ learnMoreHref = "/issues" }: HomeCommonSensePr
             </p>
             <a
               href={learnMoreHref}
-              className="mt-5 inline-flex items-center justify-center rounded-full border-2 border-primary px-6 py-2.5 text-sm font-black uppercase tracking-wide text-primary transition-all duration-200 hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="mt-5 inline-flex items-center justify-center rounded-full border-2 border-secondary/70 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-ink transition-all duration-200 hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-neutral-base"
             >
               Learn More
             </a>

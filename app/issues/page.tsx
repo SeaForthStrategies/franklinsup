@@ -26,7 +26,7 @@ const ISSUE_VIDEOS = [
     title: "Opposes Sanctuary:",
     videoId: "nULDwnohokU",
   },
-  { title: "No Early Release for Sexually Violent Predators:", videoId: "8PV5N9RD9W8" },
+  { title: "Criminal Justice:", videoId: "8PV5N9RD9W8" },
   { title: "Fiscal Responsibility:", videoId: "rELPIcuan2w" },
 ] as const;
 

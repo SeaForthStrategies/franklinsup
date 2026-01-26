@@ -56,12 +56,17 @@ const config: Config = {
         },
         neutral: {
           /* Franklin neutrals */
-          ink: "#071734",
-          slate: "#0a1f44",
-          muted: "#3b4351",
-          border: "#E2E8F0",
-          surface: "#F8FAFC",
-          base: "#FFFFFF",
+          // Light-first: “premium” off-white base (not flat white)
+          // - base: page background (tinted)
+          // - surface: true white cards/surfaces
+          // - border: cool gray-blue separators
+          // - ink/slate/muted: text hierarchy on light
+          base: "#F6F8FF",
+          surface: "#FFFFFF",
+          border: "#D6DFEF",
+          ink: "#0B1220",
+          slate: "#334155",
+          muted: "#475569",
         },
       },
       fontFamily: {

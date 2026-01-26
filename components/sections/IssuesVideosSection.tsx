@@ -25,7 +25,7 @@ export function IssuesVideosSection({
     <section aria-labelledby="issues-videos-title" className="relative overflow-hidden py-16 sm:py-20">
       {/* Soft gradient background with lighter blues */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/80 via-cyan-50/60 to-white" />
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
         <div className="absolute -top-24 left-[-10%] h-[520px] w-[900px] rounded-full bg-cyan-200/25 blur-3xl" />
         <div className="absolute -top-40 right-[-10%] h-[480px] w-[820px] rounded-full bg-blue-200/20 blur-3xl" />
       </div>

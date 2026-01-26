@@ -25,14 +25,14 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
     <section aria-labelledby="recordnews-title" className="relative overflow-hidden py-16 sm:py-20">
       {/* Soft gradient background blending with adjacent sections */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-sky-50/40 to-blue-50/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
         <div className="absolute -top-24 left-[-10%] h-[360px] w-[850px] -skew-y-6 rounded-full bg-sky-200/30 blur-3xl" />
         <div className="absolute -top-24 right-[-10%] h-[360px] w-[780px] -skew-y-6 rounded-full bg-cyan-200/25 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <header className="max-w-3xl">
-          <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-primary/80">
+          <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-neutral-slate/80">
             <span className="h-3 w-3 rounded bg-gradient-to-br from-accent-400 to-secondary-500 shadow-sm" aria-hidden="true" />
             John on the Record
           </div>
@@ -91,7 +91,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
               </a>
 
               <div className="flex h-full flex-col gap-3 p-6">
-                <div className="flex flex-wrap items-center gap-2 text-xs tracking-wide text-primary/70">
+                <div className="flex flex-wrap items-center gap-2 text-xs tracking-wide text-neutral-slate/70">
                   <span className="font-semibold">{lead.sourceName}</span>
                   <span aria-hidden="true" className="opacity-70">
                     •
@@ -112,7 +112,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
                   target="_blank"
                   rel="noopener noreferrer"
                   className={[
-                    "mt-auto inline-flex w-max items-center justify-between gap-3 rounded-xl bg-neutral-surface px-4 py-3 font-black tracking-wide text-primary-800 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+                    "mt-auto inline-flex w-max items-center justify-between gap-3 rounded-xl bg-neutral-surface px-4 py-3 font-black tracking-wide text-neutral-ink shadow-sm transition-all hover:-translate-y-0.5 hover:bg-primary/5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
                     borderless ? "" : "border border-neutral-border hover:border-primary/30",
                   ].join(" ")}
                 >
@@ -125,7 +125,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
                       aria-hidden="true"
                       width={34}
                       height={34}
-                      className="h-[34px] w-[34px] rounded-md border border-neutral-border bg-neutral-base p-1"
+                      className="h-[34px] w-[34px] rounded-md border border-neutral-border bg-neutral-surface p-1"
                       loading="lazy"
                       decoding="async"
                     />
@@ -157,7 +157,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
                 <article
                   key={item.url}
                   className={[
-                    "grid grid-cols-[96px_1fr] gap-3 rounded-xl p-3 transition-all hover:-translate-y-0.5 hover:bg-sky-50/60",
+                    "grid grid-cols-[96px_1fr] gap-3 rounded-xl p-3 transition-all hover:-translate-y-0.5 hover:bg-primary/5",
                     idx > 0 && !borderless ? "border-t border-neutral-border rounded-t-none" : "",
                     "sm:grid-cols-[110px_1fr]",
                   ].join(" ")}
@@ -180,7 +180,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
                   </a>
 
                   <div className="min-w-0">
-                    <div className="text-xs text-primary/70">
+                    <div className="text-xs text-neutral-slate/70">
                       <time dateTime={item.dateTime}>{item.dateLabel}</time>
                     </div>
                     <h3 className="mt-1 line-clamp-2 font-heading text-sm font-black leading-snug text-neutral-ink sm:text-base">
@@ -190,7 +190,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-2 inline-flex w-max items-center gap-2 border-b-2 border-primary/20 pb-0.5 text-sm font-black text-primary-800 transition-all hover:translate-x-0.5 hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      className="mt-2 inline-flex w-max items-center gap-2 border-b-2 border-primary/20 pb-0.5 text-sm font-black text-neutral-ink transition-all hover:translate-x-0.5 hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     >
                       {/* Use <img> for SVG icons to avoid next/image SVG restrictions */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -200,7 +200,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
                         aria-hidden="true"
                         width={24}
                         height={24}
-                        className="h-6 w-6 rounded-md border border-neutral-border bg-neutral-base p-1"
+                        className="h-6 w-6 rounded-md border border-neutral-border bg-neutral-surface p-1"
                         loading="lazy"
                         decoding="async"
                       />

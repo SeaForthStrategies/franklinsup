@@ -33,12 +33,12 @@ export default function RootLayout({
       <body>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-neutral-base focus:px-4 focus:py-3 focus:shadow-card focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-neutral-surface focus:px-4 focus:py-3 focus:shadow-card focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
         >
           Skip to content
         </a>
 
-        <div className="min-h-screen bg-neutral-base text-neutral-ink flex flex-col">
+        <div className="min-h-screen bg-transparent text-neutral-ink flex flex-col">
           <Header />
 
           <main id="main-content" className="flex-1">

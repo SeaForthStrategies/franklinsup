@@ -33,10 +33,10 @@ export function Issues({
           {items.map((issue) => (
             <article
               key={issue.title}
-              className="relative overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-xl"
+              className="relative overflow-hidden rounded-2xl border border-neutral-border bg-neutral-surface p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="absolute inset-x-0 top-0 h-2 bg-accent" aria-hidden="true" />
-              <h3 className="mt-2 font-heading text-xl font-black uppercase tracking-tight text-primary-800">
+              <h3 className="mt-2 font-heading text-xl font-black uppercase tracking-tight text-neutral-ink">
                 {issue.title}
               </h3>
               <p className="mt-3 text-neutral-slate">

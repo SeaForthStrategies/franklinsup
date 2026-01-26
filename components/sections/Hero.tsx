@@ -22,7 +22,7 @@ export function Hero({
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative overflow-hidden bg-gradient-to-b from-neutral-base via-sky-50/60 to-neutral-surface py-20 md:py-32"
+      className="relative overflow-hidden bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface py-20 md:py-32"
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute left-[-15%] top-[-20%] h-[520px] w-[780px] rounded-full bg-cyan-200/25 blur-3xl" />
@@ -33,7 +33,7 @@ export function Hero({
         <div className="text-center">
           <div className="inline-flex items-center gap-3">
             <span className="h-3 w-3 rounded-full bg-accent" aria-hidden="true" />
-            <p className="text-xs font-black uppercase tracking-widest text-primary/80">
+            <p className="text-xs font-black uppercase tracking-widest text-neutral-slate/80">
               {kicker}
             </p>
           </div>

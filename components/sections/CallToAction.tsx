@@ -12,15 +12,15 @@ export function CallToAction({
   secondaryCta,
 }: CallToActionProps) {
   return (
-    <section aria-labelledby="cta-title" className="bg-neutral-surface py-16">
+    <section id="get-involved" aria-labelledby="cta-title" className="bg-neutral-base py-16">
       <div className="mx-auto max-w-content px-6">
-        <div className="overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base shadow-card">
+        <div className="overflow-hidden rounded-2xl border border-neutral-border bg-neutral-surface shadow-card">
           <div className="h-2 gradient-patriot" aria-hidden="true" />
 
           <div className="p-8 md:p-10">
             <h2
               id="cta-title"
-              className="font-heading text-3xl font-black uppercase tracking-tight text-primary-900 md:text-4xl"
+              className="font-heading text-3xl font-black uppercase tracking-tight text-neutral-ink md:text-4xl"
             >
               {title}
             </h2>
@@ -43,7 +43,7 @@ export function CallToAction({
                   href={secondaryCta.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-full border-2 border-primary px-7 py-3 text-base font-black uppercase tracking-wide text-primary transition-colors hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="inline-flex items-center justify-center rounded-full border-2 border-secondary/70 px-7 py-3 text-base font-black uppercase tracking-wide text-neutral-ink transition-colors hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-neutral-base"
                 >
                   {secondaryCta.label}
                 </a>

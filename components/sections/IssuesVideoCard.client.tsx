@@ -23,7 +23,7 @@ export function IssuesVideoCard({ title, videoId, start, borderless = false }: I
   return (
     <article
       className={[
-        "relative isolate flex h-full flex-col gap-3 overflow-hidden rounded-2xl bg-neutral-base p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-xl",
+        "relative isolate flex h-full flex-col gap-3 overflow-hidden rounded-2xl bg-neutral-surface p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-xl",
         borderless ? "" : "border border-neutral-border",
       ].join(" ")}
     >
@@ -32,7 +32,7 @@ export function IssuesVideoCard({ title, videoId, start, borderless = false }: I
         className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-accent-400 to-secondary-500 opacity-95"
       />
 
-      <h3 className="relative z-10 min-h-[3.75rem] font-heading text-lg font-black leading-tight tracking-tight text-primary-800 sm:text-xl">
+      <h3 className="relative z-10 min-h-[3.75rem] font-heading text-lg font-black leading-tight tracking-tight text-neutral-ink sm:text-xl">
         {title}
       </h3>
 
