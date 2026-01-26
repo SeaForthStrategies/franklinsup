@@ -1,6 +1,7 @@
 import { CallToAction } from "@/components/sections/CallToAction";
+import { HomeCommonSense } from "@/components/sections/HomeCommonSense";
+import { HomeExperienceDonate } from "@/components/sections/HomeExperienceDonate";
 import { Hero } from "@/components/sections/Hero";
-import { Issues } from "@/components/sections/Issues";
 
 export default function Home() {
   return (
@@ -8,44 +9,18 @@ export default function Home() {
       <Hero
         title={
           <>
-            Leadership for
-            <br />
-            San Diego County
+            A Safer, Cleaner
+            <br /> North County
           </>
         }
-        subtitle="After 14 years of elected public service, I'm ready to meet the challenges our region faces. A husband, local business owner, Mayor, and proud member of the North County community."
+        subtitle=""
         donateUrl="https://secure.franklinforsupervisor.com/15"
         volunteerUrl="https://secure.franklinforsupervisor.com/volunteer-web"
       />
 
-      <Issues
-        items={[
-          {
-            title: "Affordability",
-            description: "Lower the cost of living and protect working and middle-class families.",
-          },
-          {
-            title: "Homelessness",
-            description: "Real solutions that restore safety, accountability, and compassion.",
-          },
-          {
-            title: "Public Safety",
-            description: "Support law enforcement and policies that prevent crime before it starts.",
-          },
-          {
-            title: "Fire Prevention",
-            description: "Plan now—firebreaks, evacuation routes, and prevention technology that works.",
-          },
-          {
-            title: "Fix our Roads",
-            description: "Deliver on the 78 corridor and reduce traffic with real infrastructure.",
-          },
-          {
-            title: "Community",
-            description: "Families, faith, and neighbors working together for a safer, cleaner North County.",
-          },
-        ]}
-      />
+      <HomeExperienceDonate donateUrl="https://secure.franklinforsupervisor.com/15" />
+
+      <HomeCommonSense learnMoreHref="/issues" />
 
       <CallToAction
         title="Help us win in District 5"
