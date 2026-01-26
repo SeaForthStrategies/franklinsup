@@ -44,10 +44,6 @@ export function SectionDivider({ variant = "wave1", className = "" }: SectionDiv
       {/* Feathered blend seam */}
       <div className={`absolute inset-0 bg-gradient-to-b ${seamGradient}`} />
       <div className={`absolute inset-0 ${glow}`} />
-
-      {/* subtle hairline highlight (keeps it crisp, not "muddy") */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
     </div>
   );
 }

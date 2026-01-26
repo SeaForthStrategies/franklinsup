@@ -11,6 +11,7 @@ interface IssuesVideosSectionProps {
   subtitle?: string;
   volunteerUrl: string;
   items: IssuesVideoItem[];
+  borderless?: boolean;
 }
 
 export function IssuesVideosSection({
@@ -18,6 +19,7 @@ export function IssuesVideosSection({
   subtitle = "Short videos where John lays out the issue, the stakes, and what San Diego County should do next.",
   volunteerUrl,
   items,
+  borderless = false,
 }: IssuesVideosSectionProps) {
   return (
     <section aria-labelledby="issues-videos-title" className="relative overflow-hidden py-16 sm:py-20">
@@ -51,7 +53,13 @@ export function IssuesVideosSection({
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
-            <IssuesVideoCard key={item.videoId} title={item.title} videoId={item.videoId} start={item.start} />
+            <IssuesVideoCard
+              key={item.videoId}
+              title={item.title}
+              videoId={item.videoId}
+              start={item.start}
+              borderless={borderless}
+            />
           ))}
         </div>
       </div>

@@ -7,9 +7,10 @@ interface IssuesVideoCardProps {
   title: string;
   videoId: string;
   start?: number;
+  borderless?: boolean;
 }
 
-export function IssuesVideoCard({ title, videoId, start }: IssuesVideoCardProps) {
+export function IssuesVideoCard({ title, videoId, start, borderless = false }: IssuesVideoCardProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const qs = new URLSearchParams({
@@ -20,7 +21,12 @@ export function IssuesVideoCard({ title, videoId, start }: IssuesVideoCardProps)
   if (typeof start === "number") qs.set("start", String(start));
 
   return (
-    <article className="relative isolate flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
+    <article
+      className={[
+        "relative isolate flex h-full flex-col gap-3 overflow-hidden rounded-2xl bg-neutral-base p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-xl",
+        borderless ? "" : "border border-neutral-border",
+      ].join(" ")}
+    >
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-accent-400 to-secondary-500 opacity-95"
@@ -30,7 +36,12 @@ export function IssuesVideoCard({ title, videoId, start }: IssuesVideoCardProps)
         {title}
       </h3>
 
-      <div className="relative z-10 overflow-hidden rounded-xl border border-primary/10 bg-[#0b1733] shadow-md">
+      <div
+        className={[
+          "relative z-10 overflow-hidden rounded-xl bg-[#0b1733] shadow-md",
+          borderless ? "" : "border border-primary/10",
+        ].join(" ")}
+      >
         <div className="relative aspect-video">
           {isPlaying ? (
             <iframe

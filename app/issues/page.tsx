@@ -39,12 +39,14 @@ export default function IssuesPage() {
       <IssuesVideosSection
         volunteerUrl="https://secure.franklinforsupervisor.com/volunteer-web"
         items={[...ISSUE_VIDEOS]}
+        borderless
       />
 
       <SectionDivider variant="wave1" />
 
       <RecordNewsSection
         donateUrl="https://secure.franklinforsupervisor.com/15?_gl=1*1jmx4dj*_gcl_au*NDI0MzU5NjY1LjE3NjQ2OTQ1NTM."
+        borderless
         lead={{
           title: "SANDAG’s Multibillion-Dollar Project: The Case Is Full of Holes",
           url: "https://www.sandiegouniontribune.com/2025/04/23/opinion-sandags-case-for-multibillion-dollar-project-is-full-of-holes/",
@@ -99,6 +101,7 @@ export default function IssuesPage() {
       <SectionDivider variant="wave2" />
 
       <PrioritiesSection
+        borderless
         cards={[
           {
             type: "text",

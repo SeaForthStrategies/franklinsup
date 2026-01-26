@@ -24,12 +24,14 @@ interface PrioritiesSectionProps {
   title?: string;
   subtitle?: string;
   cards: PriorityCard[];
+  borderless?: boolean;
 }
 
 export function PrioritiesSection({
   title = "Solutions That Put Families First",
   subtitle = "Clear commitments on affordability, homelessness, public safety, fire prevention, and fixing our roads.",
   cards,
+  borderless = false,
 }: PrioritiesSectionProps) {
   return (
     <section aria-labelledby="priorities-title" className="relative overflow-hidden py-16 sm:py-20">
@@ -61,7 +63,10 @@ export function PrioritiesSection({
             <article
               key={card.id}
               aria-labelledby={`priority-${card.id}-title`}
-              className="relative isolate flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base/90 p-6 shadow-card sm:p-7"
+              className={[
+                "relative isolate flex h-full flex-col gap-3 overflow-hidden rounded-2xl bg-neutral-base/90 p-6 shadow-card sm:p-7",
+                borderless ? "" : "border border-neutral-border",
+              ].join(" ")}
             >
               <div
                 aria-hidden="true"
@@ -80,7 +85,12 @@ export function PrioritiesSection({
               </h3>
 
               {card.type === "image" ? (
-                <div className="relative z-10 overflow-hidden rounded-xl border border-neutral-border bg-neutral-base">
+                <div
+                  className={[
+                    "relative z-10 overflow-hidden rounded-xl bg-neutral-base",
+                    borderless ? "" : "border border-neutral-border",
+                  ].join(" ")}
+                >
                   <Image
                     src={card.imageUrl}
                     alt={card.imageAlt}

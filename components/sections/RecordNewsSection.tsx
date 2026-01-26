@@ -17,9 +17,10 @@ interface RecordNewsSectionProps {
   donateUrl: string;
   lead: NewsItem;
   rail: NewsItem[];
+  borderless?: boolean;
 }
 
-export function RecordNewsSection({ donateUrl, lead, rail }: RecordNewsSectionProps) {
+export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }: RecordNewsSectionProps) {
   return (
     <section aria-labelledby="recordnews-title" className="relative overflow-hidden py-16 sm:py-20">
       {/* Soft gradient background blending with adjacent sections */}
@@ -58,7 +59,12 @@ export function RecordNewsSection({ donateUrl, lead, rail }: RecordNewsSectionPr
 
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[1.65fr_1fr] lg:items-stretch">
           {/* Lead */}
-          <article className="relative h-full overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base shadow-card">
+          <article
+            className={[
+              "relative h-full overflow-hidden rounded-2xl bg-neutral-base shadow-card",
+              borderless ? "" : "border border-neutral-border",
+            ].join(" ")}
+          >
             <div aria-hidden="true" className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-accent-400 to-secondary-500 opacity-95" />
 
             <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr]">
@@ -105,7 +111,10 @@ export function RecordNewsSection({ donateUrl, lead, rail }: RecordNewsSectionPr
                   href={lead.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-auto inline-flex w-max items-center justify-between gap-3 rounded-xl border border-neutral-border bg-neutral-surface px-4 py-3 font-black tracking-wide text-primary-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className={[
+                    "mt-auto inline-flex w-max items-center justify-between gap-3 rounded-xl bg-neutral-surface px-4 py-3 font-black tracking-wide text-primary-800 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+                    borderless ? "" : "border border-neutral-border hover:border-primary/30",
+                  ].join(" ")}
                 >
                   <span className="inline-flex items-center gap-2">
                     {/* Use <img> for SVG icons to avoid next/image SVG restrictions */}
@@ -129,8 +138,14 @@ export function RecordNewsSection({ donateUrl, lead, rail }: RecordNewsSectionPr
           </article>
 
           {/* Rail */}
-          <aside className="h-full overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base shadow-card" aria-label="More on the record">
-            <div className="border-b border-neutral-border bg-neutral-surface px-5 py-4">
+          <aside
+            className={[
+              "h-full overflow-hidden rounded-2xl bg-neutral-base shadow-card",
+              borderless ? "" : "border border-neutral-border",
+            ].join(" ")}
+            aria-label="More on the record"
+          >
+            <div className={["bg-neutral-surface px-5 py-4", borderless ? "" : "border-b border-neutral-border"].join(" ")}>
               <div className="text-xs font-black uppercase tracking-widest text-primary/80">
                 More on the Record
               </div>
@@ -143,12 +158,17 @@ export function RecordNewsSection({ donateUrl, lead, rail }: RecordNewsSectionPr
                   key={item.url}
                   className={[
                     "grid grid-cols-[96px_1fr] gap-3 rounded-xl p-3 transition-all hover:-translate-y-0.5 hover:bg-sky-50/60",
-                    idx > 0 ? "border-t border-neutral-border rounded-t-none" : "",
+                    idx > 0 && !borderless ? "border-t border-neutral-border rounded-t-none" : "",
                     "sm:grid-cols-[110px_1fr]",
                   ].join(" ")}
                 >
                   <a href={item.url} target="_blank" rel="noopener noreferrer" className="block">
-                    <div className="relative h-[70px] w-[96px] overflow-hidden rounded-xl border border-neutral-border bg-[#0b1733] sm:h-[80px] sm:w-[110px]">
+                    <div
+                      className={[
+                        "relative h-[70px] w-[96px] overflow-hidden rounded-xl bg-[#0b1733] sm:h-[80px] sm:w-[110px]",
+                        borderless ? "" : "border border-neutral-border",
+                      ].join(" ")}
+                    >
                       <Image
                         src={item.imageUrl}
                         alt={item.imageAlt}
