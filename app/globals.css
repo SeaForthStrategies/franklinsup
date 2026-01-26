@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Font CSS variables for Next.js font optimization */
+  --font-heading: "Montserrat", ui-sans-serif, system-ui;
+  --font-body: "Source Sans 3", ui-sans-serif, system-ui;
+
+  /* Campaign palette (Franklin for Supervisor) */
+  --ffsv-navy: #0a1f44;
+  --ffsv-ink: #071734;
+  --ffsv-text: #0a1f44;
+  --ffsv-muted: #3b4351;
+
+  --ffsv-accent: #1b5cff;
+  --ffsv-record-accent: #19b7ff;
+  --ffsv-pri-accent: var(--ffsv-record-accent);
+
+  --ffsv-ring: rgba(10, 31, 68, 0.22);
+}
+
+@layer base {
+  body {
+    @apply antialiased;
+    font-family: var(--font-body);
+    color: var(--ffsv-text);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-black uppercase tracking-tight;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+@layer components {
+  .site-container {
+    /* Mobile-first padding; widen on larger screens */
+    @apply mx-auto max-w-content px-4 sm:px-6 lg:px-8;
+  }
+
+  .site-header {
+    /* Keep the header readable while scrolling */
+    @apply sticky top-0 z-40 border-b border-neutral-border bg-neutral-base/95 backdrop-blur;
+  }
+
+  .site-nav {
+    /* Mobile: stacked blocks (logo, links, CTAs). Tablet/Desktop: single row */
+    @apply flex flex-col gap-4 py-4 md:flex-row md:items-center md:justify-between md:gap-6;
+  }
+
+  .site-brand {
+    @apply inline-flex items-center justify-center md:justify-start;
+  }
+
+  .site-logo {
+    /* Slightly smaller on mobile, full size on desktop */
+    @apply h-auto w-[180px] sm:w-[200px] md:w-[220px];
+  }
+
+  .site-nav-links {
+    /*
+      Mobile: horizontal scroll (keeps header compact without JS).
+      Tablet/Desktop: normal wrap + centered.
+    */
+    @apply -mx-4 flex items-center gap-4 overflow-x-auto px-4 py-1 text-xs font-black uppercase tracking-widest;
+    @apply sm:text-sm;
+    @apply md:mx-0 md:flex-wrap md:justify-center md:overflow-visible md:px-0;
+    color: var(--ffsv-text);
+  }
+
+  .site-nav-link {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply whitespace-nowrap;
+    color: var(--ffsv-text);
+  }
+  .site-nav-link:hover {
+    color: var(--ffsv-ink);
+  }
+
+  .site-nav-ctas {
+    /* Mobile: full-width buttons. Tablet/Desktop: inline buttons. */
+    @apply flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center md:justify-end;
+  }
+
+  .site-cta {
+    @apply inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-black uppercase tracking-wide;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply sm:w-auto sm:px-5 sm:py-2;
+  }
+
+  .site-cta--primary {
+    background: linear-gradient(135deg, var(--ffsv-navy), #123a7a 55%, var(--ffsv-accent));
+    color: #fff;
+  }
+  .site-cta--primary:hover {
+    filter: saturate(1.05);
+  }
+
+  .site-cta--secondary {
+    border: 2px solid var(--ffsv-navy);
+    color: var(--ffsv-navy);
+    background: transparent;
+  }
+  .site-cta--secondary:hover {
+    background: var(--ffsv-navy);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(90deg, var(--ffsv-ink), var(--ffsv-navy));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-patriot {
+    background: linear-gradient(135deg, var(--ffsv-record-accent), var(--ffsv-accent));
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, var(--ffsv-record-accent), var(--ffsv-accent));
+  }
+}

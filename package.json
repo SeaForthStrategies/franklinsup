@@ -1,0 +1,41 @@
+{
+  "name": "franklinforsupervisor",
+  "version": "0.1.0",
+  "description": "Official campaign website for John Franklin for San Diego County Supervisor 2026",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:local": "next dev --hostname 127.0.0.1 --port 3010",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "campaign",
+    "san-diego",
+    "supervisor",
+    "politics"
+  ],
+  "author": "John Franklin for Supervisor 2026",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@10.15.0",
+  "dependencies": {
+    "next": "^16.1.4",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "styled-jsx": "^5.1.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.11",
+    "@types/node": "^25.0.10",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.23",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.4",
+    "postcss": "^8.5.6",
+    "tailwindcss": "3.4.17",
+    "typescript": "^5.9.3"
+  }
+}
