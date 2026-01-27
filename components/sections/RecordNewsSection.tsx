@@ -26,14 +26,14 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
       {/* Soft gradient background blending with adjacent sections */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
-        <div className="absolute -top-24 left-[-10%] h-[360px] w-[850px] -skew-y-6 rounded-full bg-sky-200/30 blur-3xl" />
-        <div className="absolute -top-24 right-[-10%] h-[360px] w-[780px] -skew-y-6 rounded-full bg-cyan-200/25 blur-3xl" />
+        <div className="absolute -top-24 left-[-10%] h-[360px] w-[850px] -skew-y-6 rounded-full bg-blue-200/25 blur-3xl" />
+        <div className="absolute -top-24 right-[-10%] h-[360px] w-[780px] -skew-y-6 rounded-full bg-blue-300/15 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="max-w-3xl">
           <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-neutral-slate/80">
-            <span className="h-3 w-3 rounded bg-gradient-to-br from-accent-400 to-secondary-500 shadow-sm" aria-hidden="true" />
+            <span className="h-3 w-3 rounded bg-gradient-to-br from-primary to-secondary shadow-sm" aria-hidden="true" />
             My record
           </div>
 
@@ -65,7 +65,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
               borderless ? "" : "border border-neutral-border",
             ].join(" ")}
           >
-            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-accent-400 to-secondary-500 opacity-95" />
+            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-95" />
 
             <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr]">
               <a

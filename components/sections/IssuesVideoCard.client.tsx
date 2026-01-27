@@ -29,7 +29,7 @@ export function IssuesVideoCard({ title, videoId, start, borderless = false }: I
     >
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-accent-400 to-secondary-500 opacity-95"
+        className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-95"
       />
 
       <h3 className="relative z-10 min-h-[3.75rem] font-heading text-lg font-black leading-tight tracking-tight text-neutral-ink sm:text-xl">

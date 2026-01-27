@@ -116,4 +116,3 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
     </section>
   );
 }
-

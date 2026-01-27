@@ -77,13 +77,13 @@ export function PrioritiesSection({
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
         <div className="absolute left-[-10%] top-[-10%] h-[420px] w-[720px] rounded-full bg-blue-200/25 blur-3xl" />
-        <div className="absolute right-[-10%] top-[-15%] h-[420px] w-[720px] rounded-full bg-cyan-200/20 blur-3xl" />
+        <div className="absolute right-[-10%] top-[-15%] h-[420px] w-[720px] rounded-full bg-blue-300/15 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="max-w-3xl">
           <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-neutral-slate/80">
-            <span className="h-3 w-3 rounded bg-gradient-to-br from-accent-400 to-secondary-500 shadow-sm" aria-hidden="true" />
+            <span className="h-3 w-3 rounded bg-gradient-to-br from-primary to-secondary shadow-sm" aria-hidden="true" />
             Priorities
           </div>
 
@@ -161,14 +161,14 @@ export function PrioritiesSection({
                     <span
                       aria-hidden="true"
                       className={[
-                        "absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-accent-400 to-secondary-500 transition-opacity duration-200",
+                        "absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-primary to-secondary transition-opacity duration-200",
                         isActive ? "opacity-100" : "opacity-0 group-hover:opacity-60",
                       ].join(" ")}
                     />
 
                     <span
                       aria-hidden="true"
-                      className="absolute inset-0 bg-[radial-gradient(520px_190px_at_10%_10%,rgba(25,183,255,.10),transparent_60%)]"
+                      className="absolute inset-0 bg-[radial-gradient(520px_190px_at_10%_10%,rgba(59,130,246,.10),transparent_60%)]"
                     />
 
                     <span className="relative z-10 flex h-full items-center justify-between gap-4 px-4 sm:px-5">
@@ -214,18 +214,18 @@ export function PrioritiesSection({
           >
             <div
               aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-accent-400 to-secondary-500 opacity-95"
+              className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-95"
             />
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-[radial-gradient(720px_240px_at_12%_12%,rgba(25,183,255,.12),transparent_60%)]"
+              className="absolute inset-0 bg-[radial-gradient(720px_240px_at_12%_12%,rgba(59,130,246,.12),transparent_60%)]"
             />
 
             {activeCard ? (
               <div className="relative z-10">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-neutral-slate/80">
-                    <span className="h-3 w-3 rounded bg-gradient-to-br from-accent-400 to-secondary-500 shadow-sm" aria-hidden="true" />
+                    <span className="h-3 w-3 rounded bg-gradient-to-br from-primary to-secondary shadow-sm" aria-hidden="true" />
                     Solutions
                   </div>
 
@@ -275,7 +275,7 @@ export function PrioritiesSection({
                           >
                             <span
                               aria-hidden="true"
-                              className="mt-1 h-2.5 w-2.5 rounded-sm bg-gradient-to-br from-accent-400 to-secondary-500 shadow-sm"
+                              className="mt-1 h-2.5 w-2.5 rounded-sm bg-gradient-to-br from-primary to-secondary shadow-sm"
                             />
                             <span>{b}</span>
                           </li>

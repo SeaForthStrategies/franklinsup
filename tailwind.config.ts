@@ -41,18 +41,18 @@ const config: Config = {
           900: "#1b5cff",
         },
         accent: {
-          /* Franklin record accent (light/cyan blue) */
-          DEFAULT: "#19b7ff",
-          50: "#19b7ff",
-          100: "#19b7ff",
-          200: "#19b7ff",
-          300: "#19b7ff",
-          400: "#19b7ff",
-          500: "#19b7ff",
-          600: "#19b7ff",
-          700: "#19b7ff",
-          800: "#19b7ff",
-          900: "#19b7ff",
+          /* Record accent (blue; avoid cyan/teal) */
+          DEFAULT: "#3b82f6",
+          50: "#3b82f6",
+          100: "#3b82f6",
+          200: "#3b82f6",
+          300: "#3b82f6",
+          400: "#3b82f6",
+          500: "#3b82f6",
+          600: "#3b82f6",
+          700: "#3b82f6",
+          800: "#3b82f6",
+          900: "#3b82f6",
         },
         neutral: {
           /* Franklin neutrals */

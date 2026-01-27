@@ -9,6 +9,10 @@ export interface VideoAppearance {
   outlet: "KUSI" | "Fox 5";
 }
 
+import { RECORD_NEWS_LEAD, RECORD_NEWS_RAIL } from "@/src/content/recordNews";
+
+export type RecordNewsItem = typeof RECORD_NEWS_LEAD;
+
 export const FEATURED_IN = [
   {
     slug: "kusi",
@@ -86,6 +90,7 @@ export const FEATURED_IN = [
       "I support pairing shelter and services with enforcement so refusing help doesn’t become the default",
       "I want policies that restore safety and dignity in our neighborhoods and for those suffering on the streets",
     ],
+    articles: [RECORD_NEWS_LEAD, ...RECORD_NEWS_RAIL].filter((a) => a.sourceName === "San Diego Union-Tribune"),
   },
   {
     slug: "franklin-for-supervisor",

@@ -1,14 +1,16 @@
+import Link from "next/link";
+
 export function Footer() {
   const contactUrl =
     "https://secure.franklinforsupervisor.com/contact?_gl=1%2A1hbffur%2A_gcl_au%2ANDA2MjI2MjM4LjE3Njk0NDU2NTI.";
 
   return (
     <footer className="bg-primary-900 text-white">
-      <div className="mx-auto max-w-content px-6 py-12">
+      <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-3 md:items-start">
           <div>
             <p className="font-heading text-lg font-black uppercase tracking-tight">
-              John Franklin for Supervisor 2026
+              My campaign for Supervisor 2026
             </p>
             <p className="mt-3 text-sm text-white/75">
               Paid for by John Franklin for Supervisor 2026 • FPPC ID 1462594
@@ -21,24 +23,24 @@ export function Footer() {
             </p>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <a className="text-white/75 hover:text-white" href="/about">
+                <Link className="text-white/75 hover:text-white" href="/about">
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="text-white/75 hover:text-white" href="/issues">
+                <Link className="text-white/75 hover:text-white" href="/issues">
                   Issues
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="text-white/75 hover:text-white" href="/endorsements">
+                <Link className="text-white/75 hover:text-white" href="/endorsements">
                   Endorsements
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="text-white/75 hover:text-white" href="/news">
+                <Link className="text-white/75 hover:text-white" href="/news">
                   News
-                </a>
+                </Link>
               </li>
               <li>
                 <a className="text-white/75 hover:text-white" href={contactUrl}>
@@ -73,7 +75,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-white/10 pt-6 text-xs text-white/60">
-          © {new Date().getFullYear()} John Franklin for Supervisor
+          © {new Date().getFullYear()} My campaign for Supervisor
         </div>
       </div>
     </footer>

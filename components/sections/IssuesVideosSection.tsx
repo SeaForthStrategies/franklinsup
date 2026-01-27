@@ -26,11 +26,11 @@ export function IssuesVideosSection({
       {/* Soft gradient background with lighter blues */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
-        <div className="absolute -top-24 left-[-10%] h-[520px] w-[900px] rounded-full bg-cyan-200/25 blur-3xl" />
+        <div className="absolute -top-24 left-[-10%] h-[520px] w-[900px] rounded-full bg-blue-200/22 blur-3xl" />
         <div className="absolute -top-40 right-[-10%] h-[480px] w-[820px] rounded-full bg-blue-200/20 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="max-w-3xl">
           <h1 id="issues-videos-title" className="text-4xl font-black uppercase tracking-tight md:text-5xl gradient-primary">
             {title}

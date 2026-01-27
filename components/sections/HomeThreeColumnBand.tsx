@@ -27,7 +27,7 @@ export function HomeThreeColumnBand({ donateUrl }: HomeThreeColumnBandProps) {
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
-        <div className="absolute left-[-10%] top-[-15%] h-[420px] w-[720px] rounded-full bg-cyan-200/22 blur-3xl" />
+        <div className="absolute left-[-10%] top-[-15%] h-[420px] w-[720px] rounded-full bg-blue-200/18 blur-3xl" />
         <div className="absolute right-[-10%] bottom-[-15%] h-[420px] w-[720px] rounded-full bg-blue-200/20 blur-3xl" />
       </div>
 
@@ -90,7 +90,7 @@ export function HomeThreeColumnBand({ donateUrl }: HomeThreeColumnBandProps) {
                     { title: "Strong communities", body: "Quality of life, local values, real partnership." },
                   ].map((item) => (
                     <li key={item.title} className="grid grid-cols-[16px_1fr] gap-3">
-                      <span aria-hidden="true" className="mt-1.5 h-2.5 w-2.5 rounded-sm bg-gradient-to-br from-accent-400 to-secondary-500 shadow-sm" />
+                      <span aria-hidden="true" className="mt-1.5 h-2.5 w-2.5 rounded-sm bg-gradient-to-br from-primary to-secondary shadow-sm" />
                       <div>
                         <p className="font-black uppercase tracking-wide text-neutral-ink">{item.title}</p>
                         <p className="mt-1">{item.body}</p>

@@ -44,6 +44,26 @@ function hasVideos(
   return "videos" in item && Array.isArray((item as { videos?: unknown }).videos);
 }
 
+type ArticleItem = {
+  title: string;
+  url: string;
+  imageUrl: string;
+  imageAlt: string;
+  sourceName: string;
+  dateLabel: string;
+  dateTime: string;
+  excerpt?: string;
+  ariaLabel?: string;
+};
+
+function hasArticles(
+  item: (typeof FEATURED_IN)[number]
+): item is (typeof FEATURED_IN)[number] & {
+  articles: ArticleItem[];
+} {
+  return "articles" in item && Array.isArray((item as { articles?: unknown }).articles);
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const item = getItem(slug);
@@ -93,6 +113,7 @@ export default async function FeaturedItemPage({ params }: PageProps) {
   if (hasEnhancedContent(item)) {
     const videos = hasVideos(item) ? item.videos : [];
     const isVideoPage = videos.length > 0;
+    const articles = hasArticles(item) ? item.articles : [];
 
     return (
       <>
@@ -105,7 +126,7 @@ export default async function FeaturedItemPage({ params }: PageProps) {
           {/* Subtle decorative gradients - hidden on mobile for performance */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden overflow-hidden sm:block">
             <div className="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-primary/8 blur-3xl" />
-            <div className="absolute -top-20 right-1/4 h-80 w-80 rounded-full bg-accent-500/6 blur-3xl" />
+            <div className="absolute -top-20 right-1/4 h-80 w-80 rounded-full bg-secondary/8 blur-3xl" />
           </div>
 
           <div className="relative mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-12 md:py-16 lg:px-8 lg:py-20">
@@ -206,6 +227,74 @@ export default async function FeaturedItemPage({ params }: PageProps) {
                           Watch on YouTube
                           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            {/* Articles (if present) */}
+            {articles.length ? (
+              <div className="mt-8 sm:mt-10 md:mt-12">
+                <h2 className="text-xl font-black uppercase tracking-tight text-neutral-ink sm:text-2xl">Articles</h2>
+                <p className="mt-1 text-sm text-neutral-muted sm:text-base">
+                  Recent commentary and reporting featuring my work and priorities.
+                </p>
+
+                <div className="mt-4 grid gap-4 sm:mt-6 sm:gap-6 md:grid-cols-2 lg:gap-8">
+                  {articles.map((a) => (
+                    <article
+                      key={a.url}
+                      className="overflow-hidden rounded-xl border border-neutral-border bg-neutral-base shadow-card sm:rounded-2xl"
+                    >
+                      <a
+                        href={a.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={a.ariaLabel ?? `Read: ${a.title}`}
+                        className="block"
+                      >
+                        <div className="relative aspect-video overflow-hidden bg-neutral-ink">
+                          <Image
+                            src={a.imageUrl}
+                            alt={a.imageAlt}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover"
+                          />
+                          <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/35" />
+                        </div>
+                      </a>
+
+                      <div className="p-4 sm:p-5">
+                        <div className="mb-2 flex flex-wrap items-center gap-2 text-[10px] font-semibold text-neutral-muted sm:text-xs">
+                          <span>{a.sourceName}</span>
+                          <span className="text-neutral-border">·</span>
+                          <time dateTime={a.dateTime}>{a.dateLabel}</time>
+                        </div>
+
+                        <h3 className="text-base font-black uppercase tracking-tight text-neutral-ink sm:text-lg">
+                          {a.title}
+                        </h3>
+                        {a.excerpt ? (
+                          <p className="mt-1.5 line-clamp-3 text-xs leading-relaxed text-neutral-slate sm:mt-2 sm:text-sm">
+                            {a.excerpt}
+                          </p>
+                        ) : null}
+
+                        <a
+                          href={a.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-3 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary/80 sm:mt-4"
+                        >
+                          Read the article
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M14 3h7v7m0-7L10 14" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 5v14h14v-6" />
                           </svg>
                         </a>
                       </div>

@@ -24,7 +24,7 @@ export default function EndorsementsPage() {
         <SectionHeader
           eyebrow="Endorsements"
           title="Support you can trust"
-          lead="We’re finalizing an updated list of endorsements and community supporters."
+          lead="I’m finalizing an updated list of endorsements and community supporters."
         />
 
         <div className="mt-10 rounded-3xl border border-neutral-border bg-neutral-surface p-6 shadow-card sm:p-8">
@@ -34,7 +34,7 @@ export default function EndorsementsPage() {
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a className="site-cta site-cta--secondary" href={contactUrl}>
-              Contact the campaign
+              Contact me
             </a>
             <a
               className="site-cta site-cta--primary"

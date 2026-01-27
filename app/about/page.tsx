@@ -34,8 +34,8 @@ export default function AboutPage() {
                 the basics: safe communities, strong infrastructure, and a county government that respects taxpayers.
               </p>
               <p>
-                We’re building this page now. In the meantime, you can learn more by visiting the Issues page and
-                following campaign updates in News.
+                I’m building this page now. In the meantime, you can learn more by visiting the Issues page and following campaign updates
+                in News.
               </p>
             </div>
           </div>

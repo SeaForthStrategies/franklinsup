@@ -31,7 +31,7 @@
 
   /* Premium UI tokens */
   /* Light base (neutral-first; avoid purple-tinted whites) */
-  --ffsv-base: #f8fafc;
+  --ffsv-base: #F6F8FF;
   --ffsv-surface: #ffffff;
   --ffsv-border: #d6dfef;
   --ffsv-glow: rgba(59, 130, 246, 0.18);
@@ -150,7 +150,7 @@
 @layer components {
   .site-container {
     /* Mobile-first padding; widen on larger screens */
-    @apply mx-auto max-w-content px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
 
   .site-header {

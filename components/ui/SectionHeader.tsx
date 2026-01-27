@@ -27,7 +27,7 @@ export function SectionHeader({
           ].join(" ")}
         >
           <span
-            className="h-3 w-3 rounded bg-gradient-to-br from-accent-400 to-secondary-500 shadow-sm"
+            className="h-3 w-3 rounded bg-gradient-to-br from-primary to-secondary shadow-sm"
             aria-hidden="true"
           />
           {eyebrow}

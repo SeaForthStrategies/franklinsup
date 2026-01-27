@@ -14,7 +14,7 @@ export function CallToAction({
   return (
     <section id="get-involved" aria-labelledby="cta-title" className="relative overflow-hidden bg-neutral-base py-16 sm:py-20">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(900px_320px_at_20%_10%,rgba(25,183,255,.14),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(900px_320px_at_20%_10%,rgba(59,130,246,.14),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(900px_320px_at_80%_90%,rgba(27,92,255,.12),transparent_62%)]" />
       </div>
 

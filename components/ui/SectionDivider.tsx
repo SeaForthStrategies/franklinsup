@@ -18,11 +18,11 @@ export function SectionDivider({ variant = "wave1", className = "" }: SectionDiv
   if (variant === "dots") {
     return (
       <div aria-hidden="true" data-ffsv-divider="dots" className={base}>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-sky-100/35 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-100/35 to-transparent" />
         <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center gap-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-cyan-400/50" />
-          <span className="h-2 w-2 rounded-full bg-sky-400/55" />
+          <span className="h-1.5 w-1.5 rounded-full bg-blue-400/50" />
+          <span className="h-2 w-2 rounded-full bg-blue-500/45" />
           <span className="h-1.5 w-1.5 rounded-full bg-blue-400/50" />
         </div>
       </div>
@@ -32,12 +32,12 @@ export function SectionDivider({ variant = "wave1", className = "" }: SectionDiv
   const seamGradient =
     variant === "wave2"
       ? "from-transparent via-blue-100/35 to-transparent"
-      : "from-transparent via-sky-100/35 to-transparent";
+      : "from-transparent via-blue-100/35 to-transparent";
 
   const glow =
     variant === "wave2"
       ? "bg-[radial-gradient(55%_55%_at_50%_50%,rgba(59,130,246,.18),transparent_65%)]"
-      : "bg-[radial-gradient(55%_55%_at_50%_50%,rgba(34,211,238,.16),transparent_65%)]";
+      : "bg-[radial-gradient(55%_55%_at_50%_50%,rgba(59,130,246,.14),transparent_65%)]";
 
   return (
     <div aria-hidden="true" data-ffsv-divider={variant} className={base}>

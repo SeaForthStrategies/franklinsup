@@ -3,6 +3,7 @@ import { IssuesVideosSection } from "@/components/sections/IssuesVideosSection";
 import { RecordNewsSection } from "@/components/sections/RecordNewsSection";
 import { PrioritiesSection } from "@/components/sections/PrioritiesSection";
 import { SectionDivider } from "@/components/ui/SectionDivider";
+import { RECORD_NEWS_LEAD, RECORD_NEWS_RAIL } from "@/src/content/recordNews";
 
 export const metadata: Metadata = {
   title: "My take on the issues | My campaign for Supervisor 2026",
@@ -30,9 +31,6 @@ const ISSUE_VIDEOS = [
   { title: "Fiscal Responsibility:", videoId: "rELPIcuan2w" },
 ] as const;
 
-const SOURCE_ICON_UTSD =
-  "https://franklinforsupervisor.com/wp-content/uploads/2026/01/UTSD-34f9e2.svg";
-
 export default function IssuesPage() {
   return (
     <>
@@ -47,55 +45,8 @@ export default function IssuesPage() {
       <RecordNewsSection
         donateUrl="https://secure.franklinforsupervisor.com/15?_gl=1*1jmx4dj*_gcl_au*NDI0MzU5NjY1LjE3NjQ2OTQ1NTM."
         borderless
-        lead={{
-          title: "SANDAG’s Multibillion-Dollar Project: The Case Is Full of Holes",
-          url: "https://www.sandiegouniontribune.com/2025/04/23/opinion-sandags-case-for-multibillion-dollar-project-is-full-of-holes/",
-          ariaLabel: "Read: SANDAG’s Multibillion-Dollar Project: The Case Is Full of Holes",
-          imageUrl:
-            "https://franklinforsupervisor.com/wp-content/uploads/2026/01/Opinion-SANDAGs-case-for-multibillion-dollar-project-is-full-of-holes-.webp",
-          imageAlt: "SANDAG rail project",
-          sourceIconUrl: SOURCE_ICON_UTSD,
-          sourceName: "San Diego Union-Tribune",
-          dateLabel: "Apr 23, 2025",
-          dateTime: "2025-04-23",
-          excerpt:
-            "A clear-eyed critique of the plan’s assumptions, costs, and accountability — and why taxpayers deserve answers.",
-        }}
-        rail={[
-          {
-            title: "County Tax Hikes Must Be Rejected",
-            url: "https://www.sandiegouniontribune.com/2025/03/19/opinion-supervisors-push-for-higher-county-taxes-must-be-rejected/",
-            imageUrl:
-              "https://franklinforsupervisor.com/wp-content/uploads/2026/01/Opinion-Supervisors-push-for-higher-county-taxes-must-be-rejected-.webp",
-            imageAlt: "Home with for sale sign",
-            sourceIconUrl: SOURCE_ICON_UTSD,
-            sourceName: "San Diego Union-Tribune",
-            dateLabel: "Mar 19, 2025",
-            dateTime: "2025-03-19",
-          },
-          {
-            title: "Pair Compassion With Accountability",
-            url: "https://www.sandiegouniontribune.com/2025/09/30/opinion-to-reduce-homelessness-pair-compassion-with-accountability/",
-            imageUrl:
-              "https://franklinforsupervisor.com/wp-content/uploads/2026/01/Opinion-To-reduce-homelessness-pair-compassion-with-accountability-.webp",
-            imageAlt: "Speaker at podium",
-            sourceIconUrl: SOURCE_ICON_UTSD,
-            sourceName: "San Diego Union-Tribune",
-            dateLabel: "Sep 30, 2025",
-            dateTime: "2025-09-30",
-          },
-          {
-            title: "Transfer Tax Hike Will Worsen the Housing Crisis",
-            url: "https://voiceofsandiego.org/2025/04/25/terra-lawson-remers-property-transfer-tax-hike-will-worsen-the-housing-crisis/",
-            imageUrl:
-              "https://franklinforsupervisor.com/wp-content/uploads/2026/01/Terra-Lawson-Remers-Property-Transfer-Tax-Hike-Will-Worsen-the-Housing-Crisis-.jpg",
-            imageAlt: "Housing event",
-            sourceIconUrl: SOURCE_ICON_UTSD,
-            sourceName: "Voice of San Diego",
-            dateLabel: "Apr 25, 2025",
-            dateTime: "2025-04-25",
-          },
-        ]}
+        lead={RECORD_NEWS_LEAD}
+        rail={RECORD_NEWS_RAIL}
       />
 
       <SectionDivider variant="wave2" />
