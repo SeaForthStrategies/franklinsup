@@ -1,0 +1,15 @@
+---
+description: Typography: use the logo/brand font site-wide
+alwaysApply: true
+---
+
+# Typography: logo/brand font site-wide
+
+This campaign site uses **one primary font family** for a consistent, professional look.
+
+## Rules
+
+- Default all UI/body typography to the **logo/brand font** (currently Montserrat).
+- Avoid introducing additional fonts (no new `next/font` imports, no ad-hoc font stacks).
+- Use weights and casing (e.g. `font-black`, uppercase headings) for hierarchy instead of switching typefaces.
+

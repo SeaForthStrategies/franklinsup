@@ -7,6 +7,9 @@ import { useState } from "react";
 const LOGO_URL =
   "https://franklinforsupervisor.com/wp-content/uploads/2024/07/Supervisor_Logo_noBG-01.png";
 
+const CONTACT_URL =
+  "https://secure.franklinforsupervisor.com/contact?_gl=1%2A1hbffur%2A_gcl_au%2ANDA2MjI2MjM4LjE3Njk0NDU2NTI.";
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -18,7 +21,7 @@ export function Header() {
             <Link href="/" className="site-brand" aria-label="Home">
               <Image
                 src={LOGO_URL}
-                alt="John Franklin for Supervisor"
+                alt="Franklin for Supervisor"
                 width={220}
                 height={70}
                 priority
@@ -28,7 +31,7 @@ export function Header() {
 
             {/* Mobile menu toggle button */}
             <button
-              className="site-menu-toggle md:hidden"
+              className="site-menu-toggle lg:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
@@ -63,9 +66,13 @@ export function Header() {
                 </Link>
               </li>
               <li>
-                <Link className="site-nav-link" href="/contact" onClick={() => setIsMenuOpen(false)}>
+                <a
+                  className="site-nav-link"
+                  href={CONTACT_URL}
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   Contact
-                </Link>
+                </a>
               </li>
             </ul>
 

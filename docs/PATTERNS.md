@@ -43,19 +43,11 @@ export default function AboutPage() {
 ### Server Component with Data Fetching
 ```tsx
 // app/endorsements/page.tsx
-import endorsements from '@/content/endorsements.json';
-import { EndorsementCard } from '@/components/sections/EndorsementCard';
-
 export default function EndorsementsPage() {
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {endorsements.map((endorsement) => (
-        <EndorsementCard 
-          key={endorsement.id} 
-          endorsement={endorsement} 
-        />
-      ))}
-    </div>
+    <main className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      {/* Render static or fetched endorsements here */}
+    </main>
   );
 }
 ```
@@ -154,20 +146,10 @@ export function VideoPlayer({ videoId, title, thumbnail }: VideoPlayerProps) {
 ### Composition Pattern (Server + Client)
 ```tsx
 // app/issues/page.tsx (Server Component)
-import { IssuesGrid } from '@/components/sections/IssuesGrid';
-import { ShareButton } from '@/components/common/ShareButton';
-import priorities from '@/content/priorities.json';
-
 export default function IssuesPage() {
   return (
     <main>
-      <header className="flex justify-between items-center mb-8">
-        <h1 className="text-5xl font-black">Issues</h1>
-        {/* Client component for interactivity */}
-        <ShareButton url="/issues" title="John's Policy Positions" />
-      </header>
-      {/* Server component for static content */}
-      <IssuesGrid priorities={priorities} />
+      {/* Compose server-rendered sections + client components as needed. */}
     </main>
   );
 }

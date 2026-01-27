@@ -11,7 +11,7 @@ This web app represents a political candidate. Every edit must keep the UI **cle
 
 - Keep **spacing consistent** (use the established scale; avoid arbitrary one-offs).
 - Keep **typography consistent** (heading/body usage, weights, casing; avoid ad-hoc variants).
-- Keep **color usage consistent** with `docs/DESIGN_SYSTEM.md` (red for primary CTAs, navy for headers, gold sparingly).
+- Keep **color usage consistent** with campaign palette (navy/blues for structure, red for primary CTAs, neutrals for everything else). Avoid extra accent colors.
 - Ensure **alignment** is crisp (consistent gutters, equal padding, baseline alignment, tidy grids).
 - Ensure **copy + punctuation** feels campaign-ready (confident, clear, no typos; consistent capitalization).
 - Avoid visual clutter: prefer **simplicity, hierarchy, and restraint** (this is a political campaign site).

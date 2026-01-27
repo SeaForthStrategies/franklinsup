@@ -1,0 +1,27 @@
+---
+description: Site copy must be first-person ("I") and never "John..."
+alwaysApply: true
+---
+
+# Copy voice: first-person only ("I"), except legal disclosures
+
+## Non-negotiable rule (site-wide)
+
+- All **user-facing copy** (headlines, body, CTAs, labels, alt text, SEO titles/descriptions, OpenGraph/Twitter metadata) must be written in **first-person** ("I", "me", "my", "we", "our").
+- **Never** refer to the candidate in third-person by name (no "John", "John Franklin", "John’s", etc.) anywhere on the site.
+
+## Only exception (allowed)
+
+- **Legal disclosures only** (including the **footer FPPC “Paid for by …” disclosure block**, and any other legally-required disclaimer/disclosure text) may use the **official committee/candidate name** as required.
+- Outside of legal disclosures, **no “John…”** anywhere.
+
+## Overrides
+
+- This rule **overrides** the default “match `franklinforsupervisor.com` copy” rule. If the live site uses "John...", convert it to first-person for this project.
+
+## Examples
+
+- ❌ "John will deliver results." → ✅ "I will deliver results."
+- ❌ "Meet John" → ✅ "Meet me"
+- ❌ "Donate to John Franklin" → ✅ "Donate to support my campaign"
+- ✅ (Legal disclosure/footer only) "Paid for by John Franklin for Supervisor 2026 • FPPC ID 1462594"

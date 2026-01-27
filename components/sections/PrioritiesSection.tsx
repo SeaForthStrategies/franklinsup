@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 interface PriorityCardBase {
   id: string;
@@ -37,18 +37,39 @@ export function PrioritiesSection({
   borderless = false,
 }: PrioritiesSectionProps) {
   const sectionId = useId();
-  const firstId = useMemo(() => cards[0]?.id ?? "", [cards]);
-  const [activeId, setActiveId] = useState<string>(() => firstId);
+  const fallbackId = cards[0]?.id ?? "";
+  const [activeId, setActiveId] = useState<string>(() => fallbackId);
+  const panelRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (!activeId && firstId) setActiveId(firstId);
-    if (activeId && !cards.some((c) => c.id === activeId)) setActiveId(firstId);
-  }, [activeId, cards, firstId]);
+  const resolvedActiveId = useMemo(
+    () => (cards.some((c) => c.id === activeId) ? activeId : fallbackId),
+    [activeId, cards, fallbackId],
+  );
 
-  const activeCard = useMemo(() => cards.find((c) => c.id === activeId) ?? cards[0], [activeId, cards]);
-  const activeIndex = useMemo(() => cards.findIndex((c) => c.id === activeId), [activeId, cards]);
+  const activeCard = useMemo(() => cards.find((c) => c.id === resolvedActiveId) ?? cards[0], [cards, resolvedActiveId]);
+  const activeIndex = useMemo(() => cards.findIndex((c) => c.id === resolvedActiveId), [cards, resolvedActiveId]);
   const mobileSelectId = `priority-${sectionId}-select`;
   const activeTabId = activeCard ? `priority-${sectionId}-${activeCard.id}-tab` : undefined;
+
+  useEffect(() => {
+    const selectFromHash = () => {
+      const raw = window.location.hash.replace(/^#/, "");
+      const decoded = raw ? decodeURIComponent(raw) : "";
+      if (!decoded) return;
+      if (!cards.some((c) => c.id === decoded)) return;
+
+      setActiveId(decoded);
+
+      // Ensure the selected priority is actually visible (sticky header friendly).
+      window.requestAnimationFrame(() => {
+        panelRef.current?.scrollIntoView({ block: "start" });
+      });
+    };
+
+    selectFromHash();
+    window.addEventListener("hashchange", selectFromHash);
+    return () => window.removeEventListener("hashchange", selectFromHash);
+  }, [cards]);
 
   return (
     <section aria-labelledby="priorities-title" className="relative overflow-hidden py-16 sm:py-20">
@@ -86,7 +107,7 @@ export function PrioritiesSection({
               <div className="mt-2">
                 <select
                   id={mobileSelectId}
-                  value={activeId}
+                  value={resolvedActiveId}
                   onChange={(e) => setActiveId(e.target.value)}
                   className={[
                     "w-full rounded-2xl bg-neutral-surface px-4 py-3 font-black uppercase tracking-tight text-neutral-ink shadow-sm",
@@ -115,7 +136,7 @@ export function PrioritiesSection({
               {cards.map((card) => {
                 const tabId = `priority-${sectionId}-${card.id}-tab`;
                 const panelId = `priority-${sectionId}-panel`;
-                const isActive = card.id === activeId;
+                const isActive = card.id === resolvedActiveId;
 
                 return (
                   <button
@@ -180,12 +201,14 @@ export function PrioritiesSection({
 
           {/* Right: detail panel */}
           <div
+            ref={panelRef}
             role="tabpanel"
             id={`priority-${sectionId}-panel`}
             aria-labelledby={[mobileSelectId, activeTabId].filter(Boolean).join(" ") || undefined}
             className={[
               "relative isolate overflow-hidden rounded-2xl bg-neutral-surface p-6 shadow-card sm:p-8",
               "min-h-[420px]",
+              "scroll-mt-24",
               borderless ? "" : "border border-neutral-border",
             ].join(" ")}
           >
@@ -233,7 +256,7 @@ export function PrioritiesSection({
                       />
                     </div>
                     <p className="mt-3 text-sm text-neutral-muted">
-                      This graphic summarizes John’s position. Share it, save it, or use it to start the conversation.
+                      This graphic summarizes my position. Share it, save it, or use it to start the conversation.
                     </p>
                   </div>
                 ) : (

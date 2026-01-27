@@ -1,6 +1,6 @@
 interface CallToActionProps {
   title: string;
-  body: string;
+  body?: string;
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
 }
@@ -12,8 +12,13 @@ export function CallToAction({
   secondaryCta,
 }: CallToActionProps) {
   return (
-    <section id="get-involved" aria-labelledby="cta-title" className="bg-neutral-base py-16">
-      <div className="mx-auto max-w-content px-6">
+    <section id="get-involved" aria-labelledby="cta-title" className="relative overflow-hidden bg-neutral-base py-16 sm:py-20">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(900px_320px_at_20%_10%,rgba(25,183,255,.14),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(900px_320px_at_80%_90%,rgba(27,92,255,.12),transparent_62%)]" />
+      </div>
+
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="overflow-hidden rounded-2xl border border-neutral-border bg-neutral-surface shadow-card">
           <div className="h-2 gradient-patriot" aria-hidden="true" />
 
@@ -24,11 +29,13 @@ export function CallToAction({
             >
               {title}
             </h2>
-            <p className="mt-4 max-w-3xl text-lg text-neutral-slate">
-              {body}
-            </p>
+            {body ? (
+              <p className="mt-4 max-w-3xl text-lg text-neutral-slate">
+                {body}
+              </p>
+            ) : null}
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href={primaryCta.href}
                 target="_blank"

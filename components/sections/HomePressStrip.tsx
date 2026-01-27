@@ -1,28 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 
-const ITEMS = [
-  {
-    href: "https://www.youtube.com/watch?v=V0LDn67bbis",
-    img: "https://franklinforsupervisor.com/wp-content/uploads/2026/01/KUSI-e1769197324992.png",
-    alt: "KUSI",
-  },
-  {
-    href: "https://www.sandiegouniontribune.com/2025/09/30/opinion-to-reduce-homelessness-pair-compassion-with-accountability/",
-    img: "https://franklinforsupervisor.com/wp-content/uploads/2026/01/SDTB-1024x236.png",
-    alt: "San Diego Union-Tribune",
-  },
-  {
-    href: "https://franklinforsupervisor.com/wp-content/uploads/2026/01/1768601284709-5c6e4dec-d9cd-49a6-911b-7057b1e021a8_1.png",
-    img: "https://franklinforsupervisor.com/wp-content/uploads/2026/01/Subheading-1024x262.png",
-    alt: "Franklin for Supervisor",
-  },
-] as const;
+import { FEATURED_IN } from "@/src/content/featuredIn";
 
 export function HomePressStrip() {
+  const mobileMarqueeItems = [...FEATURED_IN, ...FEATURED_IN];
+
   return (
     <section id="featured" aria-label="In the news" className="relative bg-neutral-base py-10 sm:py-12">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(900px_240px_at_50%_-10%,rgba(25,183,255,.18),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(900px_240px_at_50%_-10%,rgba(59,130,246,.14),transparent_60%)]" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/18 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/14 to-transparent" />
       </div>
@@ -34,31 +21,92 @@ export function HomePressStrip() {
         </div>
 
         <div className="relative mt-6">
-          <div
-            className={[
-              "flex items-center gap-12 overflow-x-auto py-3",
-              "[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
-              "snap-x snap-mandatory",
-            ].join(" ")}
-          >
-            {ITEMS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={item.alt}
-                className="group inline-flex shrink-0 snap-start items-center justify-center"
+          {/* Mobile: auto-rotating strip */}
+          <div className="sm:hidden">
+            <div className="overflow-hidden py-3">
+              <div
+                className={[
+                  "flex w-max items-center gap-12",
+                  "will-change-transform animate-[ffsvMarquee_26s_linear_infinite]",
+                  "motion-reduce:animate-none motion-reduce:overflow-x-auto",
+                  "motion-reduce:[scrollbar-width:none] motion-reduce:[-ms-overflow-style:none] motion-reduce:[&::-webkit-scrollbar]:hidden",
+                ].join(" ")}
+              >
+                {mobileMarqueeItems.map((item, idx) => {
+                  const isDupe = idx >= FEATURED_IN.length;
+                  return (
+                    <Link
+                      key={`${item.slug}-${idx}`}
+                      href={`/featured/${item.slug}`}
+                      aria-label={`${item.name} coverage`}
+                      aria-hidden={isDupe ? true : undefined}
+                      tabIndex={isDupe ? -1 : undefined}
+                      className="group inline-flex shrink-0 items-center justify-center py-2"
+                    >
+                      <Image
+                        src={item.logoUrl}
+                        alt={item.name}
+                        width={520}
+                        height={140}
+                        className="h-10 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
+                      />
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Tablet/Desktop: centered strip (SDUT in visual center) */}
+          <div className="hidden sm:grid grid-cols-[1fr_auto_1fr] items-center py-3">
+            {/* Left logo — pushed to the right edge of its column */}
+            <div className="flex justify-end pr-8 lg:pr-12">
+              <Link
+                href={`/featured/${FEATURED_IN[0].slug}`}
+                aria-label={`${FEATURED_IN[0].name} coverage`}
+                className="group inline-flex shrink-0 items-center justify-center py-2"
               >
                 <Image
-                  src={item.img}
-                  alt={item.alt}
+                  src={FEATURED_IN[0].logoUrl}
+                  alt={FEATURED_IN[0].name}
                   width={520}
                   height={140}
-                  className="h-10 w-auto opacity-70 grayscale transition-all duration-200 group-hover:opacity-100 group-hover:grayscale-0 sm:h-12"
+                  className="h-10 lg:h-12 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
                 />
-              </a>
-            ))}
+              </Link>
+            </div>
+
+            {/* Center logo — truly centered */}
+            <Link
+              href={`/featured/${FEATURED_IN[1].slug}`}
+              aria-label={`${FEATURED_IN[1].name} coverage`}
+              className="group inline-flex shrink-0 items-center justify-center py-2"
+            >
+              <Image
+                src={FEATURED_IN[1].logoUrl}
+                alt={FEATURED_IN[1].name}
+                width={520}
+                height={140}
+                className="h-14 lg:h-16 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
+              />
+            </Link>
+
+            {/* Right logo — pushed to the left edge of its column */}
+            <div className="flex justify-start pl-8 lg:pl-12">
+              <Link
+                href={`/featured/${FEATURED_IN[2].slug}`}
+                aria-label={`${FEATURED_IN[2].name} coverage`}
+                className="group inline-flex shrink-0 items-center justify-center py-2"
+              >
+                <Image
+                  src={FEATURED_IN[2].logoUrl}
+                  alt={FEATURED_IN[2].name}
+                  width={520}
+                  height={140}
+                  className="h-10 lg:h-12 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
+                />
+              </Link>
+            </div>
           </div>
 
           {/* Edge fades so the strip feels intentional (not “boxes”) */}

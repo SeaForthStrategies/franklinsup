@@ -1,4 +1,7 @@
 export function Footer() {
+  const contactUrl =
+    "https://secure.franklinforsupervisor.com/contact?_gl=1%2A1hbffur%2A_gcl_au%2ANDA2MjI2MjM4LjE3Njk0NDU2NTI.";
+
   return (
     <footer className="bg-primary-900 text-white">
       <div className="mx-auto max-w-content px-6 py-12">
@@ -38,7 +41,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a className="text-white/75 hover:text-white" href="/contact">
+                <a className="text-white/75 hover:text-white" href={contactUrl}>
                   Contact
                 </a>
               </li>

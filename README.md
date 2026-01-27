@@ -5,36 +5,20 @@ Total redesign of [franklinforsupervisor.com](https://franklinforsupervisor.com/
 ## Project Structure
 
 ```
-franklinsup/
-├── src/                          # Source code
-│   ├── components/               # React/Vue components
-│   │   ├── common/              # Reusable UI components (buttons, cards, etc.)
-│   │   ├── sections/            # Page sections (hero, priorities, news, etc.)
-│   │   ├── forms/               # Form components (volunteer, donate, contact)
-│   │   └── layout/              # Layout components (header, footer, navigation)
-│   ├── pages/                   # Page components/routes
-│   ├── styles/                  # Global styles, themes, variables
-│   ├── assets/                  # Static assets (processed)
-│   │   ├── images/
-│   │   ├── videos/
-│   │   └── fonts/
-│   ├── lib/                     # Utility functions, helpers
-│   ├── hooks/                   # Custom React hooks
-│   ├── contexts/                # React contexts for state management
-│   ├── data/                    # Static data, constants
-│   └── content/                 # Content files (markdown, JSON)
-├── public/                      # Public static files (served as-is)
-│   ├── images/
-│   ├── videos/
-│   ├── documents/
-│   └── fonts/
-├── config/                      # Configuration files
-├── tests/                       # Test files
-├── docs/                        # Documentation
-└── legacy/                      # Old website components (reference)
-    ├── issues
-    ├── johnontheissues
-    └── ontherecord
+Franklin4sup.web/
+├── app/                          # Next.js App Router routes (pages)
+│   ├── layout.tsx
+│   ├── page.tsx                  # Home
+│   ├── issues/page.tsx
+│   └── news/page.tsx
+├── components/
+│   ├── layout/                   # Header, Footer
+│   ├── sections/                 # Page sections (hero, priorities, news, etc.)
+│   └── ui/                       # Shared UI primitives
+├── docs/                         # Documentation
+├── src/                          # Reserved for future (currently placeholders)
+├── legacy/                       # Reserved (legacy reference removed)
+└── config files                  # next/tailwind/ts/eslint/postcss configs
 ```
 
 ## Key Features to Implement

@@ -21,20 +21,17 @@
 
 ### App Structure
 ```
-src/
-├── app/
-│   ├── layout.tsx       ✅ Root layout with SEO metadata
-│   ├── page.tsx         ✅ Homepage with hero, priorities, footer
-│   └── globals.css      ✅ Global styles with Tailwind + custom CSS variables
-├── components/
-│   ├── common/          📁 Ready for reusable components
-│   ├── sections/        📁 Ready for page sections
-│   ├── forms/           📁 Ready for form components
-│   └── layout/          📁 Ready for layout components
-├── styles/              📁 Additional styles
-├── lib/                 📁 Utility functions
-├── hooks/               📁 Custom React hooks
-└── content/             📁 Content JSON files
+app/
+├── layout.tsx       ✅ Root layout with SEO metadata
+├── page.tsx         ✅ Homepage
+├── issues/page.tsx  ✅ Issues
+├── news/page.tsx    ✅ News
+└── globals.css      ✅ Global styles with Tailwind + custom CSS variables
+
+components/
+├── layout/          ✅ Header, Footer
+├── sections/        ✅ Page sections
+└── ui/              ✅ Shared UI primitives
 ```
 
 ### Design System Configured
@@ -131,11 +128,7 @@ Create JSON files in `src/content/`:
 - `site-config.json` - Social links, contact info
 
 ### 4. Extract Legacy Content
-Review files in `legacy/` folder:
-- Extract content text for priorities
-- Get YouTube video IDs
-- Copy article titles and links
-- Reference styling and layouts
+Legacy reference snippets were removed during cleanup (the live content now lives in `app/` and `components/`).
 
 ### 5. Integrate External Services
 - Set up donation platform integration

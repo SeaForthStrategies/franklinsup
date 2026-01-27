@@ -1,0 +1,12 @@
+---
+description: Match franklinforsupervisor.com copy by default
+alwaysApply: true
+---
+
+# Copy source of truth: franklinforsupervisor.com
+
+- **Default**: All user-facing text (headlines, subheads, section copy, CTA labels, meta descriptions) should **match the exact wording** on `franklinforsupervisor.com`.
+- **When changing copy**: Pull the current live copy first and mirror it exactly (including punctuation, capitalization, and apostrophes).
+- **Overrides**: Only diverge from the live site copy when the user **explicitly** requests different text or says not to match.
+- **Consistency**: If the same line appears in multiple places, keep it identical everywhere unless the user asks for variation.
+

@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { RecordNewsSection } from "@/components/sections/RecordNewsSection";
 
 export const metadata: Metadata = {
-  title: "In the News & Commentary | John Franklin for Supervisor 2026",
+  title: "In the News & Commentary | My campaign for Supervisor 2026",
   description:
-    "Op-eds and commentary where John Franklin lays out the case for common-sense policy — directly, clearly, and on the record.",
+    "Op-eds and commentary where I lay out the case for common-sense policy — directly, clearly, and on the record.",
   openGraph: {
-    title: "In the News & Commentary | John Franklin for Supervisor 2026",
+    title: "In the News & Commentary | My campaign for Supervisor 2026",
     description:
-      "Op-eds and commentary where John Franklin lays out the case for common-sense policy — directly, clearly, and on the record.",
+      "Op-eds and commentary where I lay out the case for common-sense policy — directly, clearly, and on the record.",
     url: "https://franklinforsupervisor.com/news",
     siteName: "Franklin for Supervisor",
     type: "website",

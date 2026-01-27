@@ -32,6 +32,24 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  webpack: (config, { dev }) => {
+    // In some environments (and on some macOS setups), file watcher limits can be low,
+    // causing Watchpack `EMFILE: too many open files` and breaking route compilation.
+    // Polling avoids opening a watcher per file.
+    if (dev) {
+      config.watchOptions = {
+        ...(config.watchOptions ?? {}),
+        poll: 1000,
+        aggregateTimeout: 200,
+        ignored: [
+          '**/.git/**',
+          '**/.next/**',
+          '**/node_modules/**',
+        ],
+      }
+    }
+    return config
+  },
 }
 
 export default nextConfig

@@ -34,7 +34,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
         <header className="max-w-3xl">
           <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-neutral-slate/80">
             <span className="h-3 w-3 rounded bg-gradient-to-br from-accent-400 to-secondary-500 shadow-sm" aria-hidden="true" />
-            John on the Record
+            My record
           </div>
 
           <h2 id="recordnews-title" className="mt-3 text-4xl font-black uppercase tracking-tight md:text-5xl gradient-primary">
@@ -42,7 +42,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
           </h2>
 
           <p className="mt-4 text-lg leading-relaxed text-neutral-muted">
-            Op-eds and commentary where John lays out the case for common-sense policy — directly, clearly, and on the record.
+            Op-eds and commentary where I lay out the case for common-sense policy — directly, clearly, and on the record.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">

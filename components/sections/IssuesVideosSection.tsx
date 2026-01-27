@@ -15,8 +15,8 @@ interface IssuesVideosSectionProps {
 }
 
 export function IssuesVideosSection({
-  title = "John on the Issues",
-  subtitle = "Short videos where John lays out the issue, the stakes, and what San Diego County should do next.",
+  title = "My take on the issues",
+  subtitle = "Short videos where I lay out the issue, the stakes, and what San Diego County should do next.",
   volunteerUrl,
   items,
   borderless = false,

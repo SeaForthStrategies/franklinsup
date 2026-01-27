@@ -1,0 +1,27 @@
+---
+description: Color palette enforcement: blues + reds + neutrals only (no gold/purple/cyan)
+alwaysApply: true
+---
+
+# Color palette: blues + reds + neutrals only
+
+This campaign site must stay **clean and professional**. Do not introduce extra accent colors.
+
+## Allowed colors
+
+- **Blues**: navy + blue shades (brand structure, headings, links)
+- **Reds**: CTA/action only (donate, primary actions, alerts)
+- **Neutrals**: backgrounds, borders, body text
+
+## Not allowed
+
+- **Gold / yellow accents**
+- **Purple / magenta**
+- **Cyan / teal “neon” accents**
+
+## Practical rules
+
+- Prefer existing utilities/tokens (`primary-*`, `secondary-*`, `neutral-*`, `--ffsv-*`).
+- Avoid adding new gradients beyond **navy↔blue** or **navy↔red** (keep subtle).
+- If a color reads “purple” when layered/blended, remove the blend and use neutrals.
+

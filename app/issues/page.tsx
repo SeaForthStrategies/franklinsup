@@ -5,13 +5,13 @@ import { PrioritiesSection } from "@/components/sections/PrioritiesSection";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 
 export const metadata: Metadata = {
-  title: "John on the Issues | John Franklin for Supervisor 2026",
+  title: "My take on the issues | My campaign for Supervisor 2026",
   description:
-    "Short videos where John Franklin lays out the issue, the stakes, and what San Diego County should do next.",
+    "Short videos where I lay out the issue, the stakes, and what San Diego County should do next.",
   openGraph: {
-    title: "John on the Issues | John Franklin for Supervisor 2026",
+    title: "My take on the issues | My campaign for Supervisor 2026",
     description:
-      "Short videos where John Franklin lays out the issue, the stakes, and what San Diego County should do next.",
+      "Short videos where I lay out the issue, the stakes, and what San Diego County should do next.",
     url: "https://franklinforsupervisor.com/issues",
     siteName: "Franklin for Supervisor",
     type: "website",

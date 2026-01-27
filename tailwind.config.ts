@@ -71,7 +71,7 @@ const config: Config = {
       },
       fontFamily: {
         heading: ["var(--font-heading)", "Montserrat", "ui-sans-serif", "system-ui"],
-        body: ["var(--font-body)", "Source Sans 3", "ui-sans-serif", "system-ui"],
+        body: ["var(--font-body)", "Montserrat", "ui-sans-serif", "system-ui"],
       },
       borderRadius: {
         xl: "1rem",
