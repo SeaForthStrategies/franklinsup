@@ -62,7 +62,7 @@ export default async function EndorsementsPage() {
     wpEndorsements.map(async (e) => {
       const name = e.acf?.endorser_name || e.title.rendered;
       const org = e.acf?.endorser_org ?? "";
-      const title = e.acf?.endorser_title ?? "";
+      const title = org || (e.acf?.endorser_title ?? "");
 
       const mediaId = e.acf?.headshot;
       if (!mediaId) return null;
