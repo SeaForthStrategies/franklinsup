@@ -1,0 +1,31 @@
+---
+description: Avoid eyebrow/overline labels above headings (no bullet/dot/badge-style labels above titles).
+globs: **/*.{ts,tsx,css,mdx}
+alwaysApply: true
+---
+
+# No eyebrow/overline labels above titles
+
+## Rule
+
+- Do **not** add “eyebrow/overline” UI above headings (e.g., small uppercase labels like `On the record`, `In the news`, `News hub`, `Video` sitting above an `h1/h2`).
+- Do **not** add decorative bullet/dot/marker/badge elements next to those labels (e.g., small gradient squares/dots used as a marker).
+
+## Do instead
+
+- Put the context **in the title** or **in the subhead**.
+- If context is needed for scanning, use a **short subhead sentence** under the title (not an overline label).
+
+## Examples
+
+### Bad
+
+- `On the record` (small label above the title)
+- `In the news` (eyebrow above the title)
+- Any dot/square/marker next to those labels
+
+### Good
+
+- Title: `Op-eds & commentary`
+- Subhead: `Published commentary on the issues — direct, clear, and on the record.`
+

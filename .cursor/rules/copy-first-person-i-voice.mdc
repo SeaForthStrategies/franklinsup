@@ -15,6 +15,11 @@ alwaysApply: true
 - **Legal disclosures only** (including the **footer FPPC “Paid for by …” disclosure block**, and any other legally-required disclaimer/disclosure text) may use the **official committee/candidate name** as required.
 - Outside of legal disclosures, **no “John…”** anywhere.
 
+## User-directed override (allowed)
+
+- If the user **explicitly requests** using the candidate’s name (e.g. “Use John Franklin in this title”), you may use it **only for the specific requested copy**.
+- Default back to first-person everywhere else unless the user repeats/extends that instruction.
+
 ## Overrides
 
 - This rule **overrides** the default “match `franklinforsupervisor.com` copy” rule. If the live site uses "John...", convert it to first-person for this project.

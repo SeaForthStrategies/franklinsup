@@ -96,8 +96,10 @@ export const FEATURED_IN = [
     slug: "franklin-for-supervisor",
     name: "Franklin for Supervisor",
     logoUrl: "https://franklinforsupervisor.com/wp-content/uploads/2026/01/Subheading-1024x262.png",
-    sourceUrl:
+    sourceUrl: "https://www.hjta.org/",
+    heroImageUrl:
       "https://franklinforsupervisor.com/wp-content/uploads/2026/01/1768601284709-5c6e4dec-d9cd-49a6-911b-7057b1e021a8_1.png",
+    heroImageAlt: "No Tax Hikes",
   },
 ] as const;
 

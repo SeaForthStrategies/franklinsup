@@ -18,43 +18,91 @@ interface RecordNewsSectionProps {
   lead: NewsItem;
   rail: NewsItem[];
   borderless?: boolean;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  ctaLabel?: string;
+  hideCta?: boolean;
+  tone?: "light" | "dark";
+  showBackground?: boolean;
 }
 
-export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }: RecordNewsSectionProps) {
+export function RecordNewsSection({
+  donateUrl,
+  lead,
+  rail,
+  borderless = false,
+  eyebrow = "My record",
+  title = "In the News & Commentary",
+  description = "Op-eds and commentary where I lay out the case for common-sense policy — directly, clearly, and on the record.",
+  ctaLabel = "Donate",
+  hideCta = false,
+  tone = "light",
+  showBackground = true,
+}: RecordNewsSectionProps) {
+  const isDark = tone === "dark";
+  const showEyebrow = (eyebrow ?? "").trim().length > 0;
+
   return (
     <section aria-labelledby="recordnews-title" className="relative overflow-hidden py-16 sm:py-20">
       {/* Soft gradient background blending with adjacent sections */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
-        <div className="absolute -top-24 left-[-10%] h-[360px] w-[850px] -skew-y-6 rounded-full bg-blue-200/25 blur-3xl" />
-        <div className="absolute -top-24 right-[-10%] h-[360px] w-[780px] -skew-y-6 rounded-full bg-blue-300/15 blur-3xl" />
-      </div>
+      {showBackground ? (
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          {isDark ? (
+            <>
+              <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary to-primary" />
+              <div className="absolute -top-24 left-[-10%] h-[360px] w-[850px] -skew-y-6 rounded-full bg-secondary/20 blur-3xl" />
+              <div className="absolute -top-24 right-[-10%] h-[360px] w-[780px] -skew-y-6 rounded-full bg-secondary/10 blur-3xl" />
+            </>
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
+              <div className="absolute -top-24 left-[-10%] h-[360px] w-[850px] -skew-y-6 rounded-full bg-blue-200/25 blur-3xl" />
+              <div className="absolute -top-24 right-[-10%] h-[360px] w-[780px] -skew-y-6 rounded-full bg-blue-300/15 blur-3xl" />
+            </>
+          )}
+        </div>
+      ) : null}
 
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="max-w-3xl">
-          <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-neutral-slate/80">
-            <span className="h-3 w-3 rounded bg-gradient-to-br from-primary to-secondary shadow-sm" aria-hidden="true" />
-            My record
-          </div>
+          {showEyebrow ? (
+            <div
+              className={[
+                "inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest",
+                isDark ? "text-neutral-base/80" : "text-neutral-slate/80",
+              ].join(" ")}
+            >
+              {eyebrow}
+            </div>
+          ) : null}
 
-          <h2 id="recordnews-title" className="mt-3 text-4xl font-black uppercase tracking-tight text-primary md:text-5xl">
-            In the News &amp; Commentary
+          <h2
+            id="recordnews-title"
+            className={[
+              "mt-3 text-4xl font-black uppercase tracking-tight md:text-5xl",
+              isDark ? "text-neutral-base" : "text-primary",
+            ].join(" ")}
+          >
+            {title}
           </h2>
 
-          <p className="mt-4 text-lg leading-relaxed text-neutral-muted">
-            Op-eds and commentary where I lay out the case for common-sense policy — directly, clearly, and on the record.
+          <p className={["mt-4 text-lg leading-relaxed", isDark ? "text-neutral-base/80" : "text-neutral-muted"].join(" ")}>
+            {description}
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <a
-              href={donateUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="site-cta site-cta--primary text-base sm:text-sm sm:py-3"
-            >
-              Donate
-            </a>
-          </div>
+          {!hideCta ? (
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href={donateUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="site-cta site-cta--primary text-base sm:text-sm sm:py-3"
+              >
+                {ctaLabel}
+              </a>
+            </div>
+          ) : null}
         </header>
 
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[1.65fr_1fr] lg:items-stretch">
@@ -75,7 +123,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
                 aria-label={lead.ariaLabel ?? `Read: ${lead.title}`}
                 className="relative block"
               >
-                <div className="relative aspect-video lg:aspect-auto lg:h-full bg-[#0b1733]">
+                <div className="relative aspect-video bg-[#0b1733] lg:aspect-auto lg:h-full">
                   <Image
                     src={lead.imageUrl}
                     alt={lead.imageAlt}
@@ -83,19 +131,14 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
                     sizes="(max-width: 1024px) 100vw, 60vw"
                     className="object-cover"
                   />
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/35"
-                  />
+                  <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/35" />
                 </div>
               </a>
 
               <div className="flex h-full flex-col gap-3 p-6">
                 <div className="flex flex-wrap items-center gap-2 text-xs tracking-wide text-neutral-slate/70">
                   <span className="font-semibold">{lead.sourceName}</span>
-                  <span aria-hidden="true" className="opacity-70">
-                    •
-                  </span>
+                  <span aria-hidden="true" className="opacity-70">—</span>
                   <time dateTime={lead.dateTime}>{lead.dateLabel}</time>
                 </div>
 
@@ -103,9 +146,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
                   {lead.title}
                 </h2>
 
-                {lead.excerpt ? (
-                  <p className="text-base text-neutral-muted">{lead.excerpt}</p>
-                ) : null}
+                {lead.excerpt ? <p className="text-base text-neutral-muted">{lead.excerpt}</p> : null}
 
                 <a
                   href={lead.url}
@@ -146,9 +187,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
             aria-label="More on the record"
           >
             <div className={["bg-neutral-surface px-5 py-4", borderless ? "" : "border-b border-neutral-border"].join(" ")}>
-              <div className="text-xs font-black uppercase tracking-widest text-primary/80">
-                More on the Record
-              </div>
+              <div className="text-xs font-black uppercase tracking-widest text-primary/80">More on the Record</div>
               <div className="mt-1 text-sm text-neutral-muted">Recent coverage &amp; commentary</div>
             </div>
 
@@ -169,13 +208,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
                         borderless ? "" : "border border-neutral-border",
                       ].join(" ")}
                     >
-                      <Image
-                        src={item.imageUrl}
-                        alt={item.imageAlt}
-                        fill
-                        sizes="110px"
-                        className="object-cover"
-                      />
+                      <Image src={item.imageUrl} alt={item.imageAlt} fill sizes="110px" className="object-cover" />
                     </div>
                   </a>
 

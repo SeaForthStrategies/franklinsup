@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FEATURED_IN, type VideoAppearance } from "@/src/content/featuredIn";
 
 type PageProps = {
@@ -62,6 +61,17 @@ function hasArticles(
   articles: ArticleItem[];
 } {
   return "articles" in item && Array.isArray((item as { articles?: unknown }).articles);
+}
+
+function hasHeroImage(
+  item: (typeof FEATURED_IN)[number]
+): item is (typeof FEATURED_IN)[number] & { heroImageUrl: string; heroImageAlt: string } {
+  return (
+    "heroImageUrl" in item &&
+    typeof (item as { heroImageUrl?: unknown }).heroImageUrl === "string" &&
+    "heroImageAlt" in item &&
+    typeof (item as { heroImageAlt?: unknown }).heroImageAlt === "string"
+  );
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -148,8 +158,8 @@ export default async function FeaturedItemPage({ params }: PageProps) {
             </Link>
 
             {/* Header */}
-            <div className="flex flex-col gap-4 sm:gap-6">
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center sm:gap-6">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
                 <div className="flex items-center justify-center rounded-lg border border-neutral-border bg-white/80 px-3 py-1.5 shadow-sm sm:rounded-xl sm:px-4 sm:py-2">
                   <Image
                     src={item.logoUrl}
@@ -159,17 +169,6 @@ export default async function FeaturedItemPage({ params }: PageProps) {
                     className="h-5 w-auto sm:h-6 md:h-8"
                   />
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-neutral-muted sm:text-xs">
-                  {videos.length ? `${videos.length} Videos` : "Featured"}
-                </span>
-                {item.date ? (
-                  <>
-                    <span className="text-neutral-border">·</span>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-neutral-muted sm:text-xs">
-                      {item.date}
-                    </span>
-                  </>
-                ) : null}
               </div>
 
               <h1 className="text-balance text-2xl font-black uppercase tracking-tight text-primary sm:text-3xl md:text-4xl lg:text-5xl">
@@ -376,48 +375,74 @@ export default async function FeaturedItemPage({ params }: PageProps) {
   // Fallback: simple layout for items without extended content
   return (
     <section className="bg-neutral-base">
-      <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:py-16 lg:px-8 lg:py-20">
-        <SectionHeader eyebrow="Featured" title="In the news" lead={`Coverage from ${item.name}.`} />
+      <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-12 md:py-16 lg:px-8 lg:py-20">
+        <Link
+          href="/#featured"
+          className="group mb-6 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-neutral-muted transition-colors hover:text-primary sm:mb-8"
+        >
+          <svg
+            className="h-4 w-4 transition-transform group-hover:-translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to coverage featuring me
+        </Link>
 
-        <div className="mt-8 grid gap-6 sm:mt-10 lg:grid-cols-3 lg:gap-10">
-          <div className="lg:col-span-2">
-            <div className="prose prose-sm prose-neutral max-w-none sm:prose-base">
-              <p>
-                I&apos;m building these &quot;Featured&quot; pages now so each logo on the home page can link to a
-                dedicated write-up.
-              </p>
-              <p>
-                For now, you can read the original coverage here:{" "}
-                <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">
-                  {item.sourceUrl}
-                </a>
-                .
-              </p>
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center sm:gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="flex items-center justify-center rounded-lg border border-neutral-border bg-white/80 px-3 py-1.5 shadow-sm sm:rounded-xl sm:px-4 sm:py-2">
+              <Image src={item.logoUrl} alt={item.name} width={520} height={140} className="h-6 w-auto sm:h-7 md:h-8" />
             </div>
           </div>
 
-          <aside className="rounded-2xl border border-neutral-border bg-neutral-surface p-4 shadow-card sm:rounded-3xl sm:p-6">
+          <h1 className="text-balance text-2xl font-black uppercase tracking-tight text-primary sm:text-3xl md:text-4xl">
+            {item.name}
+          </h1>
+        </div>
+
+        <div className="mt-8 grid gap-6 sm:mt-10 lg:grid-cols-3 lg:gap-10">
+          <div className="lg:col-span-2">
+            {hasHeroImage(item) ? (
+              <div className="overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base shadow-card sm:rounded-3xl">
+                <Image
+                  src={item.heroImageUrl}
+                  alt={item.heroImageAlt}
+                  width={791}
+                  height={1024}
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  className="h-auto w-full"
+                />
+              </div>
+            ) : (
+              <div className="rounded-2xl border border-neutral-border bg-neutral-surface p-6 text-sm text-neutral-muted sm:rounded-3xl">
+                No preview image available for this item yet.
+              </div>
+            )}
+          </div>
+
+          <aside className="rounded-2xl border border-neutral-border bg-neutral-surface p-4 shadow-card sm:rounded-3xl sm:p-6 lg:sticky lg:top-28 lg:self-start">
             <p className="text-[10px] font-black uppercase tracking-widest text-neutral-slate/80 sm:text-xs">Source</p>
             <div className="mt-3 flex flex-col gap-3 sm:mt-4 sm:gap-4">
               <div className="flex items-center justify-center rounded-xl border border-neutral-border bg-white/70 p-3 sm:rounded-2xl sm:p-4">
-                <Image
-                  src={item.logoUrl}
-                  alt={item.name}
-                  width={520}
-                  height={140}
-                  className="h-8 w-auto sm:h-10 md:h-12"
-                />
+                <Image src={item.logoUrl} alt={item.name} width={520} height={140} className="h-8 w-auto sm:h-10 md:h-12" />
               </div>
+              <a className="site-cta site-cta--primary" href={item.sourceUrl} target="_blank" rel="noopener noreferrer">
+                View the source
+              </a>
               <a
-                className="site-cta site-cta--primary"
                 href={item.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="break-words text-xs font-semibold text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:text-primary/80"
               >
-                Read the original coverage
+                {item.sourceUrl}
               </a>
               <Link className="site-cta site-cta--secondary" href="/">
-                Back to home
+                Back to Home
               </Link>
             </div>
           </aside>

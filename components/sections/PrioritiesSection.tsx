@@ -72,20 +72,17 @@ export function PrioritiesSection({
   }, [cards]);
 
   return (
-    <section aria-labelledby="priorities-title" className="relative overflow-hidden py-16 sm:py-20">
+    <section aria-labelledby="priorities-title" className="relative isolate overflow-hidden bg-neutral-base py-16 sm:py-20">
       {/* Soft gradient background blending from news section */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
-        <div className="absolute left-[-10%] top-[-10%] h-[420px] w-[720px] rounded-full bg-blue-200/25 blur-3xl" />
-        <div className="absolute right-[-10%] top-[-15%] h-[420px] w-[720px] rounded-full bg-blue-300/15 blur-3xl" />
+        <div className="absolute left-[-10%] top-[-10%] h-[420px] w-[720px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute right-[-10%] top-[-15%] h-[420px] w-[720px] rounded-full bg-primary/8 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative site-container">
         <header className="max-w-3xl">
-          <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-neutral-slate/80">
-            <span className="h-3 w-3 rounded bg-gradient-to-br from-primary to-secondary shadow-sm" aria-hidden="true" />
-            Priorities
-          </div>
+          <div className="text-xs font-black uppercase tracking-widest text-neutral-slate/80">Priorities</div>
 
           <h2 id="priorities-title" className="mt-3 text-3xl font-black uppercase tracking-tight text-primary sm:text-4xl md:text-5xl">
             {title}
@@ -224,10 +221,7 @@ export function PrioritiesSection({
             {activeCard ? (
               <div className="relative z-10">
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-neutral-slate/80">
-                    <span className="h-3 w-3 rounded bg-gradient-to-br from-primary to-secondary shadow-sm" aria-hidden="true" />
-                    Solutions
-                  </div>
+                  <div className="text-xs font-black uppercase tracking-widest text-neutral-slate/80">Solutions</div>
 
                   <div className="inline-flex items-center gap-2 rounded-full border border-neutral-border bg-neutral-base px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-slate/80">
                     <span aria-hidden="true" className="h-2 w-2 rounded-full bg-secondary-500" />
@@ -266,18 +260,17 @@ export function PrioritiesSection({
                     </p>
 
                     <div>
-                        <div className="text-xs font-black uppercase tracking-widest text-neutral-slate/80">Key commitments</div>
+                      <div className="text-xs font-black uppercase tracking-widest text-neutral-slate/80">Key commitments</div>
                       <ul role="list" className="mt-3 grid gap-2 sm:grid-cols-2">
                         {activeCard.bullets.map((b) => (
                           <li
                             key={b}
-                            className="grid grid-cols-[16px_1fr] items-start gap-3 text-sm font-black leading-relaxed text-neutral-ink sm:text-[15px]"
+                            className={[
+                              "relative pl-4 text-sm font-black leading-relaxed text-neutral-ink sm:text-[15px]",
+                              "before:absolute before:left-0 before:top-[0.15rem] before:content-['—'] before:text-neutral-slate/70",
+                            ].join(" ")}
                           >
-                            <span
-                              aria-hidden="true"
-                              className="mt-1 h-2.5 w-2.5 rounded-sm bg-gradient-to-br from-primary to-secondary shadow-sm"
-                            />
-                            <span>{b}</span>
+                            {b}
                           </li>
                         ))}
                       </ul>

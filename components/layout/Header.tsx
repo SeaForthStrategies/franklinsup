@@ -4,14 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const LOGO_URL =
-  "https://franklinforsupervisor.com/wp-content/uploads/2024/07/Supervisor_Logo_noBG-01.png";
+import supervisorLogoPng from "@/Images/Supervisor_Logo_noBG_v2EL.png";
 
 const CONTACT_URL =
   "https://secure.franklinforsupervisor.com/contact?_gl=1%2A1hbffur%2A_gcl_au%2ANDA2MjI2MjM4LjE3Njk0NDU2NTI.";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+
+  function closeAllMenus() {
+    setIsMenuOpen(false);
+    setIsAboutOpen(false);
+  }
 
   return (
     <header className="site-header">
@@ -20,8 +25,8 @@ export function Header() {
           <div className="site-nav-top">
             <Link href="/" className="site-brand" aria-label="Home">
               <Image
-                src={LOGO_URL}
-                alt="Franklin for Supervisor"
+                src={supervisorLogoPng}
+                alt="My campaign logo"
                 width={220}
                 height={70}
                 priority
@@ -46,22 +51,52 @@ export function Header() {
           <div className={`site-nav-menu ${isMenuOpen ? "open" : ""}`}>
             <ul className="site-nav-links" role="list">
               <li>
-                <Link className="site-nav-link" href="/about" onClick={() => setIsMenuOpen(false)}>
-                  About
-                </Link>
+                <details
+                  className="site-nav-dropdown"
+                  open={isAboutOpen}
+                  onToggle={(e) => setIsAboutOpen((e.currentTarget as HTMLDetailsElement).open)}
+                >
+                  <summary className="site-nav-link site-nav-dropdown-trigger">
+                    <span>About</span>
+                    <span aria-hidden="true" className="site-nav-dropdown-caret">
+                      <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                        <path
+                          d="M6 8l4 4 4-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </summary>
+                  <ul className="site-nav-submenu" role="list">
+                    <li>
+                      <Link className="site-nav-sublink" href="/district-5" onClick={closeAllMenus}>
+                        District 5
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="site-nav-sublink" href="/about" onClick={closeAllMenus}>
+                        About
+                      </Link>
+                    </li>
+                  </ul>
+                </details>
               </li>
               <li>
-                <Link className="site-nav-link" href="/issues" onClick={() => setIsMenuOpen(false)}>
+                <Link className="site-nav-link" href="/issues" onClick={closeAllMenus}>
                   Issues
                 </Link>
               </li>
               <li>
-                <Link className="site-nav-link" href="/endorsements" onClick={() => setIsMenuOpen(false)}>
+                <Link className="site-nav-link" href="/endorsements" onClick={closeAllMenus}>
                   Endorsements
                 </Link>
               </li>
               <li>
-                <Link className="site-nav-link" href="/news" onClick={() => setIsMenuOpen(false)}>
+                <Link className="site-nav-link" href="/news" onClick={closeAllMenus}>
                   News
                 </Link>
               </li>
@@ -69,7 +104,7 @@ export function Header() {
                 <a
                   className="site-nav-link"
                   href={CONTACT_URL}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={closeAllMenus}
                 >
                   Contact
                 </a>

@@ -22,16 +22,16 @@ export function IssuesVideosSection({
   borderless = false,
 }: IssuesVideosSectionProps) {
   return (
-    <section aria-labelledby="issues-videos-title" className="relative overflow-hidden py-16 sm:py-20">
+    <section aria-labelledby="issues-videos-title" className="relative isolate overflow-hidden bg-neutral-base py-16 sm:py-20">
       {/* Soft gradient background with lighter blues */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
-        <div className="absolute -top-24 left-[-10%] h-[520px] w-[900px] rounded-full bg-blue-200/22 blur-3xl" />
-        <div className="absolute -top-40 right-[-10%] h-[480px] w-[820px] rounded-full bg-blue-200/20 blur-3xl" />
+        <div className="absolute -top-24 left-[-10%] h-[520px] w-[900px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -top-40 right-[-10%] h-[480px] w-[820px] rounded-full bg-primary/8 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <header className="max-w-3xl">
+      <div className="relative site-container">
+        <header className="mx-auto max-w-3xl text-center">
           <h1 id="issues-videos-title" className="text-4xl font-black uppercase tracking-tight text-primary md:text-5xl">
             {title}
           </h1>
@@ -39,7 +39,7 @@ export function IssuesVideosSection({
             {subtitle}
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
               href={volunteerUrl}
               target="_blank"

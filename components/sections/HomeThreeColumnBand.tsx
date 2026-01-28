@@ -89,8 +89,13 @@ export function HomeThreeColumnBand({ donateUrl }: HomeThreeColumnBandProps) {
                     { title: "Fix our roads", body: "Relief on key corridors and long-overdue improvements." },
                     { title: "Strong communities", body: "Quality of life, local values, real partnership." },
                   ].map((item) => (
-                    <li key={item.title} className="grid grid-cols-[16px_1fr] gap-3">
-                      <span aria-hidden="true" className="mt-1.5 h-2.5 w-2.5 rounded-sm bg-gradient-to-br from-primary to-secondary shadow-sm" />
+                    <li
+                      key={item.title}
+                      className={[
+                        "relative pl-4",
+                        "before:absolute before:left-0 before:top-[0.35rem] before:content-['—'] before:text-neutral-slate/70",
+                      ].join(" ")}
+                    >
                       <div>
                         <p className="font-black uppercase tracking-wide text-neutral-ink">{item.title}</p>
                         <p className="mt-1">{item.body}</p>

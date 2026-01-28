@@ -13,8 +13,8 @@ const CARDS = [
       "Proper planning could have prevented the LA wildfires. San Diego County needs to ensure that does not happen here.",
     icon: "https://franklinforsupervisor.com/wp-content/uploads/2025/09/Fire.png",
     bgFocusClass: "object-[50%_22%]",
-    bgScaleClass: "scale-[0.92]",
-    bgHoverScaleClass: "group-hover:scale-[0.98]",
+    bgScaleClass: "",
+    bgHoverScaleClass: "group-hover:scale-[1.06]",
   },
   {
     id: "roads",
@@ -88,9 +88,9 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
                       "object-cover",
                       c.bgFocusClass,
                       c.bgScaleClass ?? "",
-                      "opacity-35 transition-transform duration-500 will-change-transform",
+                      "opacity-30 transition-transform duration-500 will-change-transform",
                       c.bgHoverScaleClass ?? "group-hover:scale-[1.06]",
-                      "group-hover:opacity-45",
+                      "group-hover:opacity-40",
                     ].join(" ")}
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-neutral-surface/15 via-neutral-surface/75 to-neutral-surface transition-opacity duration-300 group-hover:opacity-85" />

@@ -1,6 +1,8 @@
+import type { ReactNode } from "react";
+
 interface SectionHeaderProps {
   eyebrow?: string;
-  title: string;
+  title: ReactNode;
   lead?: string;
   align?: "left" | "center";
   titleId?: string;
@@ -22,14 +24,10 @@ export function SectionHeader({
       {eyebrow ? (
         <div
           className={[
-            "inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-neutral-slate/80",
+            "inline-flex items-center text-xs font-black uppercase tracking-widest text-neutral-slate/80",
             isCenter ? "mx-auto" : "",
           ].join(" ")}
         >
-          <span
-            className="h-3 w-3 rounded bg-gradient-to-br from-primary to-secondary shadow-sm"
-            aria-hidden="true"
-          />
           {eyebrow}
         </div>
       ) : null}

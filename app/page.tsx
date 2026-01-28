@@ -13,10 +13,7 @@ export default function Home() {
 
   return (
     <>
-      <HomeCoverHero
-        donateUrl={donateUrl}
-        endorsementsHref="/endorsements"
-      />
+      <HomeCoverHero donateUrl={donateUrl} endorsementsHref="/endorsements" />
 
       <HomeSupportDonate donateUrl={donateUrl} volunteerUrl={volunteerUrl} />
       <HomeSupportMarquee />
