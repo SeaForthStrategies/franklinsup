@@ -19,7 +19,7 @@ type WPEndorsement = {
     endorser_title?: string;
     endorser_org?: string;
     sort_order?: number;
-    logo?: { url?: string; alt?: string };
+    headshot?: unknown;
   };
 };
 
@@ -58,17 +58,48 @@ export default async function EndorsementsPage() {
 
   // Map WP items into the same shape your EndorsementsGrid expects
   // (no CSS changes; just data)
-  const wpPeopleEndorsements = wpEndorsements
-    .filter((e) => Boolean(e.acf?.logo?.url))
-    .map((e) => ({
-      id: `wp-${e.id}`,
-      name: e.acf?.endorser_name || e.title.rendered,
-      title: e.acf?.endorser_title ?? "",
-      imageUrl: e.acf.logo?.url as string,
-      imageAlt: e.acf?.logo?.alt,
-    }));
+  const wpPeopleEndorsements = await Promise.all(
+    wpEndorsements.map(async (e) => {
+      const name = e.acf?.endorser_name || e.title.rendered;
+      const org = e.acf?.endorser_org ?? "";
+      const title = e.acf?.endorser_title ?? "";
 
-  const combinedPeopleEndorsements = [...PEOPLE_ENDORSEMENTS, ...wpPeopleEndorsements];
+      const mediaId = e.acf?.headshot;
+      if (!mediaId) return null;
+
+      try {
+        const base = process.env.WORDPRESS_URL;
+        const mediaRes = await fetch(`${base}/wp-json/wp/v2/media/${mediaId}`, {
+          next: { revalidate: 60 },
+        });
+        if (!mediaRes.ok) return null;
+
+        const media = await mediaRes.json();
+        const imageUrl = media?.source_url as string | undefined;
+        if (!imageUrl) return null;
+
+        const imageAlt = (media?.alt_text as string | undefined) || name;
+
+        return {
+          id: `wp-${e.id}`,
+          name,
+          title,
+          organization: org,
+          imageUrl,
+          imageAlt,
+        };
+      } catch {
+        return null;
+      }
+    })
+  );
+
+  const wpPeopleEndorsementsClean = wpPeopleEndorsements.filter(Boolean) as any[];
+
+  const combinedPeopleEndorsements = [
+    ...PEOPLE_ENDORSEMENTS,
+    ...wpPeopleEndorsementsClean,
+  ];
 
   return (
     <>
