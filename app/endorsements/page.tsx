@@ -5,6 +5,37 @@ import { EndorsementQuote } from "@/components/sections/EndorsementQuote";
 import { EndorsementsTopAnimations } from "@/components/sections/EndorsementsTopAnimations.client";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 
+export const revalidate = 60;
+
+type WPEndorsement = {
+  id: number;
+  title: { rendered: string };
+  acf: {
+    endorser_name?: string;
+    endorser_title?: string;
+    endorser_org?: string;
+    sort_order?: number;
+    logo?: { url?: string; alt?: string };
+  };
+};
+
+async function getWPEndorsements(): Promise<WPEndorsement[]> {
+  const base = process.env.WORDPRESS_URL;
+  if (!base) return [];
+
+  const res = await fetch(`${base}/wp-json/wp/v2/endorsement?per_page=100`, {
+    next: { revalidate: 60 },
+  });
+
+  if (!res.ok) return [];
+
+  const data = (await res.json()) as WPEndorsement[];
+
+  data.sort((a, b) => (a.acf?.sort_order ?? 9999) - (b.acf?.sort_order ?? 9999));
+
+  return data;
+}
+
 export const metadata: Metadata = {
   title: "Endorsements – Support my campaign",
   openGraph: {
@@ -15,7 +46,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function EndorsementsPage() {
+export default async function EndorsementsPage() {
+  const wpEndorsements = await getWPEndorsements();
+
+  const wpPeopleEndorsements = wpEndorsements
+    .filter((e) => Boolean(e.acf?.logo?.url))
+    .map((e) => ({
+    id: `wp-${e.id}`,
+    name: e.acf?.endorser_name || e.title.rendered,
+    title: e.acf?.endorser_title ?? "",
+    organization: e.acf?.endorser_org,
+    imageUrl: e.acf.logo?.url as string,
+    imageAlt: e.acf?.logo?.alt,
+  }));
+
+  const combinedPeopleEndorsements = [...PEOPLE_ENDORSEMENTS, ...wpPeopleEndorsements];
+
   return (
     <>
       <section className="relative overflow-hidden bg-primary-900 py-14 text-white sm:py-20 lg:py-24">
@@ -42,7 +88,7 @@ export default function EndorsementsPage() {
         </div>
 
         <div className="relative mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-          <EndorsementsGrid endorsements={PEOPLE_ENDORSEMENTS} variant="people" />
+          <EndorsementsGrid endorsements={combinedPeopleEndorsements} variant="people" />
 
           <div className="mt-14 sm:mt-16">
             <h2 className="text-center text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">

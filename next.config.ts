@@ -1,35 +1,14 @@
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     unoptimized: true, // Disable image optimization for external images
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'i.ytimg.com',
-        pathname: '/vi/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'franklinforsupervisor.com',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'secure.franklinforsupervisor.com',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'voiceofsandiego.org',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'i.postimg.cc',
-        pathname: '/**',
-      },
+      { protocol: "https", hostname: "franklinforsupervisor.com" },
+      { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
+      { protocol: "https", hostname: "secure.franklinforsupervisor.com", pathname: "/**" },
+      { protocol: "https", hostname: "voiceofsandiego.org", pathname: "/**" },
+      { protocol: "https", hostname: "i.postimg.cc", pathname: "/**" },
     ],
   },
   webpack: (config, { dev }) => {
@@ -41,15 +20,11 @@ const nextConfig: NextConfig = {
         ...(config.watchOptions ?? {}),
         poll: 1000,
         aggregateTimeout: 200,
-        ignored: [
-          '**/.git/**',
-          '**/.next/**',
-          '**/node_modules/**',
-        ],
-      }
+        ignored: ["**/.git/**", "**/.next/**", "**/node_modules/**"],
+      };
     }
-    return config
+    return config;
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
