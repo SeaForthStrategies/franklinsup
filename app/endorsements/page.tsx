@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-import { EndorsementsGrid, ORGANIZATION_ENDORSEMENTS, PEOPLE_ENDORSEMENTS } from "@/components/sections/EndorsementsGrid";
+import {
+  EndorsementsGrid,
+  ORGANIZATION_ENDORSEMENTS,
+  PEOPLE_ENDORSEMENTS,
+} from "@/components/sections/EndorsementsGrid";
 import { EndorsementQuote } from "@/components/sections/EndorsementQuote";
 import { EndorsementsTopAnimations } from "@/components/sections/EndorsementsTopAnimations.client";
 import { SectionDivider } from "@/components/ui/SectionDivider";
@@ -21,17 +25,22 @@ type WPEndorsement = {
 
 async function getWPEndorsements(): Promise<WPEndorsement[]> {
   const base = process.env.WORDPRESS_URL;
-  if (!base) return [];
+  if (!base) {
+    throw new Error("Missing WORDPRESS_URL (check Vercel env vars + redeploy)");
+  }
 
-  const res = await fetch(`${base}/wp-json/wp/v2/endorsement?per_page=100`, {
-    next: { revalidate: 60 },
-  });
+  const url = `${base}/wp-json/wp/v2/endorsement?per_page=100`;
+  const res = await fetch(url, { next: { revalidate: 60 } });
 
-  if (!res.ok) return [];
+  if (!res.ok) {
+    throw new Error(`WP fetch failed: ${res.status} for ${url}`);
+  }
 
   const data = (await res.json()) as WPEndorsement[];
 
-  data.sort((a, b) => (a.acf?.sort_order ?? 9999) - (b.acf?.sort_order ?? 9999));
+  data.sort(
+    (a, b) => (a.acf?.sort_order ?? 9999) - (b.acf?.sort_order ?? 9999)
+  );
 
   return data;
 }
@@ -49,18 +58,22 @@ export const metadata: Metadata = {
 export default async function EndorsementsPage() {
   const wpEndorsements = await getWPEndorsements();
 
+  // Map WP items into the same shape your EndorsementsGrid expects
+  // (no CSS changes; just data)
   const wpPeopleEndorsements = wpEndorsements
     .filter((e) => Boolean(e.acf?.logo?.url))
     .map((e) => ({
-    id: `wp-${e.id}`,
-    name: e.acf?.endorser_name || e.title.rendered,
-    title: e.acf?.endorser_title ?? "",
-    organization: e.acf?.endorser_org,
-    imageUrl: e.acf.logo?.url as string,
-    imageAlt: e.acf?.logo?.alt,
-  }));
+      name: e.acf?.endorser_name || e.title.rendered,
+      title: e.acf?.endorser_title ?? "",
+      organization: e.acf?.endorser_org ?? "",
+      imageUrl: e.acf.logo!.url!,
+      imageAlt: e.acf?.logo?.alt ?? "",
+    }));
 
-  const combinedPeopleEndorsements = [...PEOPLE_ENDORSEMENTS, ...wpPeopleEndorsements];
+  const combinedPeopleEndorsements = [
+    ...PEOPLE_ENDORSEMENTS,
+    ...wpPeopleEndorsements,
+  ];
 
   return (
     <>
@@ -75,7 +88,11 @@ export default async function EndorsementsPage() {
               Endorsements
             </h1>
 
-            <EndorsementsTopAnimations people={PEOPLE_ENDORSEMENTS} organizations={ORGANIZATION_ENDORSEMENTS} />
+            {/* Optional: show animations with the combined list too */}
+            <EndorsementsTopAnimations
+              people={combinedPeopleEndorsements}
+              organizations={ORGANIZATION_ENDORSEMENTS}
+            />
           </div>
         </div>
       </section>
