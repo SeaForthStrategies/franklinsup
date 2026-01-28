@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { AboutHeroImages } from "@/components/sections/AboutHeroImages.client";
 
 export const metadata: Metadata = {
   title: "About – Leadership for San Diego County",
@@ -38,46 +38,7 @@ export default function AboutPage() {
           </div>
 
           {/* Supporting images (match live site: 3 images under heading) */}
-          <div className="mx-auto mt-10 grid max-w-6xl gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-            <figure className="relative overflow-hidden rounded-3xl border border-white/18 bg-black/25 shadow-2xl backdrop-blur-sm">
-              <div className="relative aspect-[16/12] bg-neutral-ink">
-                <Image
-                  src="https://franklinforsupervisor.com/wp-content/uploads/2024/08/JohnShanna1EL.png"
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-cover object-[50%_30%] sm:object-[50%_25%]"
-                />
-                <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/25" />
-              </div>
-            </figure>
-
-            <figure className="relative overflow-hidden rounded-3xl border border-white/18 bg-black/25 shadow-2xl backdrop-blur-sm">
-              <div className="relative aspect-[16/12] bg-neutral-ink">
-                <Image
-                  src="https://franklinforsupervisor.com/wp-content/uploads/2023/07/DG5_0419-Copy-1024x683.jpg"
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-cover object-[50%_30%] sm:object-[50%_25%]"
-                />
-                <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/25" />
-              </div>
-            </figure>
-
-            <figure className="relative overflow-hidden rounded-3xl border border-white/18 bg-black/25 shadow-2xl backdrop-blur-sm">
-              <div className="relative aspect-[16/12] bg-neutral-ink">
-                <Image
-                  src="https://franklinforsupervisor.com/wp-content/uploads/2024/07/347799573_644190660379563_4869575071748284670_n-1024x782.jpg"
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover object-[50%_28%] sm:object-[50%_24%]"
-                />
-                <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/25" />
-              </div>
-            </figure>
-          </div>
+          <AboutHeroImages />
         </div>
       </section>
 

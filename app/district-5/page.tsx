@@ -37,7 +37,7 @@ export default function District5Page() {
       <section className="border-t border-neutral-border/60 bg-neutral-surface">
         <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:py-16 lg:px-8 lg:py-20">
           <div className="mx-auto w-full max-w-6xl grid gap-8 lg:grid-cols-12 lg:gap-10">
-            <div className="space-y-8 lg:col-span-7">
+            <div className="order-2 space-y-8 lg:order-1 lg:col-span-7">
               <article className="rounded-2xl border border-neutral-border bg-neutral-base p-5 shadow-card sm:rounded-3xl sm:p-7">
                 <h2 className="text-2xl font-black uppercase tracking-tight text-primary sm:text-3xl">District Overview</h2>
                 <div className="mt-4 space-y-5 text-base leading-relaxed text-neutral-slate">
@@ -78,7 +78,7 @@ export default function District5Page() {
               </article>
             </div>
 
-            <aside className="lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
+            <aside className="order-1 lg:order-2 lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
               <article className="rounded-2xl border border-neutral-border bg-neutral-base p-5 shadow-card sm:rounded-3xl sm:p-7">
                 <h2 className="sr-only">District 5 map</h2>
                 <div className="rounded-2xl border border-neutral-border bg-neutral-surface p-3 sm:p-4">

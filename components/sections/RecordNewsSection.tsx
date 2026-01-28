@@ -223,7 +223,7 @@ export function RecordNewsSection({
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-2 inline-flex w-max items-center gap-2 border-b-2 border-primary/20 pb-0.5 text-sm font-black text-neutral-ink transition-all hover:translate-x-0.5 hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      className="ffsv-tap-link mt-2 inline-flex w-max items-center gap-2 border-b-2 border-primary/20 pb-0.5 text-sm font-black text-neutral-ink transition-all hover:translate-x-0.5 hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     >
                       {/* Use <img> for SVG icons to avoid next/image SVG restrictions */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -56,13 +56,13 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
           <h2 id="home-issues-title" className="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl">
             Real problems. Real solutions.
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-white/80 sm:text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
             Practical, results-focused leadership on the issues that affect families across North County every day.
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
-          {CARDS.map((c) => {
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {CARDS.map((c, idx) => {
             const topicHref = `${issuesBaseHref}#${c.id}`;
 
             return (
@@ -71,6 +71,7 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
                 href={topicHref}
                 className={[
                   "group relative block h-full min-h-[320px] overflow-hidden rounded-3xl border border-neutral-border bg-neutral-surface shadow-card",
+                  idx === CARDS.length - 1 ? "sm:col-span-2 lg:col-span-1" : "",
                   "transition-all duration-300 hover:-translate-y-2 hover:border-primary/25 hover:shadow-2xl",
                   "focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary-900",
                 ].join(" ")}
@@ -83,7 +84,7 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
                     src={c.icon}
                     alt=""
                     fill
-                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className={[
                       "object-cover",
                       c.bgFocusClass,
@@ -101,7 +102,7 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
                     <h3 className="font-heading text-xl font-black uppercase tracking-tight text-neutral-ink sm:text-2xl">
                       {c.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-neutral-muted sm:text-base">{c.body}</p>
+                    <p className="mt-3 text-base leading-relaxed text-neutral-muted sm:text-lg">{c.body}</p>
 
                     <div className="mt-auto pt-7 inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-primary transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-secondary">
                       Learn more <span aria-hidden="true">→</span>

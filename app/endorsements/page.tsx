@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 
 import { EndorsementsGrid, ORGANIZATION_ENDORSEMENTS, PEOPLE_ENDORSEMENTS } from "@/components/sections/EndorsementsGrid";
 import { EndorsementQuote } from "@/components/sections/EndorsementQuote";
+import { EndorsementsTopAnimations } from "@/components/sections/EndorsementsTopAnimations.client";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 
 export const metadata: Metadata = {
-  title: "Endorsements – Leadership for San Diego County",
+  title: "Endorsements – Support my campaign",
   openGraph: {
-    title: "Endorsements – Leadership for San Diego County",
+    title: "Endorsements – Support my campaign",
     url: "https://franklinforsupervisor.com/endorsements",
     siteName: "Franklin for Supervisor",
     type: "website",
@@ -25,8 +26,10 @@ export default function EndorsementsPage() {
         <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="text-balance text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl">
-              We Endorse John Franklin for Supervisor!
+              Endorsements
             </h1>
+
+            <EndorsementsTopAnimations people={PEOPLE_ENDORSEMENTS} organizations={ORGANIZATION_ENDORSEMENTS} />
           </div>
         </div>
       </section>

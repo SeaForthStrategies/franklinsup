@@ -152,6 +152,11 @@
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
 
+  /* Header only: slightly wider side gutters on mobile */
+  .site-header .site-container {
+    @apply px-8;
+  }
+
   .site-header {
     /* Keep the header readable while scrolling */
     @apply sticky top-0 z-40 border-b border-neutral-border/70 bg-neutral-base/75 backdrop-blur-xl;
@@ -224,7 +229,7 @@
   }
 
   .site-nav-menu.open {
-    @apply mt-6 pb-4;
+    @apply mt-6 pt-2 pb-6;
     max-height: 600px;
     opacity: 1;
   }
@@ -258,7 +263,7 @@
   }
 
   .site-nav-links {
-    @apply flex flex-col items-stretch gap-4 text-sm font-black uppercase tracking-widest;
+    @apply flex flex-col items-stretch gap-5 text-sm font-black uppercase tracking-widest;
     @apply lg:flex-1 lg:flex-row lg:flex-nowrap lg:items-center lg:justify-center lg:gap-5;
     color: var(--ffsv-text);
   }
@@ -605,5 +610,81 @@
     transform: translate3d(0, 0, 0) scale(1);
     opacity: 0.55;
     filter: blur(54px);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mobile + tablet-only responsiveness (desktop must remain pixel-identical)   */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 1023.98px) {
+  /* Prevent horizontal overflow from decorative absolute-positioned blobs */
+  html,
+  body,
+  #dev-preview-shell {
+    overflow-x: clip;
+  }
+
+  @supports not (overflow: clip) {
+    html,
+    body,
+    #dev-preview-shell {
+      overflow-x: hidden;
+    }
+  }
+
+  /* Improve mobile menu behavior (avoid clipping if menu content grows) */
+  .site-nav-menu.open {
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Extra breathing room + iOS safe-area so items never feel “outside the border” */
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  }
+
+  .site-nav-ctas {
+    padding-top: 0.25rem;
+  }
+
+  /* Tap targets */
+  .site-menu-toggle {
+    height: 44px;
+    width: 44px;
+  }
+
+  .site-nav-link {
+    min-height: 44px;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  /* Prevent tap/focus “rings” from getting clipped by the mobile menu container */
+  .site-nav-link:focus,
+  .site-nav-sublink:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--ffsv-ring);
+  }
+
+  /* Utility class for small “text links” that need a larger hit area */
+  .ffsv-tap-link {
+    min-height: 44px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    touch-action: manipulation;
+  }
+
+  /* Footer links: keep layout, increase hit area */
+  footer a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    touch-action: manipulation;
+  }
+
+  /* Prevent iOS “zoom on focus” for small form controls */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
   }
 }

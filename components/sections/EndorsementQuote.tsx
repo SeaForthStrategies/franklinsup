@@ -27,14 +27,14 @@ export function EndorsementQuote({ quote, author, authorTitle, imageUrl, imageAl
           </h2>
 
           <div className="grid gap-8 rounded-3xl border border-neutral-border bg-neutral-base p-6 shadow-card sm:grid-cols-[220px_1fr] sm:gap-10 sm:p-8 lg:grid-cols-[260px_1fr]">
-            <div className="relative mx-auto aspect-square w-full max-w-[220px] overflow-hidden rounded-2xl bg-neutral-surface sm:mx-0 sm:max-w-none animate-[fadeInScale_0.5s_ease-out_backwards]">
+            <div className="relative mx-auto aspect-square w-full max-w-[220px] overflow-hidden rounded-2xl bg-neutral-surface sm:mx-0 sm:max-w-none animate-[fadeInScale_0.5s_ease-out_backwards] will-change-transform transform-gpu">
               {/* Backdrop (keeps the frame looking intentional) */}
               <Image
                 src={imageUrl}
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 260px, (min-width: 640px) 220px, 220px"
-                className="object-cover scale-110 blur-2xl opacity-30"
+                className="object-cover scale-110 blur-2xl opacity-30 will-change-transform transform-gpu"
               />
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/20" />
 
@@ -44,7 +44,8 @@ export function EndorsementQuote({ quote, author, authorTitle, imageUrl, imageAl
                 alt={imageAlt || author}
                 fill
                 sizes="(min-width: 1024px) 260px, (min-width: 640px) 220px, 220px"
-                className="object-cover object-[50%_22%] drop-shadow-[0_18px_30px_rgba(2,6,23,0.45)]"
+                className="object-cover object-[50%_22%] drop-shadow-[0_18px_30px_rgba(2,6,23,0.45)] will-change-transform transform-gpu"
+                priority
               />
             </div>
 
