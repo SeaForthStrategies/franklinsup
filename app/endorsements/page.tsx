@@ -25,24 +25,22 @@ type WPEndorsement = {
 
 async function getWPEndorsements(): Promise<WPEndorsement[]> {
   const base = process.env.WORDPRESS_URL;
-  if (!base) {
-    throw new Error("Missing WORDPRESS_URL (check Vercel env vars + redeploy)");
+  if (!base) return [];
+
+  try {
+    const url = `${base}/wp-json/wp/v2/endorsement?per_page=100`;
+    const res = await fetch(url, { next: { revalidate: 60 } });
+
+    if (!res.ok) return [];
+
+    const data = (await res.json()) as WPEndorsement[];
+
+    data.sort((a, b) => (a.acf?.sort_order ?? 9999) - (b.acf?.sort_order ?? 9999));
+
+    return data;
+  } catch {
+    return [];
   }
-
-  const url = `${base}/wp-json/wp/v2/endorsement?per_page=100`;
-  const res = await fetch(url, { next: { revalidate: 60 } });
-
-  if (!res.ok) {
-    throw new Error(`WP fetch failed: ${res.status} for ${url}`);
-  }
-
-  const data = (await res.json()) as WPEndorsement[];
-
-  data.sort(
-    (a, b) => (a.acf?.sort_order ?? 9999) - (b.acf?.sort_order ?? 9999)
-  );
-
-  return data;
 }
 
 export const metadata: Metadata = {
@@ -63,17 +61,14 @@ export default async function EndorsementsPage() {
   const wpPeopleEndorsements = wpEndorsements
     .filter((e) => Boolean(e.acf?.logo?.url))
     .map((e) => ({
+      id: `wp-${e.id}`,
       name: e.acf?.endorser_name || e.title.rendered,
       title: e.acf?.endorser_title ?? "",
-      organization: e.acf?.endorser_org ?? "",
-      imageUrl: e.acf.logo!.url!,
-      imageAlt: e.acf?.logo?.alt ?? "",
+      imageUrl: e.acf.logo?.url as string,
+      imageAlt: e.acf?.logo?.alt,
     }));
 
-  const combinedPeopleEndorsements = [
-    ...PEOPLE_ENDORSEMENTS,
-    ...wpPeopleEndorsements,
-  ];
+  const combinedPeopleEndorsements = [...PEOPLE_ENDORSEMENTS, ...wpPeopleEndorsements];
 
   return (
     <>
@@ -88,11 +83,7 @@ export default async function EndorsementsPage() {
               Endorsements
             </h1>
 
-            {/* Optional: show animations with the combined list too */}
-            <EndorsementsTopAnimations
-              people={combinedPeopleEndorsements}
-              organizations={ORGANIZATION_ENDORSEMENTS}
-            />
+            <EndorsementsTopAnimations people={PEOPLE_ENDORSEMENTS} organizations={ORGANIZATION_ENDORSEMENTS} />
           </div>
         </div>
       </section>
