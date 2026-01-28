@@ -37,7 +37,7 @@ export function RecordNewsSection({ donateUrl, lead, rail, borderless = false }:
             My record
           </div>
 
-          <h2 id="recordnews-title" className="mt-3 text-4xl font-black uppercase tracking-tight md:text-5xl gradient-primary">
+          <h2 id="recordnews-title" className="mt-3 text-4xl font-black uppercase tracking-tight text-primary md:text-5xl">
             In the News &amp; Commentary
           </h2>
 

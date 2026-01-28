@@ -37,7 +37,7 @@ export function SectionHeader({
       <h2
         id={titleId}
         className={[
-          "mt-3 text-balance text-3xl font-black uppercase tracking-tight sm:text-4xl md:text-5xl gradient-primary",
+          "mt-3 text-balance text-3xl font-black uppercase tracking-tight text-primary sm:text-4xl md:text-5xl",
         ].join(" ")}
       >
         {title}

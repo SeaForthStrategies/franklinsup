@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { EndorsementsGrid } from "@/components/sections/EndorsementsGrid";
+import { EndorsementQuote } from "@/components/sections/EndorsementQuote";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 
 export const metadata: Metadata = {
   title: "Endorsements | My campaign for Supervisor 2026",
@@ -15,39 +18,30 @@ export const metadata: Metadata = {
 };
 
 export default function EndorsementsPage() {
-  const contactUrl =
-    "https://secure.franklinforsupervisor.com/contact?_gl=1%2A1hbffur%2A_gcl_au%2ANDA2MjI2MjM4LjE3Njk0NDU2NTI.";
-
   return (
-    <section className="bg-neutral-base">
-      <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-        <SectionHeader
-          eyebrow="Endorsements"
-          title="Support you can trust"
-          lead="I’m finalizing an updated list of endorsements and community supporters."
-        />
+    <>
+      <section className="bg-neutral-base">
+        <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <SectionHeader
+            eyebrow="Endorsements"
+            title="Support for my campaign"
+            align="center"
+            lead="A growing coalition of leaders, organizations, and community members supporting my campaign for San Diego County Supervisor, District 5."
+          />
 
-        <div className="mt-10 rounded-3xl border border-neutral-border bg-neutral-surface p-6 shadow-card sm:p-8">
-          <p className="text-sm text-neutral-muted">
-            If you’d like to add your endorsement, please reach out through the Contact page.
-          </p>
-
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a className="site-cta site-cta--secondary" href={contactUrl}>
-              Contact me
-            </a>
-            <a
-              className="site-cta site-cta--primary"
-              href="https://secure.franklinforsupervisor.com/15"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Donate
-            </a>
+          <div className="mt-12">
+            <EndorsementsGrid />
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <SectionDivider variant="wave1" />
+
+      <EndorsementQuote
+        quote="Mayor Franklin is a common sense thinker who doesn't take no for an answer. I've known him for 21 years. He's a problem solver who gets to the source of the problem and finds solutions. He believes in accountability and transparency. He's got my vote!"
+        author="Congressman Darrell Issa"
+        imageUrl="https://franklinforsupervisor.com/wp-content/uploads/2025/02/272330064_479135523575125_5456602968414208822_n.jpg"
+      />
+    </>
   );
 }
-

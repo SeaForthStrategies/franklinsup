@@ -226,29 +226,21 @@ xl:  1280px  /* Large desktops */
 
 ## Gradients
 
-### Gradient Primary (Navy)
-```css
-.gradient-primary {
-  background: linear-gradient(135deg, #2F427A, #1F2A56);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-```
-**Usage**: Large headings, hero titles
+### Heading treatment (no gradient)
+We no longer use gradient text for headings (it read as a “purple glow”).
 
-### Gradient Patriot (Navy to Red)
+### Gradient Patriot (Navy to Blue)
 ```css
 .gradient-patriot {
-  background: linear-gradient(135deg, #1F2A56, #B21F2D);
+  background: linear-gradient(135deg, #0a1f44, #1b5cff);
 }
 ```
 **Usage**: Background elements, decorative accents
 
-### Gradient Accent (Gold)
+### Gradient Accent (Blue)
 ```css
 .gradient-accent {
-  background: linear-gradient(135deg, #DBAE3B, #C7A34A);
+  background: linear-gradient(135deg, #1b5cff, #3b82f6);
 }
 ```
 **Usage**: Accent bars, decorative elements
@@ -292,7 +284,7 @@ xl:  1280px  /* Large desktops */
 ```tsx
 <section className="py-16 bg-neutral-surface">
   <div className="container mx-auto px-6 max-w-content">
-    <h2 className="text-4xl font-black uppercase gradient-primary mb-8">
+    <h2 className="text-4xl font-black uppercase text-primary mb-8">
       Section Title
     </h2>
     {/* Section content */}

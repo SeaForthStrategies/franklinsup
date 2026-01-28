@@ -172,7 +172,7 @@ export default async function FeaturedItemPage({ params }: PageProps) {
                 ) : null}
               </div>
 
-              <h1 className="text-balance text-2xl font-black uppercase tracking-tight gradient-primary sm:text-3xl md:text-4xl lg:text-5xl">
+              <h1 className="text-balance text-2xl font-black uppercase tracking-tight text-primary sm:text-3xl md:text-4xl lg:text-5xl">
                 {item.headline}
               </h1>
               <p className="text-base text-neutral-muted sm:text-lg md:text-xl">{item.subhead}</p>
@@ -312,7 +312,7 @@ export default async function FeaturedItemPage({ params }: PageProps) {
             <div className="grid gap-8 lg:grid-cols-3 lg:gap-12">
               {/* Key points */}
               <div className="lg:col-span-2">
-                <h2 className="text-xl font-black uppercase tracking-tight gradient-primary sm:text-2xl">
+                <h2 className="text-xl font-black uppercase tracking-tight text-primary sm:text-2xl">
                   {isVideoPage ? "My Priorities" : "Key points"}
                 </h2>
                 <p className="mt-1 text-sm text-neutral-muted sm:mt-2 sm:text-base">

@@ -47,9 +47,8 @@ neutral-base: #FFFFFF
 - Standard Tailwind shadows: shadow-sm through shadow-2xl
 
 #### Gradients
-- `.gradient-primary`: Navy blue gradient for text
-- `.gradient-patriot`: Navy to red gradient for backgrounds
-- `.gradient-accent`: Gold gradient for accents
+- `.gradient-patriot`: Navy-to-blue gradient for backgrounds
+- `.gradient-accent`: Blue-only gradient for accents
 
 ## File Structure
 - `globals.css` - Base styles, custom utilities, font variables

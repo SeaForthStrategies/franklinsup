@@ -32,7 +32,7 @@ export function IssuesVideosSection({
 
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="max-w-3xl">
-          <h1 id="issues-videos-title" className="text-4xl font-black uppercase tracking-tight md:text-5xl gradient-primary">
+          <h1 id="issues-videos-title" className="text-4xl font-black uppercase tracking-tight text-primary md:text-5xl">
             {title}
           </h1>
           <p className="mt-4 text-lg text-neutral-muted">

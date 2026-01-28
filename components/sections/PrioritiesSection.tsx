@@ -87,7 +87,7 @@ export function PrioritiesSection({
             Priorities
           </div>
 
-          <h2 id="priorities-title" className="mt-3 text-3xl font-black uppercase tracking-tight sm:text-4xl md:text-5xl gradient-primary">
+          <h2 id="priorities-title" className="mt-3 text-3xl font-black uppercase tracking-tight text-primary sm:text-4xl md:text-5xl">
             {title}
           </h2>
 
