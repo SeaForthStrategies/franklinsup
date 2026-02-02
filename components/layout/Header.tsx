@@ -187,7 +187,7 @@ export function Header() {
             {/* Desktop Navigation (≥1280px) */}
             <ul className="site-nav-desktop" role="list">
               {NAV_ITEMS.map((item) =>
-                item.children ? (
+                "children" in item ? (
                   <li
                     key={item.label}
                     className="site-nav-desktop-dropdown"
@@ -343,7 +343,7 @@ export function Header() {
         <nav className="site-drawer-nav" aria-label="Mobile navigation">
           <ul className="site-drawer-links" role="list">
             {NAV_ITEMS.map((item) =>
-              item.children ? (
+              "children" in item ? (
                 <li key={item.label} className="site-drawer-item">
                   <button
                     className="site-drawer-accordion-trigger"
