@@ -72,42 +72,42 @@ export function PrioritiesSection({
   }, [cards]);
 
   return (
-    <section aria-labelledby="priorities-title" className="relative isolate overflow-hidden bg-neutral-base py-16 sm:py-20">
+    <section aria-labelledby="priorities-title" className="relative isolate overflow-hidden bg-neutral-base py-12 sm:py-16 md:py-20">
       {/* Soft gradient background blending from news section */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
-        <div className="absolute left-[-10%] top-[-10%] h-[420px] w-[720px] rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute right-[-10%] top-[-15%] h-[420px] w-[720px] rounded-full bg-primary/8 blur-3xl" />
+        <div className="absolute left-[-10%] top-[-10%] h-[300px] w-[500px] rounded-full bg-primary/10 blur-3xl sm:h-[420px] sm:w-[720px]" />
+        <div className="absolute right-[-10%] top-[-15%] h-[300px] w-[500px] rounded-full bg-primary/8 blur-3xl sm:h-[420px] sm:w-[720px]" />
       </div>
 
       <div className="relative site-container">
         <header className="max-w-3xl">
-          <div className="text-xs font-black uppercase tracking-widest text-neutral-slate/80">Priorities</div>
+          <div className="text-[10px] font-black uppercase tracking-widest text-neutral-slate/80 sm:text-xs">Priorities</div>
 
-          <h2 id="priorities-title" className="mt-3 text-3xl font-black uppercase tracking-tight text-primary sm:text-4xl md:text-5xl">
+          <h2 id="priorities-title" className="mt-2 text-2xl font-black uppercase tracking-tight text-primary sm:mt-3 sm:text-3xl md:text-4xl lg:text-5xl">
             {title}
           </h2>
 
-          <p className="mt-4 text-base text-neutral-muted sm:text-lg">
+          <p className="mt-3 text-sm text-neutral-muted sm:mt-4 sm:text-base md:text-lg">
             {subtitle}
           </p>
         </header>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[380px_minmax(0,1fr)] lg:items-start">
+        <div className="mt-8 grid gap-6 sm:mt-10 sm:gap-8 lg:grid-cols-[380px_minmax(0,1fr)] lg:items-start">
           {/* Left: mobile dropdown + desktop list */}
           <div className={borderless ? "" : "lg:pr-2"}>
             {/* Mobile: dropdown */}
             <div className="lg:hidden">
-              <label htmlFor={mobileSelectId} className="block text-xs font-black uppercase tracking-widest text-neutral-slate/80">
+              <label htmlFor={mobileSelectId} className="block text-[10px] font-black uppercase tracking-widest text-neutral-slate/80 sm:text-xs">
                 Choose a priority
               </label>
-              <div className="mt-2">
+              <div className="mt-1.5 sm:mt-2">
                 <select
                   id={mobileSelectId}
                   value={resolvedActiveId}
                   onChange={(e) => setActiveId(e.target.value)}
                   className={[
-                    "w-full rounded-2xl bg-neutral-surface px-4 py-3 font-black uppercase tracking-tight text-neutral-ink shadow-sm",
+                    "w-full rounded-xl bg-neutral-surface px-3 py-2.5 text-sm font-black uppercase tracking-tight text-neutral-ink shadow-sm sm:rounded-2xl sm:px-4 sm:py-3 sm:text-base",
                     borderless ? "" : "border border-neutral-border",
                     "focus-visible:ring-2 focus-visible:ring-secondary-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-base",
                   ].join(" ")}
@@ -203,15 +203,15 @@ export function PrioritiesSection({
             id={`priority-${sectionId}-panel`}
             aria-labelledby={[mobileSelectId, activeTabId].filter(Boolean).join(" ") || undefined}
             className={[
-              "relative isolate overflow-hidden rounded-2xl bg-neutral-surface p-6 shadow-card sm:p-8",
-              "min-h-[420px]",
+              "relative isolate overflow-hidden rounded-xl bg-neutral-surface p-5 shadow-card sm:rounded-2xl sm:p-6 md:p-8",
+              "min-h-[360px] sm:min-h-[420px]",
               "scroll-mt-24",
               borderless ? "" : "border border-neutral-border",
             ].join(" ")}
           >
             <div
               aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-95"
+              className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary to-secondary opacity-95 sm:h-2"
             />
             <div
               aria-hidden="true"
@@ -220,24 +220,24 @@ export function PrioritiesSection({
 
             {activeCard ? (
               <div className="relative z-10">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="text-xs font-black uppercase tracking-widest text-neutral-slate/80">Solutions</div>
+                <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3">
+                  <div className="text-[10px] font-black uppercase tracking-widest text-neutral-slate/80 sm:text-xs">Solutions</div>
 
-                  <div className="inline-flex items-center gap-2 rounded-full border border-neutral-border bg-neutral-base px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-slate/80">
-                    <span aria-hidden="true" className="h-2 w-2 rounded-full bg-secondary-500" />
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-neutral-border bg-neutral-base px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-neutral-slate/80 sm:gap-2 sm:px-3 sm:py-1 sm:text-xs">
+                    <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-secondary-500 sm:h-2 sm:w-2" />
                     {activeIndex >= 0 ? `Selected ${activeIndex + 1}/${cards.length}` : "Selected"}
                   </div>
                 </div>
 
-                <h3 className="mt-3 font-heading text-2xl font-black uppercase tracking-tight text-neutral-ink sm:text-3xl">
+                <h3 className="mt-2 font-heading text-xl font-black uppercase tracking-tight text-neutral-ink sm:mt-3 sm:text-2xl md:text-3xl">
                   {activeCard.title}
                 </h3>
 
                 {activeCard.type === "image" ? (
-                  <div className="mt-6">
+                  <div className="mt-4 sm:mt-6">
                     <div
                       className={[
-                        "overflow-hidden rounded-xl bg-neutral-base",
+                        "overflow-hidden rounded-lg bg-neutral-base sm:rounded-xl",
                         borderless ? "" : "border border-neutral-border",
                       ].join(" ")}
                     >
@@ -249,24 +249,24 @@ export function PrioritiesSection({
                         className="h-auto w-full"
                       />
                     </div>
-                    <p className="mt-3 text-sm text-neutral-muted">
+                    <p className="mt-2 text-xs text-neutral-muted sm:mt-3 sm:text-sm">
                       This graphic summarizes my position. Share it, save it, or use it to start the conversation.
                     </p>
                   </div>
                 ) : (
-                  <div className="mt-6 grid gap-5">
-                    <p className="text-base text-neutral-muted sm:text-lg">
+                  <div className="mt-4 grid gap-4 sm:mt-6 sm:gap-5">
+                    <p className="text-sm text-neutral-muted sm:text-base md:text-lg">
                       {activeCard.lead}
                     </p>
 
                     <div>
-                      <div className="text-xs font-black uppercase tracking-widest text-neutral-slate/80">Key commitments</div>
-                      <ul role="list" className="mt-3 grid gap-2 sm:grid-cols-2">
+                      <div className="text-[10px] font-black uppercase tracking-widest text-neutral-slate/80 sm:text-xs">Key commitments</div>
+                      <ul role="list" className="mt-2 grid gap-1.5 sm:mt-3 sm:gap-2 md:grid-cols-2">
                         {activeCard.bullets.map((b) => (
                           <li
                             key={b}
                             className={[
-                              "relative pl-4 text-sm font-black leading-relaxed text-neutral-ink sm:text-[15px]",
+                              "relative pl-3 text-xs font-black leading-relaxed text-neutral-ink sm:pl-4 sm:text-sm md:text-[15px]",
                               "before:absolute before:left-0 before:top-[0.15rem] before:content-['—'] before:text-neutral-slate/70",
                             ].join(" ")}
                           >
@@ -276,9 +276,9 @@ export function PrioritiesSection({
                       </ul>
                     </div>
 
-                    <div className="grid gap-4 border-t border-neutral-border pt-5">
+                    <div className="grid gap-3 border-t border-neutral-border pt-4 sm:gap-4 sm:pt-5">
                       {activeCard.body.map((p, idx) => (
-                        <p key={idx} className="text-sm leading-relaxed text-neutral-muted sm:text-base">
+                        <p key={idx} className="text-xs leading-relaxed text-neutral-muted sm:text-sm md:text-base">
                           {p}
                         </p>
                       ))}

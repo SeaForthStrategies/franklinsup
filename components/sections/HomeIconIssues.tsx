@@ -45,23 +45,23 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
     <section
       id="priorities"
       aria-labelledby="home-issues-title"
-      className="relative overflow-hidden bg-primary-900 py-14 text-white sm:py-16"
+      className="relative overflow-hidden bg-primary-900 py-12 text-white sm:py-14 md:py-16"
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-25">
         <div className="absolute inset-0 bg-[radial-gradient(900px_260px_at_50%_-10%,rgba(59,130,246,.35),transparent_60%)]" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 id="home-issues-title" className="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl">
+          <h2 id="home-issues-title" className="text-3xl font-black uppercase tracking-tight text-white sm:text-4xl md:text-5xl">
             Real problems. Real solutions.
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
+          <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-white/80 sm:mt-4 sm:text-lg md:text-xl">
             Practical, results-focused leadership on the issues that affect families across North County every day.
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-8">
           {CARDS.map((c, idx) => {
             const topicHref = `${issuesBaseHref}#${c.id}`;
 
@@ -70,7 +70,7 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
                 key={c.id}
                 href={topicHref}
                 className={[
-                  "group relative block h-full min-h-[320px] overflow-hidden rounded-3xl border border-neutral-border bg-neutral-surface shadow-card",
+                  "group relative block h-full min-h-[280px] overflow-hidden rounded-2xl border border-neutral-border bg-neutral-surface shadow-card sm:min-h-[320px] sm:rounded-3xl",
                   idx === CARDS.length - 1 ? "sm:col-span-2 lg:col-span-1" : "",
                   "transition-all duration-300 hover:-translate-y-2 hover:border-primary/25 hover:shadow-2xl",
                   "focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary-900",
@@ -97,14 +97,14 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
                   <div className="absolute inset-0 bg-gradient-to-b from-neutral-surface/15 via-neutral-surface/75 to-neutral-surface transition-opacity duration-300 group-hover:opacity-85" />
                 </div>
 
-                <div className="relative z-10 flex h-full flex-col p-8 sm:p-9">
+                <div className="relative z-10 flex h-full flex-col p-6 sm:p-8 lg:p-9">
                   <div className="min-w-0">
-                    <h3 className="font-heading text-xl font-black uppercase tracking-tight text-neutral-ink sm:text-2xl">
+                    <h3 className="font-heading text-lg font-black uppercase tracking-tight text-neutral-ink sm:text-xl md:text-2xl">
                       {c.title}
                     </h3>
-                    <p className="mt-3 text-base leading-relaxed text-neutral-muted sm:text-lg">{c.body}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-neutral-muted sm:mt-3 sm:text-base md:text-lg">{c.body}</p>
 
-                    <div className="mt-auto pt-7 inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-primary transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-secondary">
+                    <div className="mt-auto pt-5 inline-flex items-center gap-2 text-xs font-black uppercase tracking-wide text-primary transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-secondary sm:pt-7 sm:text-sm">
                       Learn more <span aria-hidden="true">→</span>
                     </div>
                   </div>

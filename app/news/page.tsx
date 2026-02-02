@@ -117,16 +117,16 @@ export default function NewsPage() {
 
   return (
     <div className="min-h-screen bg-primary">
-      <section aria-labelledby="news-hub-title" className="relative overflow-hidden py-16 sm:py-20">
+      <section aria-labelledby="news-hub-title" className="relative overflow-hidden py-12 sm:py-16 md:py-20">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary to-primary" />
-          <div className="absolute -top-24 left-[-12%] h-[360px] w-[920px] -skew-y-6">
+          <div className="absolute -top-24 left-[-12%] h-[240px] w-[500px] -skew-y-6 sm:h-[300px] sm:w-[720px] md:h-[360px] md:w-[920px]">
             <div
               className="absolute inset-0 rounded-full bg-secondary/20 motion-safe:animate-[ffsvHeroFloat_16s_ease-in-out_infinite]"
               style={{ filter: "blur(56px)" }}
             />
           </div>
-          <div className="absolute -top-24 right-[-12%] h-[360px] w-[820px] -skew-y-6">
+          <div className="absolute -top-24 right-[-12%] h-[220px] w-[450px] -skew-y-6 sm:h-[280px] sm:w-[640px] md:h-[360px] md:w-[820px]">
             <div
               className="absolute inset-0 rounded-full bg-secondary/10 motion-safe:animate-[ffsvHeroFloat2_20s_ease-in-out_infinite]"
               style={{ filter: "blur(60px)" }}
@@ -138,19 +138,19 @@ export default function NewsPage() {
           <header className="mx-auto max-w-3xl text-center motion-safe:animate-[fadeInUp_650ms_ease-out_1] motion-safe:[animation-fill-mode:both]">
             <h1
               id="news-hub-title"
-              className="mt-3 text-balance text-4xl font-black uppercase tracking-tight text-neutral-base sm:text-5xl md:text-6xl"
+              className="mt-3 text-balance text-2xl font-black uppercase tracking-tight text-neutral-base sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
             >
               News &amp; <span className="text-neutral-base">commentary</span>
             </h1>
-            <p className="mt-4 text-base leading-relaxed text-neutral-base/80 sm:text-lg">
+            <p className="mt-3 text-sm leading-relaxed text-neutral-base/80 sm:mt-4 sm:text-base md:text-lg">
               Coverage, commentary, and video updates — organized in one place.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 sm:mt-6 sm:gap-2">
               {["San Diego Union-Tribune", "KPBS", "FOX 5", "KUSI"].map((label) => (
                 <span
                   key={label}
-                  className="inline-flex items-center rounded-full border border-neutral-base/20 bg-neutral-base/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-base/85 backdrop-blur"
+                  className="inline-flex items-center rounded-full border border-neutral-base/20 bg-neutral-base/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-neutral-base/85 backdrop-blur sm:px-3 sm:py-1 sm:text-xs"
                 >
                   {label}
                 </span>
@@ -158,7 +158,7 @@ export default function NewsPage() {
             </div>
           </header>
 
-          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:gap-5 md:grid-cols-3">
             {[
               {
                 title: "Coverage",
@@ -185,23 +185,23 @@ export default function NewsPage() {
               <section
                 key={card.title}
                 className={[
-                  "rounded-2xl border border-neutral-base/15 bg-neutral-base/10 p-6 shadow-card backdrop-blur",
-                  "min-h-[210px]",
+                  "rounded-xl border border-neutral-base/15 bg-neutral-base/10 p-4 shadow-card backdrop-blur sm:rounded-2xl sm:p-6",
+                  "min-h-[180px] sm:min-h-[210px]",
                   "flex flex-col justify-between text-center",
                   "motion-safe:animate-[fadeInUp_650ms_ease-out_1] motion-safe:[animation-fill-mode:both]",
                   card.delay,
                 ].join(" ")}
               >
                 <div>
-                  <h2 className="mt-3 text-balance text-2xl font-black uppercase tracking-tight text-neutral-base">
+                  <h2 className="mt-2 text-balance text-lg font-black uppercase tracking-tight text-neutral-base sm:mt-3 sm:text-xl md:text-2xl">
                     {card.title}
                   </h2>
-                  <p className="mt-4 text-base leading-relaxed text-neutral-base/80">{card.body}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-neutral-base/80 sm:mt-4 sm:text-base">{card.body}</p>
                 </div>
 
                 <a
                   href={card.href}
-                  className="mx-auto mt-6 inline-flex w-max items-center justify-center rounded-full border border-neutral-base/25 bg-neutral-base/10 px-5 py-3 text-sm font-black uppercase tracking-wide text-neutral-base shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-neutral-base/15 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary"
+                  className="mx-auto mt-4 inline-flex w-max items-center justify-center rounded-full border border-neutral-base/25 bg-neutral-base/10 px-4 py-2.5 text-xs font-black uppercase tracking-wide text-neutral-base shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-neutral-base/15 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary sm:mt-6 sm:px-5 sm:py-3 sm:text-sm"
                 >
                   {card.cta}
                 </a>
@@ -213,45 +213,45 @@ export default function NewsPage() {
 
       <SectionDivider variant="wave1" />
 
-      <section aria-labelledby="coverage-title" className="py-16 sm:py-20">
+      <section aria-labelledby="coverage-title" className="py-12 sm:py-16 md:py-20">
         <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Match the visual language of the op-eds block below */}
           <header className="max-w-3xl">
-            <h2 id="coverage-title" className="mt-3 text-4xl font-black uppercase tracking-tight text-neutral-base md:text-5xl">
+            <h2 id="coverage-title" className="mt-3 text-2xl font-black uppercase tracking-tight text-neutral-base sm:text-3xl md:text-4xl lg:text-5xl">
               News coverage featuring John Franklin
             </h2>
 
-            <p className="mt-4 text-lg leading-relaxed text-neutral-base/80">
+            <p className="mt-3 text-sm leading-relaxed text-neutral-base/80 sm:mt-4 sm:text-base md:text-lg">
               A few reputable stories about local work and practical solutions.
             </p>
           </header>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:gap-5 md:gap-6 md:grid-cols-2 xl:grid-cols-3">
             {coverageSorted.map((item) => (
               <article
                 key={item.url}
-                className="relative flex min-h-[260px] flex-col overflow-hidden rounded-2xl border border-neutral-border bg-neutral-surface shadow-card transition-all hover:-translate-y-0.5 hover:shadow-md"
+                className="relative flex min-h-[220px] flex-col overflow-hidden rounded-xl border border-neutral-border bg-neutral-surface shadow-card transition-all hover:-translate-y-0.5 hover:shadow-md sm:min-h-[260px] sm:rounded-2xl"
               >
-                <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary to-secondary opacity-95" />
+                <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary to-secondary opacity-95 sm:h-1.5" />
 
-                <div className="flex flex-1 flex-col gap-3 p-6">
-                  <div className="flex flex-wrap items-center gap-2 text-xs tracking-wide text-neutral-slate/70">
+                <div className="flex flex-1 flex-col gap-2 p-4 sm:gap-3 sm:p-6">
+                  <div className="flex flex-wrap items-center gap-1.5 text-[10px] tracking-wide text-neutral-slate/70 sm:gap-2 sm:text-xs">
                     <span className="font-semibold">{item.sourceName}</span>
                     <span aria-hidden="true" className="opacity-70">—</span>
                     <time dateTime={item.dateTime}>{item.dateLabel}</time>
                   </div>
 
-                  <h3 className="line-clamp-3 font-heading text-lg font-black leading-snug text-neutral-ink sm:text-xl">
+                  <h3 className="line-clamp-3 font-heading text-base font-black leading-snug text-neutral-ink sm:text-lg md:text-xl">
                     {item.title}
                   </h3>
 
-                  {item.summary ? <p className="line-clamp-3 text-sm text-neutral-muted sm:text-base">{item.summary}</p> : null}
+                  {item.summary ? <p className="line-clamp-3 text-xs text-neutral-muted sm:text-sm md:text-base">{item.summary}</p> : null}
 
                   <a
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="ffsv-tap-link mt-auto inline-flex w-max items-center gap-2 border-b-2 border-primary/20 pb-0.5 text-sm font-black text-neutral-ink transition-all hover:translate-x-0.5 hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    className="ffsv-tap-link mt-auto inline-flex w-max items-center gap-1.5 border-b-2 border-primary/20 pb-0.5 text-xs font-black text-neutral-ink transition-all hover:translate-x-0.5 hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:gap-2 sm:text-sm"
                   >
                     Read <span aria-hidden="true">→</span>
                   </a>
@@ -277,17 +277,17 @@ export default function NewsPage() {
 
       <SectionDivider variant="wave1" />
 
-      <section aria-labelledby="state-of-city-title" className="py-16 sm:py-20">
+      <section aria-labelledby="state-of-city-title" className="py-12 sm:py-16 md:py-20">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <header className="max-w-3xl">
-            <h2 id="state-of-city-title" className="mt-3 text-4xl font-black uppercase tracking-tight text-neutral-base md:text-5xl">
+            <h2 id="state-of-city-title" className="mt-3 text-2xl font-black uppercase tracking-tight text-neutral-base sm:text-3xl md:text-4xl lg:text-5xl">
               State of the City
             </h2>
 
-            <p className="mt-4 text-lg leading-relaxed text-neutral-base/80">Annual updates and recap videos.</p>
+            <p className="mt-3 text-sm leading-relaxed text-neutral-base/80 sm:mt-4 sm:text-base md:text-lg">Annual updates and recap videos.</p>
           </header>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-4">
             {stateOfCityVideos.map((v) => {
               const id = getYouTubeId(v.url);
               const thumbUrl = id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null;
@@ -298,7 +298,7 @@ export default function NewsPage() {
                   href={v.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group overflow-hidden rounded-2xl border border-neutral-border bg-neutral-surface shadow-card transition-all hover:-translate-y-0.5 hover:shadow-md"
+                  className="group overflow-hidden rounded-xl border border-neutral-border bg-neutral-surface shadow-card transition-all hover:-translate-y-0.5 hover:shadow-md sm:rounded-2xl"
                 >
                   <div className="relative aspect-video bg-[#0b1733]">
                     {thumbUrl ? (
@@ -306,19 +306,19 @@ export default function NewsPage() {
                         src={thumbUrl}
                         alt={v.title}
                         fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         className="object-cover"
                       />
                     ) : null}
                     <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/40" />
-                    <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-neutral-surface/90 px-3 py-1 text-xs font-black uppercase tracking-widest text-neutral-ink backdrop-blur">
+                    <div className="absolute bottom-2 left-2 inline-flex items-center gap-1.5 rounded-full bg-neutral-surface/90 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-neutral-ink backdrop-blur sm:bottom-3 sm:left-3 sm:gap-2 sm:px-3 sm:py-1 sm:text-xs">
                       Watch <span aria-hidden="true">→</span>
                     </div>
                   </div>
-                  <div className="p-5">
-                    <div className="text-xs font-black uppercase tracking-widest text-primary/80">Video</div>
-                    <div className="mt-2 text-base font-black text-neutral-ink">{v.title}</div>
-                    <div className="mt-2 text-sm text-neutral-muted">{v.label}</div>
+                  <div className="p-4 sm:p-5">
+                    <div className="text-[10px] font-black uppercase tracking-widest text-primary/80 sm:text-xs">Video</div>
+                    <div className="mt-1.5 text-sm font-black text-neutral-ink sm:mt-2 sm:text-base">{v.title}</div>
+                    <div className="mt-1.5 text-xs text-neutral-muted sm:mt-2 sm:text-sm">{v.label}</div>
                   </div>
                 </a>
               );

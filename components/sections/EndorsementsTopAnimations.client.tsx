@@ -67,7 +67,7 @@ function OdometerNumber({ value }: { value: number }) {
 
   return (
     <div
-      className="flex items-end justify-center text-5xl font-black tracking-tight text-white sm:text-6xl"
+      className="flex items-end justify-center text-4xl font-black tracking-tight text-white sm:text-5xl md:text-6xl"
       aria-label={`${text} endorsements`}
     >
       {text.split("").map((ch, idx) => {
@@ -170,7 +170,7 @@ function HeadshotRotator({ endorsements }: { endorsements: Endorsement[] }) {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="relative h-24 w-24 overflow-hidden rounded-full bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,.22)] ring-1 ring-white/20">
+      <div className="relative h-20 w-20 overflow-hidden rounded-full bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,.22)] ring-1 ring-white/20 sm:h-24 sm:w-24">
         {current ? (
           <Image
             src={current.imageUrl}
@@ -178,7 +178,7 @@ function HeadshotRotator({ endorsements }: { endorsements: Endorsement[] }) {
             width={96}
             height={96}
             sizes="96px"
-            className="h-24 w-24 object-cover"
+            className="h-20 w-20 object-cover sm:h-24 sm:w-24"
             priority={index === 0}
           />
         ) : null}
@@ -195,7 +195,7 @@ function HeadshotRotator({ endorsements }: { endorsements: Endorsement[] }) {
               width={96}
               height={96}
               sizes="96px"
-              className="h-24 w-24 object-cover"
+              className="h-20 w-20 object-cover sm:h-24 sm:w-24"
             />
           </div>
         ) : null}
@@ -220,21 +220,21 @@ export function EndorsementsTopAnimations({
   const total = all.length;
 
   return (
-    <div className="mx-auto mt-8 grid w-full max-w-5xl grid-cols-1 gap-4 text-center sm:mt-10 sm:gap-5 md:grid-cols-2">
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_1px_0_rgba(255,255,255,.08)] backdrop-blur-sm sm:p-6">
-        <div className="text-lg font-black uppercase tracking-tight text-white">Endorsements for my campaign</div>
-        <div className="mt-4">
+    <div className="mx-auto mt-6 grid w-full max-w-5xl grid-cols-1 gap-3 px-4 text-center sm:mt-8 sm:gap-4 sm:px-6 md:mt-10 md:grid-cols-2 md:gap-5 lg:px-8">
+      <div className="rounded-xl border border-white/10 bg-white/5 p-4 shadow-[0_1px_0_rgba(255,255,255,.08)] backdrop-blur-sm sm:rounded-2xl sm:p-5 md:p-6">
+        <div className="text-base font-black uppercase tracking-tight text-white sm:text-lg">Endorsements for my campaign</div>
+        <div className="mt-3 sm:mt-4">
           <OdometerNumber value={total} />
         </div>
-        <p className="mx-auto mt-3 max-w-sm text-sm text-white/75">Support from leaders, neighbors, and organizations across our county.</p>
+        <p className="mx-auto mt-2 max-w-sm text-xs text-white/75 sm:mt-3 sm:text-sm">Support from leaders, neighbors, and organizations across our county.</p>
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_1px_0_rgba(255,255,255,.08)] backdrop-blur-sm sm:p-6">
-        <div className="text-lg font-black uppercase tracking-tight text-white">Meet my endorsers</div>
-        <div className="mt-4 flex items-center justify-center">
+      <div className="rounded-xl border border-white/10 bg-white/5 p-4 shadow-[0_1px_0_rgba(255,255,255,.08)] backdrop-blur-sm sm:rounded-2xl sm:p-5 md:p-6">
+        <div className="text-base font-black uppercase tracking-tight text-white sm:text-lg">Meet my endorsers</div>
+        <div className="mt-3 flex items-center justify-center sm:mt-4">
           <HeadshotRotator endorsements={all} />
         </div>
-        <p className="mx-auto mt-3 max-w-sm text-sm text-white/75">A quick look at the people backing my campaign.</p>
+        <p className="mx-auto mt-2 max-w-sm text-xs text-white/75 sm:mt-3 sm:text-sm">A quick look at the people backing my campaign.</p>
       </div>
     </div>
   );

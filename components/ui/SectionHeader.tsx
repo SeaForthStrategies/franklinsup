@@ -24,7 +24,7 @@ export function SectionHeader({
       {eyebrow ? (
         <div
           className={[
-            "inline-flex items-center text-xs font-black uppercase tracking-widest text-neutral-slate/80",
+            "inline-flex items-center text-[10px] font-black uppercase tracking-widest text-neutral-slate/80 sm:text-xs",
             isCenter ? "mx-auto" : "",
           ].join(" ")}
         >
@@ -35,14 +35,14 @@ export function SectionHeader({
       <h2
         id={titleId}
         className={[
-          "mt-3 text-balance text-3xl font-black uppercase tracking-tight text-primary sm:text-4xl md:text-5xl",
+          "mt-2 text-balance text-xl font-black uppercase tracking-tight text-primary sm:mt-3 sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl",
         ].join(" ")}
       >
         {title}
       </h2>
 
       {lead ? (
-        <p className={[isCenter ? "mx-auto" : "", "mt-4 max-w-2xl text-base text-neutral-muted sm:text-lg"].join(" ")}>
+        <p className={[isCenter ? "mx-auto" : "", "mt-3 max-w-2xl text-sm text-neutral-muted sm:mt-4 sm:text-base md:text-lg"].join(" ")}>
           {lead}
         </p>
       ) : null}

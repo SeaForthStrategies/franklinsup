@@ -572,7 +572,7 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
     >
       <div
         className={[
-          "relative flex h-full flex-col overflow-hidden rounded-2xl shadow-card",
+          "relative flex h-full flex-col overflow-hidden rounded-xl shadow-card sm:rounded-2xl",
           isOrg
             ? "border border-neutral-border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
             : "border border-white/10 bg-white/[0.06] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.08] hover:shadow-2xl",
@@ -585,7 +585,7 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
           ].join(" ")}
         >
           {isOrg ? (
-            <div className="absolute inset-5 sm:inset-7">
+            <div className="absolute inset-4 sm:inset-5 md:inset-7">
               <Image
                 src={endorsement.imageUrl}
                 alt={endorsement.imageAlt || `${endorsement.name}${endorsement.title ? ` - ${endorsement.title}` : ""}`}
@@ -609,12 +609,12 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
         </div>
 
         {isOrg ? null : (
-          <div className="flex flex-1 flex-col p-4 sm:p-5">
+          <div className="flex flex-1 flex-col p-3 sm:p-4 md:p-5">
             <h3
               className={[
-                "font-heading text-base font-black uppercase tracking-tight sm:text-lg leading-tight text-white",
+                "font-heading text-sm font-black uppercase tracking-tight sm:text-base md:text-lg leading-tight text-white",
                 "overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]",
-                "min-h-[2.5rem] sm:min-h-[3.25rem]",
+                "min-h-[2.25rem] sm:min-h-[2.5rem] md:min-h-[3.25rem]",
               ].join(" ")}
             >
               {endorsement.name}
@@ -622,9 +622,9 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
             {endorsement.title ? (
               <p
                 className={[
-                  "mt-1 text-xs leading-relaxed sm:text-sm text-white/75",
+                  "mt-0.5 text-[10px] leading-relaxed sm:mt-1 sm:text-xs md:text-sm text-white/75",
                   "overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]",
-                  "min-h-[2.25rem] sm:min-h-[2.75rem]",
+                  "min-h-[1.75rem] sm:min-h-[2.25rem] md:min-h-[2.75rem]",
                 ].join(" ")}
               >
                 {endorsement.title}
@@ -633,8 +633,8 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
               <p
                 aria-hidden="true"
                 className={[
-                  "mt-1 text-xs leading-relaxed sm:text-sm",
-                  "min-h-[2.25rem] sm:min-h-[2.75rem]",
+                  "mt-0.5 text-[10px] leading-relaxed sm:mt-1 sm:text-xs md:text-sm",
+                  "min-h-[1.75rem] sm:min-h-[2.25rem] md:min-h-[2.75rem]",
                   "invisible",
                 ].join(" ")}
               >
@@ -655,7 +655,7 @@ interface EndorsementsGridProps {
 
 export function EndorsementsGrid({ endorsements = ENDORSEMENTS, variant = "people" }: EndorsementsGridProps) {
   return (
-    <div className="grid auto-rows-fr grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:gap-8 xl:grid-cols-4">
+    <div className="grid auto-rows-fr grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 md:gap-6 lg:gap-8 xl:grid-cols-4">
       {endorsements.map((endorsement, index) => (
         <EndorsementCard key={endorsement.id} endorsement={endorsement} index={index} variant={variant} />
       ))}

@@ -20,7 +20,7 @@ export default function Home() {
 
       <HomeQuoteSection
         imageUrl="https://franklinforsupervisor.com/wp-content/uploads/2025/03/331991699_977728099877968_6602021448170566335_n.jpg"
-        quote="I’ve spent my career serving our communities—and I’m ready to deliver a safer, cleaner North County."
+        quote="I've spent my career serving our communities—and I'm ready to deliver a safer, more affordable North County."
       />
 
       <HomeStoryStack

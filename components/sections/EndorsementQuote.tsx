@@ -20,14 +20,14 @@ export function EndorsementQuote({ quote, author, authorTitle, imageUrl, imageAl
         </div>
       ) : null}
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+      <div className="relative mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 sm:py-14 md:py-20 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-4xl">
-          <h2 className={isDark ? "mb-8 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl" : "mb-8 text-3xl font-black uppercase tracking-tight text-neutral-ink sm:text-4xl"}>
+          <h2 className={isDark ? "mb-6 text-2xl font-black uppercase tracking-tight text-white sm:mb-8 sm:text-3xl md:text-4xl" : "mb-6 text-2xl font-black uppercase tracking-tight text-neutral-ink sm:mb-8 sm:text-3xl md:text-4xl"}>
             Here&apos;s why:
           </h2>
 
-          <div className="grid gap-8 rounded-3xl border border-neutral-border bg-neutral-base p-6 shadow-card sm:grid-cols-[220px_1fr] sm:gap-10 sm:p-8 lg:grid-cols-[260px_1fr]">
-            <div className="relative mx-auto aspect-square w-full max-w-[220px] overflow-hidden rounded-2xl bg-neutral-surface sm:mx-0 sm:max-w-none animate-[fadeInScale_0.5s_ease-out_backwards] will-change-transform transform-gpu">
+          <div className="grid gap-5 rounded-2xl border border-neutral-border bg-neutral-base p-5 shadow-card sm:grid-cols-[180px_1fr] sm:gap-6 sm:rounded-3xl sm:p-6 md:grid-cols-[220px_1fr] md:gap-8 md:p-8 lg:grid-cols-[260px_1fr]">
+            <div className="relative mx-auto aspect-square w-full max-w-[180px] overflow-hidden rounded-xl bg-neutral-surface sm:mx-0 sm:max-w-none sm:rounded-2xl animate-[fadeInScale_0.5s_ease-out_backwards] will-change-transform transform-gpu">
               {/* Backdrop (keeps the frame looking intentional) */}
               <Image
                 src={imageUrl}
@@ -50,15 +50,15 @@ export function EndorsementQuote({ quote, author, authorTitle, imageUrl, imageAl
             </div>
 
             <div className="flex flex-col justify-center animate-[fadeInUp_0.55s_ease-out_backwards] [animation-delay:120ms]">
-              <blockquote className="text-base leading-relaxed text-neutral-ink sm:text-lg">
+              <blockquote className="text-sm leading-relaxed text-neutral-ink sm:text-base md:text-lg">
                 &ldquo;{quote}&rdquo;
               </blockquote>
-              <cite className="mt-4 not-italic">
-                <div className="font-heading text-sm font-black uppercase tracking-tight text-neutral-ink sm:text-base">
+              <cite className="mt-3 not-italic sm:mt-4">
+                <div className="font-heading text-xs font-black uppercase tracking-tight text-neutral-ink sm:text-sm md:text-base">
                   {author}
                 </div>
                 {authorTitle && (
-                  <div className="mt-1 text-xs text-neutral-muted sm:text-sm">{authorTitle}</div>
+                  <div className="mt-0.5 text-[10px] text-neutral-muted sm:mt-1 sm:text-xs md:text-sm">{authorTitle}</div>
                 )}
               </cite>
             </div>

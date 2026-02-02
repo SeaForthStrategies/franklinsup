@@ -60,8 +60,8 @@ export function AboutHeroImages({ images = DEFAULT_IMAGES, slideIntervalMs = 800
   const shouldRotate = isBelowDesktop && !reduceMotion && slides.length > 1;
 
   return (
-    <div className="mx-auto mt-10 grid max-w-6xl gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-      <figure className="relative overflow-hidden rounded-3xl border border-white/18 bg-black/25 shadow-2xl backdrop-blur-sm">
+    <div className="mx-auto mt-8 grid max-w-6xl gap-3 px-4 sm:mt-10 sm:gap-4 sm:px-6 md:mt-12 md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:px-8">
+      <figure className="relative overflow-hidden rounded-2xl border border-white/18 bg-black/25 shadow-2xl backdrop-blur-sm sm:rounded-3xl">
         <div className="relative aspect-[16/12] bg-neutral-ink">
           {shouldRotate ? (
             slides.map((src, idx) => (
@@ -91,7 +91,7 @@ export function AboutHeroImages({ images = DEFAULT_IMAGES, slideIntervalMs = 800
         </div>
       </figure>
 
-      <figure className="relative overflow-hidden rounded-3xl border border-white/18 bg-black/25 shadow-2xl backdrop-blur-sm">
+      <figure className="relative overflow-hidden rounded-2xl border border-white/18 bg-black/25 shadow-2xl backdrop-blur-sm sm:rounded-3xl">
         <div className="relative aspect-[16/12] bg-neutral-ink">
           {shouldRotate ? (
             slides.map((src, idx) => (
@@ -121,7 +121,7 @@ export function AboutHeroImages({ images = DEFAULT_IMAGES, slideIntervalMs = 800
         </div>
       </figure>
 
-      <figure className="relative overflow-hidden rounded-3xl border border-white/18 bg-black/25 shadow-2xl backdrop-blur-sm">
+      <figure className="relative overflow-hidden rounded-2xl border border-white/18 bg-black/25 shadow-2xl backdrop-blur-sm sm:rounded-3xl">
         <div className="relative aspect-[16/12] bg-neutral-ink">
           {shouldRotate ? (
             slides.map((src, idx) => (

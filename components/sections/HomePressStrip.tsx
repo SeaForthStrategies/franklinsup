@@ -7,26 +7,26 @@ export function HomePressStrip() {
   const mobileMarqueeItems = [...FEATURED_IN, ...FEATURED_IN];
 
   return (
-    <section id="featured" aria-label="In the news" className="relative bg-neutral-base py-10 sm:py-12">
+    <section id="featured" aria-label="In the news" className="relative bg-neutral-base py-8 sm:py-10 md:py-12">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(900px_240px_at_50%_-10%,rgba(59,130,246,.14),transparent_60%)]" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/18 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/14 to-transparent" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-4">
-          <p className="text-xs font-black uppercase tracking-widest text-neutral-muted">Featured in</p>
+      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <p className="text-[10px] font-black uppercase tracking-widest text-neutral-muted sm:text-xs">Featured in</p>
           <div className="h-px flex-1 bg-gradient-to-r from-primary/0 via-primary/15 to-primary/0" />
         </div>
 
-        <div className="relative mt-6">
+        <div className="relative mt-4 sm:mt-6">
           {/* Mobile: auto-rotating strip */}
           <div className="sm:hidden">
-            <div className="overflow-hidden py-3">
+            <div className="overflow-hidden py-2">
               <div
                 className={[
-                  "flex w-max items-center gap-12",
+                  "flex w-max items-center gap-8",
                   "will-change-transform animate-[ffsvMarquee_26s_linear_infinite]",
                   "motion-reduce:animate-none motion-reduce:overflow-x-auto",
                   "motion-reduce:[scrollbar-width:none] motion-reduce:[-ms-overflow-style:none] motion-reduce:[&::-webkit-scrollbar]:hidden",
@@ -41,14 +41,14 @@ export function HomePressStrip() {
                       aria-label={`${item.name} coverage`}
                       aria-hidden={isDupe ? true : undefined}
                       tabIndex={isDupe ? -1 : undefined}
-                      className="group inline-flex shrink-0 items-center justify-center py-2"
+                      className="group inline-flex shrink-0 items-center justify-center py-1.5"
                     >
                       <Image
                         src={item.logoUrl}
                         alt={item.name}
                         width={520}
                         height={140}
-                        className="h-10 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
+                        className="h-8 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
                       />
                     </Link>
                   );

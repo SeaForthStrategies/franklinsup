@@ -103,14 +103,14 @@ export default async function EndorsementsPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-primary-900 py-14 text-white sm:py-20 lg:py-24">
+      <section className="relative overflow-hidden bg-primary-900 py-10 text-white sm:py-14 md:py-20 lg:py-24">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-25">
           <div className="absolute inset-0 bg-[radial-gradient(900px_260px_at_50%_-10%,rgba(59,130,246,.35),transparent_60%)]" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
-            <h1 className="text-balance text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl">
+            <h1 className="text-balance text-3xl font-black uppercase tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               Endorsements
             </h1>
 
@@ -126,14 +126,14 @@ export default async function EndorsementsPage() {
           <div className="absolute inset-0 bg-[radial-gradient(1100px_520px_at_50%_0%,rgba(239,68,68,.18),transparent_62%)]" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <div className="relative mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 sm:py-14 md:py-20 lg:px-8 lg:py-24">
           <EndorsementsGrid endorsements={combinedPeopleEndorsements} variant="people" />
 
-          <div className="mt-14 sm:mt-16">
-            <h2 className="text-center text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
+          <div className="mt-10 sm:mt-14 md:mt-16">
+            <h2 className="text-center text-xl font-black uppercase tracking-tight text-white sm:text-2xl md:text-3xl">
               Organizations
             </h2>
-            <div className="mt-6 sm:mt-8">
+            <div className="mt-5 sm:mt-6 md:mt-8">
               <EndorsementsGrid endorsements={ORGANIZATION_ENDORSEMENTS} variant="orgs" />
             </div>
           </div>

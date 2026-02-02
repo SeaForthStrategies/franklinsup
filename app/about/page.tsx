@@ -44,11 +44,11 @@ export default function AboutPage() {
 
       {/* Content */}
       <section className="border-t border-neutral-border/60 bg-neutral-surface">
-        <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:py-16 lg:px-8 lg:py-20">
-          <div className="mx-auto w-full max-w-6xl grid gap-6 md:grid-cols-2 md:gap-8">
-            <article className="rounded-2xl border border-neutral-border bg-neutral-base p-5 shadow-card sm:rounded-3xl sm:p-7">
-              <h2 className="text-2xl font-black normal-case tracking-tight text-primary sm:text-3xl">Mayor John Franklin</h2>
-              <div className="mt-4 space-y-4 text-base leading-relaxed text-neutral-slate">
+        <div className="mx-auto w-full max-w-7xl px-5 py-8 sm:px-6 sm:py-12 md:py-16 lg:px-8 lg:py-20">
+          <div className="mx-auto w-full max-w-6xl grid gap-5 sm:gap-6 md:grid-cols-2 md:gap-8">
+            <article className="rounded-xl border border-neutral-border bg-neutral-base p-4 shadow-card sm:rounded-2xl sm:p-5 md:rounded-3xl md:p-7">
+              <h2 className="text-xl font-black normal-case tracking-tight text-primary sm:text-2xl md:text-3xl">Mayor John Franklin</h2>
+              <div className="mt-3 space-y-3 text-sm leading-relaxed text-neutral-slate sm:mt-4 sm:space-y-4 sm:text-base">
                 <p>
                   The fourth directly elected Mayor of the City of Vista, John Franklin is a Vista resident, homeowner, business-owner and
                   employer. Public service is his passion.
@@ -65,7 +65,7 @@ export default function AboutPage() {
                   Elected Deputy Mayor by a majority of the City Council three times, Franklin has also served in a variety of leadership
                   capacities including:
                 </p>
-                <ul className="space-y-2 pl-5" role="list">
+                <ul className="space-y-1.5 pl-4 text-sm sm:space-y-2 sm:pl-5 sm:text-base" role="list">
                   <li>North County Transit District Board of Directors</li>
                   <li>(SANDAG) The San Diego Association of Governments</li>
                   <li>The North County Emergency Dispatch JPA Board of Directors, (past Chairman)</li>
@@ -74,9 +74,9 @@ export default function AboutPage() {
               </div>
             </article>
 
-            <article className="rounded-2xl border border-neutral-border bg-neutral-base p-5 shadow-card sm:rounded-3xl sm:p-7">
-              <h2 className="text-2xl font-black normal-case tracking-tight text-primary sm:text-3xl">Personal Life</h2>
-              <div className="mt-4 space-y-4 text-base leading-relaxed text-neutral-slate">
+            <article className="rounded-xl border border-neutral-border bg-neutral-base p-4 shadow-card sm:rounded-2xl sm:p-5 md:rounded-3xl md:p-7">
+              <h2 className="text-xl font-black normal-case tracking-tight text-primary sm:text-2xl md:text-3xl">Personal Life</h2>
+              <div className="mt-3 space-y-3 text-sm leading-relaxed text-neutral-slate sm:mt-4 sm:space-y-4 sm:text-base">
                 <p>
                   John graduated from the American University in Washington, D.C. where he earned a Bachelor of Arts degree. In Washington,
                   D.C., he worked on Capitol Hill for two members of the United States House of Representatives as a policy advisor.
