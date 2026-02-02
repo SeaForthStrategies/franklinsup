@@ -26,12 +26,12 @@ export function HomeQuoteSection({
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/45 to-primary-900/90" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-7xl px-5 py-12 sm:px-6 sm:py-16 md:py-20 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:py-20 lg:px-8">
         <figure className="mx-auto max-w-4xl text-center text-white">
-          <blockquote className="text-balance text-xl font-black uppercase tracking-tight sm:text-2xl md:text-3xl lg:text-4xl">
-            "{quote}"
+          <blockquote className="text-balance text-lg font-black uppercase tracking-tight sm:text-2xl md:text-3xl">
+            &ldquo;{quote}&rdquo;
           </blockquote>
-          <figcaption className="mt-4 text-[10px] font-black uppercase tracking-widest text-white/80 sm:mt-6 sm:text-xs">{byline}</figcaption>
+          <figcaption className="mt-3 text-[10px] font-black uppercase tracking-widest text-white/80 sm:mt-5 sm:text-xs">{byline}</figcaption>
         </figure>
       </div>
     </section>

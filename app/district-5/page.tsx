@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -83,11 +84,13 @@ export default function District5Page() {
                 <h2 className="sr-only">District 5 map</h2>
                 <div className="rounded-xl border border-neutral-border bg-neutral-surface p-2 sm:rounded-2xl sm:p-3 md:p-4 flex-1 flex">
                   <div className="relative overflow-hidden rounded-lg border border-neutral-border bg-neutral-surface sm:rounded-xl md:rounded-2xl flex-1">
-                    <img
+                    <Image
                       src="https://franklinforsupervisor.com/wp-content/uploads/2026/02/Screenshot-2026-02-02-at-10.55.02-AM.png"
                       alt="District 5 map"
-                      className="w-full h-full object-cover"
+                      fill
                       loading="lazy"
+                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+                      className="h-full w-full object-cover"
                     />
                   </div>
                 </div>

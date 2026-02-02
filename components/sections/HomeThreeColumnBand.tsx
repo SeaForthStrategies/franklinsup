@@ -76,7 +76,7 @@ export function HomeThreeColumnBand({ donateUrl }: HomeThreeColumnBandProps) {
               <div className="h-1.5 gradient-patriot sm:h-2" aria-hidden="true" />
               <div className="p-5 sm:p-7 md:p-8">
                 <h3 className="text-xl font-black uppercase tracking-tight text-neutral-ink sm:text-2xl md:text-3xl">
-                  What I'll deliver
+                  What I&rsquo;ll deliver
                 </h3>
                 <p className="mt-2 text-sm text-neutral-muted sm:mt-3 sm:text-base">
                   Clear priorities, measured outcomes, and a county government that earns your trust.

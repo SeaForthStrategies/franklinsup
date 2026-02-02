@@ -45,15 +45,15 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
     <section
       id="priorities"
       aria-labelledby="home-issues-title"
-      className="relative overflow-hidden bg-primary-900 py-12 text-white sm:py-14 md:py-16"
+      className="relative overflow-hidden bg-primary-900 py-10 text-white sm:py-14 md:py-16"
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-25">
         <div className="absolute inset-0 bg-[radial-gradient(900px_260px_at_50%_-10%,rgba(59,130,246,.35),transparent_60%)]" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 id="home-issues-title" className="text-3xl font-black uppercase tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 id="home-issues-title" className="text-2xl font-black uppercase tracking-tight text-white sm:text-4xl md:text-5xl">
             Real problems. Real solutions.
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-white/80 sm:mt-4 sm:text-lg md:text-xl">
@@ -70,7 +70,7 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
                 key={c.id}
                 href={topicHref}
                 className={[
-                  "group relative block h-full min-h-[280px] overflow-hidden rounded-2xl border border-neutral-border bg-neutral-surface shadow-card sm:min-h-[320px] sm:rounded-3xl",
+                  "group relative block h-full min-h-[240px] overflow-hidden rounded-2xl border border-neutral-border bg-neutral-surface shadow-card sm:min-h-[300px] sm:rounded-3xl",
                   idx === CARDS.length - 1 ? "sm:col-span-2 lg:col-span-1" : "",
                   "transition-all duration-300 hover:-translate-y-2 hover:border-primary/25 hover:shadow-2xl",
                   "focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary-900",

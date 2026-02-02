@@ -5,6 +5,7 @@ import {
   ORGANIZATION_ENDORSEMENTS,
   PEOPLE_ENDORSEMENTS,
 } from "@/components/sections/EndorsementsGrid";
+import type { Endorsement } from "@/components/sections/EndorsementsGrid";
 import { EndorsementQuote } from "@/components/sections/EndorsementQuote";
 import { EndorsementsTopAnimations } from "@/components/sections/EndorsementsTopAnimations.client";
 import { SectionDivider } from "@/components/ui/SectionDivider";
@@ -59,7 +60,7 @@ export default async function EndorsementsPage() {
   // Map WP items into the same shape your EndorsementsGrid expects
   // (no CSS changes; just data)
   const wpPeopleEndorsements = await Promise.all(
-    wpEndorsements.map(async (e) => {
+    wpEndorsements.map(async (e): Promise<Endorsement | null> => {
       const name = e.acf?.endorser_name || e.title.rendered;
       const org = e.acf?.endorser_org ?? "";
       const title = org || (e.acf?.endorser_title ?? "");
@@ -84,7 +85,6 @@ export default async function EndorsementsPage() {
           id: `wp-${e.id}`,
           name,
           title,
-          organization: org,
           imageUrl,
           imageAlt,
         };
@@ -94,7 +94,7 @@ export default async function EndorsementsPage() {
     })
   );
 
-  const wpPeopleEndorsementsClean = wpPeopleEndorsements.filter(Boolean) as any[];
+  const wpPeopleEndorsementsClean = wpPeopleEndorsements.filter((endorsement): endorsement is Endorsement => Boolean(endorsement));
 
   const combinedPeopleEndorsements = [
     ...PEOPLE_ENDORSEMENTS,

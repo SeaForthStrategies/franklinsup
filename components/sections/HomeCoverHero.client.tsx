@@ -19,17 +19,20 @@ export function HomeCoverHero({
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true);
+    const frame = requestAnimationFrame(() => setIsLoaded(true));
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % COVER_HERO_SLIDE_IMAGES.length);
     }, 5000);
-    return () => clearInterval(interval);
+    return () => {
+      cancelAnimationFrame(frame);
+      clearInterval(interval);
+    };
   }, []);
 
   return (
     <section
       aria-labelledby="home-cover-title"
-      className="relative isolate min-h-[100svh] overflow-hidden bg-neutral-ink"
+      className="relative isolate min-h-[70svh] sm:min-h-[80svh] lg:min-h-[90svh] overflow-hidden bg-neutral-ink"
     >
       {/* Fullscreen Background Slideshow */}
       <div className="absolute inset-0">
@@ -65,7 +68,7 @@ export function HomeCoverHero({
       </div>
 
       {/* Content */}
-      <div className="relative flex flex-col items-center justify-center px-4 py-12 sm:min-h-[100svh] sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+      <div className="relative flex flex-col items-center justify-center px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
         <div className="mx-auto w-full max-w-7xl">
           <div className="grid items-center gap-4 sm:gap-12 lg:grid-cols-2 lg:gap-16">
             
@@ -118,7 +121,7 @@ export function HomeCoverHero({
 
               {/* Description */}
               <p 
-                className={`mx-auto mb-4 max-w-lg text-sm leading-relaxed text-white/80 sm:mx-0 sm:mb-10 sm:text-lg md:text-xl lg:text-2xl transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                className={`mx-auto mb-5 max-w-lg text-base leading-relaxed text-white/80 sm:mx-0 sm:mb-8 sm:text-lg md:text-xl lg:text-2xl transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: "400ms" }}
               >
                 Experienced leadership fighting for affordability, public safety, fire prevention, and fixing our roads.
@@ -126,14 +129,14 @@ export function HomeCoverHero({
 
               {/* CTAs */}
               <div 
-                className={`flex flex-row items-center justify-center gap-2 sm:justify-start sm:gap-4 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                className={`flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-start sm:gap-4 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: "500ms" }}
               >
                 <a
                   href={donateUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-red-600 via-red-500 to-red-600 px-5 py-3 text-xs font-black uppercase tracking-wide text-white shadow-lg shadow-red-500/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-500/40 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-neutral-ink sm:px-8 sm:py-4 sm:text-base md:px-10 md:text-lg"
+                  className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-red-600 via-red-500 to-red-600 px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-lg shadow-red-500/30 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-red-500/40 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-neutral-ink sm:w-auto sm:px-8 sm:py-4 sm:text-base md:px-10 md:text-lg"
                 >
                   <span className="relative z-10 flex items-center gap-1.5 sm:gap-2">
                     Donate
@@ -145,7 +148,7 @@ export function HomeCoverHero({
                 </a>
                 <Link
                   href={endorsementsHref}
-                  className="group inline-flex items-center justify-center rounded-full border-2 border-white/30 bg-white/5 px-5 py-3 text-xs font-black uppercase tracking-wide text-white backdrop-blur-sm transition-all duration-300 hover:border-white/60 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-neutral-ink sm:px-8 sm:py-4 sm:text-base md:text-lg"
+                  className="group inline-flex w-full items-center justify-center rounded-full border-2 border-white/30 bg-white/5 px-6 py-3 text-sm font-black uppercase tracking-wide text-white backdrop-blur-sm transition-all duration-300 hover:border-white/60 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-neutral-ink sm:w-auto sm:px-8 sm:py-4 sm:text-base md:text-lg"
                 >
                   <span className="flex items-center gap-1.5 sm:gap-2">
                     Endorsements
