@@ -15,14 +15,44 @@ const config: Config = {
         primary: {
           /* Franklin navy */
           DEFAULT: "#0a1f44",
+          50: "#0a1f44",
+          100: "#0a1f44",
+          200: "#0a1f44",
+          300: "#0a1f44",
+          400: "#0a1f44",
+          500: "#0a1f44",
+          600: "#0a1f44",
+          700: "#0a1f44",
+          800: "#0a1f44",
+          900: "#071734",
         },
         secondary: {
           /* Franklin accent blue */
           DEFAULT: "#1b5cff",
+          50: "#1b5cff",
+          100: "#1b5cff",
+          200: "#1b5cff",
+          300: "#1b5cff",
+          400: "#1b5cff",
+          500: "#1b5cff",
+          600: "#1b5cff",
+          700: "#1b5cff",
+          800: "#1b5cff",
+          900: "#1b5cff",
         },
         accent: {
           /* Record accent (blue; avoid cyan/teal) */
           DEFAULT: "#3b82f6",
+          50: "#3b82f6",
+          100: "#3b82f6",
+          200: "#3b82f6",
+          300: "#3b82f6",
+          400: "#3b82f6",
+          500: "#3b82f6",
+          600: "#3b82f6",
+          700: "#3b82f6",
+          800: "#3b82f6",
+          900: "#3b82f6",
         },
         neutral: {
           /* Franklin neutrals */
