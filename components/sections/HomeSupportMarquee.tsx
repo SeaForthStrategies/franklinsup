@@ -1,13 +1,20 @@
 interface HomeSupportMarqueeProps {
   text?: string;
+  donateUrl?: string;
 }
 
-export function HomeSupportMarquee({ text = "Support my campaign" }: HomeSupportMarqueeProps) {
+export function HomeSupportMarquee({ text = "Support my campaign", donateUrl = "https://secure.franklinforsupervisor.com/15" }: HomeSupportMarqueeProps) {
   // Two tracks to create a seamless marquee.
   const items = Array.from({ length: 12 }, () => text);
 
   return (
-    <section aria-label="Support marquee" className="relative overflow-hidden bg-primary-900 py-3 text-white sm:py-5 md:py-6">
+    <a
+      href={donateUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Support marquee - Click to donate"
+      className="block relative overflow-hidden bg-primary-900 py-3 text-white sm:py-5 md:py-6 cursor-pointer hover:bg-primary-800 transition-colors duration-200"
+    >
       <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
         <div className="absolute inset-0 bg-[radial-gradient(900px_260px_at_50%_-10%,rgba(59,130,246,.35),transparent_60%)]" />
       </div>
@@ -31,7 +38,7 @@ export function HomeSupportMarquee({ text = "Support my campaign" }: HomeSupport
           ))}
         </div>
       </div>
-    </section>
+    </a>
   );
 }
 

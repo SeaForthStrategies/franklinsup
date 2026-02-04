@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    unoptimized: true, // Disable image optimization for external images
+    // unoptimized: true, // Re-enable image optimization for production
     remotePatterns: [
       { protocol: "https", hostname: "franklinforsupervisor.com" },
       { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },

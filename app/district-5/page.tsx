@@ -51,7 +51,7 @@ export default function District5Page() {
                   <ul className="grid gap-2 sm:gap-3" role="list">
                     <li className="rounded-xl border border-neutral-border bg-neutral-surface p-3 sm:rounded-2xl sm:p-4">
                       <div className="text-xs font-semibold text-neutral-slate sm:text-sm">
-                        <strong className="text-neutral-ink">Major Cities:</strong> Oceanside, Vista, Carlsbad, San Marcos
+                        <strong className="text-neutral-ink">Major Cities:</strong> Oceanside, Vista, San Marcos
                       </div>
                     </li>
                     <li className="rounded-xl border border-neutral-border bg-neutral-surface p-3 sm:rounded-2xl sm:p-4">
@@ -83,7 +83,7 @@ export default function District5Page() {
               <article className="rounded-xl border border-neutral-border bg-neutral-base p-4 shadow-card sm:rounded-2xl sm:p-5 md:rounded-3xl md:p-7 flex flex-col w-full">
                 <h2 className="sr-only">District 5 map</h2>
                 <div className="rounded-xl border border-neutral-border bg-neutral-surface p-2 sm:rounded-2xl sm:p-3 md:p-4 flex-1 flex">
-                  <div className="relative overflow-hidden rounded-lg border border-neutral-border bg-neutral-surface sm:rounded-xl md:rounded-2xl flex-1">
+                  <div className="relative min-h-[300px] overflow-hidden rounded-lg border border-neutral-border bg-neutral-surface sm:rounded-xl md:rounded-2xl flex-1">
                     <Image
                       src="https://franklinforsupervisor.com/wp-content/uploads/2026/02/Screenshot-2026-02-02-at-10.55.02-AM.png"
                       alt="District 5 map"

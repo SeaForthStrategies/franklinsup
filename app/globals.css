@@ -31,7 +31,7 @@
 
   /* Premium UI tokens */
   /* Light base (neutral-first; avoid purple-tinted whites) */
-  --ffsv-base: #F6F8FF;
+  --ffsv-base: #f6f8ff;
   --ffsv-surface: #ffffff;
   --ffsv-border: #d6dfef;
   --ffsv-glow: rgba(59, 130, 246, 0.18);
@@ -80,14 +80,36 @@
     font-family: var(--font-body);
     color: var(--ffsv-text);
     background:
-      radial-gradient(1200px 700px at 12% -10%, rgba(59, 130, 246, 0.16), transparent 62%),
-      radial-gradient(1100px 650px at 92% -14%, rgba(27, 92, 255, 0.12), transparent 60%),
-      radial-gradient(1100px 650px at 88% 120%, rgba(59, 130, 246, 0.08), transparent 62%),
-      linear-gradient(180deg, rgba(248, 250, 252, 0.0) 0%, rgba(248, 250, 252, 0.92) 40%, rgba(248, 250, 252, 1) 100%),
+      radial-gradient(
+        1200px 700px at 12% -10%,
+        rgba(59, 130, 246, 0.16),
+        transparent 62%
+      ),
+      radial-gradient(
+        1100px 650px at 92% -14%,
+        rgba(27, 92, 255, 0.12),
+        transparent 60%
+      ),
+      radial-gradient(
+        1100px 650px at 88% 120%,
+        rgba(59, 130, 246, 0.08),
+        transparent 62%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(248, 250, 252, 0) 0%,
+        rgba(248, 250, 252, 0.92) 40%,
+        rgba(248, 250, 252, 1) 100%
+      ),
       var(--ffsv-base);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading font-black uppercase tracking-tight;
     letter-spacing: -0.025em;
   }
@@ -103,7 +125,15 @@
   }
 
   /* Unified “premium” focus for unstyled interactives */
-  :where(a, button, input, textarea, select, summary, [role="button"]):focus-visible {
+  :where(
+    a,
+    button,
+    input,
+    textarea,
+    select,
+    summary,
+    [role="button"]
+  ):focus-visible {
     outline: 2px solid var(--ffsv-ring);
     outline-offset: 4px;
   }
@@ -149,7 +179,7 @@
 @layer components {
   .site-container {
     /* Mobile-first padding; widen on larger screens */
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12;
   }
 
   /* Header only: slightly wider side gutters on mobile */
@@ -229,16 +259,16 @@
   .hamburger-line:nth-child(1) {
     transform-origin: center;
   }
-  
+
   .hamburger-line.open:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
   }
-  
+
   .hamburger-line.open:nth-child(2) {
     opacity: 0;
     transform: scaleX(0);
   }
-  
+
   .hamburger-line.open:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
   }
@@ -280,11 +310,15 @@
     text-decoration: none;
     background: transparent;
   }
-  
+
   .site-nav-link:hover {
     color: var(--ffsv-ink);
     transform: translateY(-1px);
-    background: linear-gradient(180deg, rgba(59, 130, 246, 0.12), rgba(27, 92, 255, 0.06));
+    background: linear-gradient(
+      180deg,
+      rgba(59, 130, 246, 0.12),
+      rgba(27, 92, 255, 0.06)
+    );
   }
 
   /* Desktop dropdown trigger */
@@ -333,7 +367,11 @@
 
   .site-nav-sublink:hover {
     color: var(--ffsv-ink);
-    background: linear-gradient(180deg, rgba(59, 130, 246, 0.12), rgba(27, 92, 255, 0.06));
+    background: linear-gradient(
+      180deg,
+      rgba(59, 130, 246, 0.12),
+      rgba(27, 92, 255, 0.06)
+    );
   }
 
   /* ============================================================================
@@ -361,7 +399,7 @@
   /* ============================================================================
      OFF-CANVAS DRAWER (mobile/tablet <1280px)
      ============================================================================ */
-  
+
   /* Overlay backdrop */
   .site-drawer-overlay {
     position: fixed;
@@ -371,7 +409,9 @@
     z-index: 998;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
   }
 
   .site-drawer-overlay.open {
@@ -497,7 +537,11 @@
 
   .site-drawer-link:hover,
   .site-drawer-link:focus-visible {
-    background: linear-gradient(180deg, rgba(59, 130, 246, 0.1), rgba(27, 92, 255, 0.05));
+    background: linear-gradient(
+      180deg,
+      rgba(59, 130, 246, 0.1),
+      rgba(27, 92, 255, 0.05)
+    );
     color: var(--ffsv-ink);
   }
 
@@ -519,7 +563,11 @@
   }
 
   .site-drawer-accordion-trigger:hover {
-    background: linear-gradient(180deg, rgba(59, 130, 246, 0.1), rgba(27, 92, 255, 0.05));
+    background: linear-gradient(
+      180deg,
+      rgba(59, 130, 246, 0.1),
+      rgba(27, 92, 255, 0.05)
+    );
     color: var(--ffsv-ink);
   }
 
@@ -541,7 +589,9 @@
     padding: 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    transition:
+      max-height 0.3s ease,
+      padding 0.3s ease;
   }
 
   .site-drawer-submenu.open {
@@ -566,7 +616,11 @@
 
   .site-drawer-sublink:hover,
   .site-drawer-sublink:focus-visible {
-    background: linear-gradient(180deg, rgba(59, 130, 246, 0.08), rgba(27, 92, 255, 0.04));
+    background: linear-gradient(
+      180deg,
+      rgba(59, 130, 246, 0.08),
+      rgba(27, 92, 255, 0.04)
+    );
     color: var(--ffsv-ink);
   }
 
@@ -602,7 +656,8 @@
     @apply lg:w-auto lg:px-6 lg:py-2.5;
     position: relative;
     overflow: hidden;
-    transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    transition:
+      transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
       box-shadow 0.35s cubic-bezier(0.23, 1, 0.32, 1),
       filter 0.35s cubic-bezier(0.23, 1, 0.32, 1);
     animation: fadeInScale 0.5s ease-out backwards;
@@ -611,17 +666,20 @@
   }
 
   .site-cta::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
     padding: 2px;
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.4) 0%, 
-      rgba(255, 255, 255, 0.1) 50%, 
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
       rgba(255, 255, 255, 0.4) 100%
     );
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
@@ -633,7 +691,7 @@
   }
 
   .site-cta::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -642,7 +700,9 @@
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
     transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
+    transition:
+      width 0.6s ease,
+      height 0.6s ease;
   }
 
   .site-cta:active::after {
@@ -659,7 +719,7 @@
       var(--ffsv-accent) 120%
     );
     color: #fff;
-    box-shadow: 
+    box-shadow:
       0 6px 18px rgba(27, 92, 255, 0.18),
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
       inset 0 -1px 0 rgba(0, 0, 0, 0.2);
@@ -668,7 +728,7 @@
 
   .site-cta--primary:hover {
     transform: translateY(-2px);
-    box-shadow: 
+    box-shadow:
       0 14px 34px rgba(27, 92, 255, 0.28),
       inset 0 1px 0 rgba(255, 255, 255, 0.2),
       inset 0 -1px 0 rgba(0, 0, 0, 0.2);
@@ -684,7 +744,7 @@
     backdrop-filter: blur(10px) saturate(150%);
     border: 2px solid var(--ffsv-navy);
     color: var(--ffsv-navy);
-    box-shadow: 
+    box-shadow:
       0 6px 18px rgba(10, 31, 68, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.4),
       inset 0 -1px 0 rgba(0, 0, 0, 0.05);
@@ -692,11 +752,15 @@
 
   .site-cta--secondary:hover {
     /* Blue-only hover (avoid blue+red blend that can read purple) */
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.16), rgba(27, 92, 255, 0.10));
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.16),
+      rgba(27, 92, 255, 0.1)
+    );
     border-color: var(--ffsv-ink);
     color: var(--ffsv-ink);
     transform: translateY(-2px);
-    box-shadow: 
+    box-shadow:
       0 16px 40px rgba(10, 31, 68, 0.24),
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
       inset 0 -1px 0 rgba(0, 0, 0, 0.2);
@@ -727,7 +791,9 @@
       0 0 60px 26px rgba(239, 68, 68, 0.55);
     opacity: 0;
     transform: scale(0.92);
-    transition: opacity 180ms ease, transform 220ms ease;
+    transition:
+      opacity 180ms ease,
+      transform 220ms ease;
   }
 
   .endorsement-card-wrap:hover::before,
@@ -752,7 +818,11 @@
 
   .gradient-accent {
     /* Blue-only (kept for legacy usage; do not introduce new “accent” colors) */
-    background: linear-gradient(135deg, var(--ffsv-accent), rgba(59, 130, 246, 0.95));
+    background: linear-gradient(
+      135deg,
+      var(--ffsv-accent),
+      rgba(59, 130, 246, 0.95)
+    );
   }
 
   /* Modern text wrapping for hero/section headings */
@@ -770,11 +840,21 @@
   animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.hero-animate-delay-1 { animation-delay: 0.1s; }
-.hero-animate-delay-2 { animation-delay: 0.2s; }
-.hero-animate-delay-3 { animation-delay: 0.35s; }
-.hero-animate-delay-4 { animation-delay: 0.5s; }
-.hero-animate-delay-5 { animation-delay: 0.65s; }
+.hero-animate-delay-1 {
+  animation-delay: 0.1s;
+}
+.hero-animate-delay-2 {
+  animation-delay: 0.2s;
+}
+.hero-animate-delay-3 {
+  animation-delay: 0.35s;
+}
+.hero-animate-delay-4 {
+  animation-delay: 0.5s;
+}
+.hero-animate-delay-5 {
+  animation-delay: 0.65s;
+}
 
 @keyframes heroFadeInUp {
   from {
@@ -836,18 +916,33 @@
 }
 
 @keyframes heroFloat1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(30px, -20px) scale(1.1); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.1);
+  }
 }
 
 @keyframes heroFloat2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-20px, 30px) scale(1.15); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-20px, 30px) scale(1.15);
+  }
 }
 
 @keyframes heroFloat3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(15px, 15px) scale(1.05); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(15px, 15px) scale(1.05);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -866,11 +961,12 @@
 }
 
 @keyframes pulseSubtle {
-  0%, 100% { 
+  0%,
+  100% {
     opacity: 1;
     filter: brightness(1);
   }
-  50% { 
+  50% {
     opacity: 0.85;
     filter: brightness(1.2);
   }

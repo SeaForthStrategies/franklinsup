@@ -9,7 +9,7 @@ interface HomeQuoteSectionProps {
 export function HomeQuoteSection({
   imageUrl,
   quote,
-  byline = "I",
+  byline = "",
 }: HomeQuoteSectionProps) {
   return (
     <section aria-label="Life of service" className="relative overflow-hidden bg-primary-900">
@@ -18,7 +18,7 @@ export function HomeQuoteSection({
           src={imageUrl}
           alt=""
           fill
-          className="object-cover object-[50%_22%]"
+          className="object-cover object-[50%_45%]"
           sizes="100vw"
           priority={false}
         />
@@ -31,7 +31,9 @@ export function HomeQuoteSection({
           <blockquote className="text-balance text-lg font-black uppercase tracking-tight sm:text-2xl md:text-3xl">
             &ldquo;{quote}&rdquo;
           </blockquote>
-          <figcaption className="mt-3 text-[10px] font-black uppercase tracking-widest text-white/80 sm:mt-5 sm:text-xs">{byline}</figcaption>
+          {byline && (
+            <figcaption className="mt-3 text-[10px] font-black uppercase tracking-widest text-white/80 sm:mt-5 sm:text-xs">{byline}</figcaption>
+          )}
         </figure>
       </div>
     </section>

@@ -89,12 +89,12 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
                       "object-cover",
                       c.bgFocusClass,
                       c.bgScaleClass ?? "",
-                      "opacity-30 transition-transform duration-500 will-change-transform",
+                      "opacity-30 transition-all duration-500 will-change-transform",
                       c.bgHoverScaleClass ?? "group-hover:scale-[1.06]",
-                      "group-hover:opacity-40",
+                      "group-hover:opacity-40 lg:group-hover:opacity-100",
                     ].join(" ")}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-b from-neutral-surface/15 via-neutral-surface/75 to-neutral-surface transition-opacity duration-300 group-hover:opacity-85" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-neutral-surface/15 via-neutral-surface/75 to-neutral-surface transition-opacity duration-300 group-hover:opacity-85 lg:group-hover:opacity-40" />
                 </div>
 
                 <div className="relative z-10 flex h-full flex-col p-6 sm:p-8 lg:p-9">

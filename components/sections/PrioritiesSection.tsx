@@ -267,7 +267,7 @@ export function PrioritiesSection({
                             key={b}
                             className={[
                               "relative pl-3 text-xs font-black leading-relaxed text-neutral-ink sm:pl-4 sm:text-sm md:text-[15px]",
-                              "before:absolute before:left-0 before:top-[0.15rem] before:content-['—'] before:text-neutral-slate/70",
+                              "before:absolute before:left-0 before:top-[0.35rem] before:content-['•'] before:text-neutral-slate/70",
                             ].join(" ")}
                           >
                             {b}
