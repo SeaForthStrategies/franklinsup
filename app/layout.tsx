@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { DevOnlyPreviewSwitcher } from "@/components/dev/DevOnlyPreviewSwitcher.client";
 import faviconPng from "@/Images/Franklin Favicon.png";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "I’m running for San Diego County Supervisor 2026",
@@ -35,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={montserrat.variable}>
       <body>
         {process.env.NODE_ENV !== "production" ? <DevOnlyPreviewSwitcher /> : null}
         <a
