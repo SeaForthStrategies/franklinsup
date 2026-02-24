@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 
-import {
-  EndorsementsGrid,
-  ORGANIZATION_ENDORSEMENTS,
-  PEOPLE_ENDORSEMENTS,
-} from "@/components/sections/EndorsementsGrid";
+import { EndorsementsGrid, ORGANIZATION_ENDORSEMENTS } from "@/components/sections/EndorsementsGrid";
 import type { Endorsement } from "@/components/sections/EndorsementsGrid";
 import { EndorsementQuote } from "@/components/sections/EndorsementQuote";
 import { EndorsementsTopAnimations } from "@/components/sections/EndorsementsTopAnimations.client";
@@ -14,6 +10,7 @@ export const revalidate = 60;
 
 type WPEndorsement = {
   id: number;
+  date: string;
   title: { rendered: string };
   acf: {
     endorser_name?: string;
@@ -25,23 +22,97 @@ type WPEndorsement = {
 };
 
 async function getWPEndorsements(): Promise<WPEndorsement[]> {
-  const base = process.env.WORDPRESS_URL;
-  if (!base) return [];
+  const base = process.env.WORDPRESS_URL ?? "https://franklinforsupervisor.com";
 
-  try {
-    const url = `${base}/wp-json/wp/v2/endorsement?per_page=100`;
-    const res = await fetch(url, { next: { revalidate: 60 } });
+  const endpoints = [
+    `${base}/wp-json/wp/v2/endorsement?per_page=100&_fields=id,date,title,acf&acf_format=standard`,
+    `${base}/wp-json/wp/v2/endorsements?per_page=100&_fields=id,date,title,acf&acf_format=standard`,
+  ];
 
-    if (!res.ok) return [];
+  for (const url of endpoints) {
+    try {
+      const res = await fetch(url, { next: { revalidate: 60 } });
 
-    const data = (await res.json()) as WPEndorsement[];
+      if (!res.ok) {
+        if (process.env.NODE_ENV !== "production") {
+          console.log("[endorsements] fetch failed", { url, status: res.status });
+        }
+        continue;
+      }
 
-    data.sort((a, b) => (a.acf?.sort_order ?? 9999) - (b.acf?.sort_order ?? 9999));
+      const data = (await res.json()) as WPEndorsement[];
 
-    return data;
-  } catch {
-    return [];
+      // Keep endorsements in creation order: oldest first, newest last.
+      data.sort((a, b) => {
+        const aTime = Number.isNaN(Date.parse(a.date)) ? 0 : Date.parse(a.date);
+        const bTime = Number.isNaN(Date.parse(b.date)) ? 0 : Date.parse(b.date);
+        if (aTime !== bTime) return aTime - bTime;
+        return a.id - b.id;
+      });
+
+      if (process.env.NODE_ENV !== "production") {
+        console.log("[endorsements] fetch success", { url, count: data.length });
+      }
+
+      return data;
+    } catch (error) {
+      if (process.env.NODE_ENV !== "production") {
+        console.log("[endorsements] fetch error", { url, error });
+      }
+    }
   }
+
+  return [];
+}
+
+type ExtractedHeadshot = {
+  mediaId?: number;
+  imageUrl?: string;
+};
+
+function extractHeadshot(raw: unknown): ExtractedHeadshot {
+  if (!raw) return {};
+
+  const normalize = (value: unknown): ExtractedHeadshot => {
+    if (!value) return {};
+
+    if (typeof value === "number") {
+      return { mediaId: value };
+    }
+
+    if (typeof value === "string") {
+      const trimmed = value.trim();
+      if (!trimmed) return {};
+      const numeric = Number.parseInt(trimmed, 10);
+      if (!Number.isNaN(numeric) && `${numeric}` === trimmed) {
+        return { mediaId: numeric };
+      }
+      return { imageUrl: trimmed };
+    }
+
+    if (Array.isArray(value)) {
+      if (value.length === 0) return {};
+      return normalize(value[0]);
+    }
+
+    if (typeof value === "object") {
+      const obj = value as Record<string, unknown>;
+      const idCandidate = obj.id ?? obj.ID;
+      const urlCandidate = (obj.url ?? obj.source_url) as unknown;
+
+      const byId = normalize(idCandidate);
+      const byUrl = normalize(urlCandidate);
+
+      return {
+        mediaId: byId.mediaId ?? byUrl.mediaId,
+        imageUrl: byUrl.imageUrl ?? byId.imageUrl,
+      };
+    }
+
+    return {};
+  };
+
+  return normalize(raw);
 }
 
 export const metadata: Metadata = {
@@ -65,19 +136,34 @@ export default async function EndorsementsPage() {
       const org = e.acf?.endorser_org ?? "";
       const title = org || (e.acf?.endorser_title ?? "");
 
-      const mediaId = e.acf?.headshot;
-      if (!mediaId) return null;
+      const { mediaId, imageUrl } = extractHeadshot(e.acf?.headshot);
+
+      // If ACF returns a direct URL, use it without an extra media fetch.
+      if (imageUrl) {
+        return {
+          id: `wp-${e.id}`,
+          name,
+          title,
+          imageUrl,
+          imageAlt: name,
+        };
+      }
+
+      if (typeof mediaId !== "number") {
+        return null;
+      }
 
       try {
-        const base = process.env.WORDPRESS_URL;
+        const base = process.env.WORDPRESS_URL ?? "https://franklinforsupervisor.com";
+
         const mediaRes = await fetch(`${base}/wp-json/wp/v2/media/${mediaId}`, {
           next: { revalidate: 60 },
         });
         if (!mediaRes.ok) return null;
 
         const media = await mediaRes.json();
-        const imageUrl = media?.source_url as string | undefined;
-        if (!imageUrl) return null;
+        const fetchedUrl = media?.source_url as string | undefined;
+        if (!fetchedUrl) return null;
 
         const imageAlt = (media?.alt_text as string | undefined) || name;
 
@@ -85,7 +171,7 @@ export default async function EndorsementsPage() {
           id: `wp-${e.id}`,
           name,
           title,
-          imageUrl,
+          imageUrl: fetchedUrl,
           imageAlt,
         };
       } catch {
@@ -94,12 +180,9 @@ export default async function EndorsementsPage() {
     })
   );
 
-  const wpPeopleEndorsementsClean = wpPeopleEndorsements.filter((endorsement): endorsement is Endorsement => Boolean(endorsement));
-
-  const combinedPeopleEndorsements = [
-    ...PEOPLE_ENDORSEMENTS,
-    ...wpPeopleEndorsementsClean,
-  ];
+  const wpPeopleEndorsementsClean = wpPeopleEndorsements.filter(
+    (endorsement): endorsement is Endorsement => Boolean(endorsement),
+  );
 
   return (
     <>
@@ -114,7 +197,10 @@ export default async function EndorsementsPage() {
               Endorsements
             </h1>
 
-            <EndorsementsTopAnimations people={PEOPLE_ENDORSEMENTS} organizations={ORGANIZATION_ENDORSEMENTS} />
+            <EndorsementsTopAnimations
+              people={wpPeopleEndorsementsClean}
+              organizations={ORGANIZATION_ENDORSEMENTS}
+            />
           </div>
         </div>
       </section>
@@ -127,7 +213,7 @@ export default async function EndorsementsPage() {
         </div>
 
         <div className="relative mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 sm:py-14 md:py-20 lg:px-8 lg:py-24">
-          <EndorsementsGrid endorsements={combinedPeopleEndorsements} variant="people" />
+          <EndorsementsGrid endorsements={wpPeopleEndorsementsClean} variant="people" />
 
           <div className="mt-10 sm:mt-14 md:mt-16">
             <h2 className="text-center text-xl font-black uppercase tracking-tight text-white sm:text-2xl md:text-3xl">

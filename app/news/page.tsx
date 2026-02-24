@@ -60,7 +60,7 @@ export default function NewsPage() {
       sourceName: "San Diego Union-Tribune",
       dateLabel: "Aug 20, 2025",
       dateTime: "2025-08-20",
-      summary: "Coverage of VisTAY House and the work to help young adults get stable and into permanent housing.",
+      summary: "North County’s first shelter for homeless young adults opens in Vista",
     },
     {
       title: "KPBS: North County’s first transitional housing for foster youth opens in Vista",

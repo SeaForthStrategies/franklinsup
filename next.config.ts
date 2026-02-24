@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // unoptimized: true, // Re-enable image optimization for production
     remotePatterns: [
       { protocol: "https", hostname: "franklinforsupervisor.com" },
       { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
@@ -10,7 +9,12 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "voiceofsandiego.org", pathname: "/**" },
       { protocol: "https", hostname: "i.postimg.cc", pathname: "/**" },
     ],
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60,
   },
+  compress: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
   webpack: (config, { dev }) => {
     // In some environments (and on some macOS setups), file watcher limits can be low,
     // causing Watchpack `EMFILE: too many open files` and breaking route compilation.
