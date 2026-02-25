@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import { COVER_HERO_WHITE_LOGO_URL } from "@/components/sections/home-hero/coverHeroAssets";
-import { GRAIN_TEXTURE_BASE64 } from "@/components/sections/home-hero/coverHeroConstants";
 
 const HERO_VIDEO_ID = "tc8NQdFXbEM";
 
@@ -81,37 +80,28 @@ export function HomeCoverHero({
   return (
     <section
       aria-labelledby="home-cover-title"
-      className="relative isolate flex w-full flex-col overflow-hidden bg-neutral-ink aspect-video"
+      className="relative isolate flex w-full flex-col overflow-hidden bg-neutral-ink min-h-[100dvh] md:min-h-0 md:aspect-video"
     >
-      {/* 1920×1080 (1080p) video background — autoplay muted; unmute via button */}
+      {/* Video background */}
       <div className="absolute inset-0" aria-hidden>
         <div
           id="hero-yt-player"
           className="absolute inset-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full"
         />
-        {/* Dark gradient overlays for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-neutral-ink/90 via-neutral-ink/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-ink via-transparent to-neutral-ink/30" />
-        {/* Subtle animated grain texture */}
-        <div className={`absolute inset-0 opacity-[0.03] mix-blend-overlay`} style={{ backgroundImage: `url('${GRAIN_TEXTURE_BASE64}')` }} />
       </div>
 
-      {/* Animated accent shapes */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden motion-reduce:hidden">
-        <div className="hero-float-1 absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-primary/20 blur-[100px]" />
-        <div className="hero-float-2 absolute -right-32 bottom-1/4 h-80 w-80 rounded-full bg-secondary/15 blur-[80px]" />
-        <div className="hero-float-3 absolute left-1/3 top-10 h-64 w-64 rounded-full bg-primary/10 blur-[60px]" />
-      </div>
+      {/* Dark overlay on entire hero */}
+      <div className="pointer-events-none absolute inset-0 bg-neutral-ink/40" aria-hidden />
 
-      {/* Content — fills hero height; scroll area gets definite height so nothing is cut off on mobile */}
-      <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8">
-        <div className="mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col">
-          <div className="flex min-h-0 flex-1 items-center justify-start">
-            <div className="relative z-10 flex min-h-0 w-full max-w-2xl flex-1 flex-col justify-center text-left">
-              {/* Scroll area: fixed max-height so it never exceeds hero; overflow scroll so all content is visible */}
+      {/* Content — on mobile section grows to fit (no cut-off). On desktop, scroll within 16:9. Buttons always have room. */}
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="flex items-center justify-start">
+            <div className="relative z-10 w-full max-w-2xl text-left">
+              {/* Mobile: no scroll, content flows so nothing is cut off. Desktop: scroll within hero height. */}
               <div
-                className="min-h-0 max-h-[min(56.25vw,80vh)] overflow-y-auto overflow-x-hidden overscroll-contain py-1"
-                style={{ WebkitOverflowScrolling: "touch" }}
+                className="pb-8 pt-2 md:max-h-[min(56.25vw,80vh)] md:min-h-0 md:overflow-y-auto md:overflow-x-hidden md:overscroll-contain md:pb-6 md:pt-0"
+                style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
               >
                 {/* Logo — consistent spacing below */}
                 <div className="mb-4 w-[200px] sm:w-[260px] md:w-[320px] lg:w-[380px] xl:w-[440px]">
