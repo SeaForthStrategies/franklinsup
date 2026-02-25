@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { COVER_HERO_WHITE_LOGO_URL } from "@/components/sections/home-hero/coverHeroAssets";
 import { GRAIN_TEXTURE_BASE64 } from "@/components/sections/home-hero/coverHeroConstants";
 
 const HERO_VIDEO_ID = "tc8NQdFXbEM";
+
+type YTPlayerInstance = { mute: () => void; unMute: () => void; getPlayerState: () => number };
 
 interface HomeCoverHeroProps {
   donateUrl: string;
@@ -18,27 +20,74 @@ export function HomeCoverHero({
   donateUrl,
   endorsementsHref = "/endorsements",
 }: HomeCoverHeroProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const playerRef = useRef<YTPlayerInstance | null>(null);
 
   useEffect(() => {
-    // specific delay to ensure initial render paint before animation triggers
-    const timer = setTimeout(() => setIsLoaded(true), 100);
-    return () => clearTimeout(timer);
+    const win = typeof window !== "undefined" ? (window as unknown as { YT?: { Player: new (id: string, config: unknown) => YTPlayerInstance } }) : null;
+    const initPlayer = () => {
+      if (!win?.YT?.Player) return;
+      const el = document.getElementById("hero-yt-player");
+      if (!el || playerRef.current) return;
+      playerRef.current = new win.YT!.Player("hero-yt-player", {
+        width: "100%",
+        height: "100%",
+        videoId: HERO_VIDEO_ID,
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          loop: 1,
+          playlist: HERO_VIDEO_ID,
+          controls: 0,
+          playsinline: 1,
+          rel: 0,
+          modestbranding: 1,
+        },
+        events: {},
+      });
+    };
+
+    if (win?.YT?.Player) {
+      initPlayer();
+      return;
+    }
+
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScript = document.getElementsByTagName("script")[0];
+    firstScript?.parentNode?.insertBefore(tag, firstScript);
+
+    (window as unknown as { onYouTubeIframeAPIReady: () => void }).onYouTubeIframeAPIReady = () => {
+      initPlayer();
+    };
+
+    return () => {
+      delete (window as unknown as { onYouTubeIframeAPIReady?: () => void }).onYouTubeIframeAPIReady;
+    };
   }, []);
+
+  const toggleMute = () => {
+    const p = playerRef.current;
+    if (!p?.getPlayerState) return;
+    if (isMuted) {
+      p.unMute();
+      setIsMuted(false);
+    } else {
+      p.mute();
+      setIsMuted(true);
+    }
+  };
 
   return (
     <section
       aria-labelledby="home-cover-title"
       className="relative isolate w-full overflow-hidden bg-neutral-ink aspect-video"
     >
-      {/* 1920×1080 (1080p) video background, autoplay (unmuted; may not autoplay on all browsers) */}
+      {/* 1920×1080 (1080p) video background — autoplay muted; unmute via button */}
       <div className="absolute inset-0" aria-hidden>
-        <iframe
-          src={`https://www.youtube.com/embed/${HERO_VIDEO_ID}?autoplay=1&mute=0&loop=1&playlist=${HERO_VIDEO_ID}&controls=0&playsinline=1&rel=0&modestbranding=1`}
-          title="Campaign video background"
-          className="absolute inset-0 h-full w-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
+        <div
+          id="hero-yt-player"
+          className="absolute inset-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full"
         />
         {/* Dark gradient overlays for text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-ink/90 via-neutral-ink/60 to-transparent" />
@@ -54,17 +103,15 @@ export function HomeCoverHero({
         <div className="hero-float-3 absolute left-1/3 top-10 h-64 w-64 rounded-full bg-primary/10 blur-[60px]" />
       </div>
 
-      {/* Content — centered vertically, uses space well; scrollable on short viewports so all content is visible */}
-      <div className="relative z-10 flex min-h-full flex-col items-center justify-center px-4 py-5 sm:px-6 sm:py-8 md:px-8 md:py-10 lg:px-10 lg:py-12">
+      {/* Content — centered vertically; fixed-height scroll area so all content is visible and layout is stable */}
+      <div className="relative z-10 flex min-h-full flex-col items-center justify-center px-5 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
         <div className="mx-auto w-full max-w-7xl">
           <div className="flex min-h-0 min-w-0 items-center justify-start">
-            <div
-              className={`relative z-10 max-w-2xl text-left transition-all duration-1000 motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-            >
-              {/* Mobile & tablet: cap height to hero so content scrolls; all content stays visible. Desktop: no cap. */}
-              <div className="max-h-[56.25vw] overflow-y-auto overscroll-contain py-1 lg:max-h-none lg:py-0">
-                {/* Logo */}
-                <div className="mb-3 w-[200px] sm:mb-5 sm:w-[260px] md:mb-6 md:w-[320px] lg:w-[380px] xl:w-[440px]" style={{ transitionDelay: "100ms" }}>
+            <div className="relative z-10 max-w-2xl text-left">
+              {/* Scroll area = hero height on all sizes so content never overflows and layout doesn't shift */}
+              <div className="max-h-[56.25vw] overflow-y-auto overscroll-contain py-0.5">
+                {/* Logo — consistent spacing below */}
+                <div className="mb-4 w-[200px] sm:w-[260px] md:w-[320px] lg:w-[380px] xl:w-[440px]">
                 <Image
                   src={COVER_HERO_WHITE_LOGO_URL}
                   alt="Franklin for Supervisor"
@@ -75,11 +122,8 @@ export function HomeCoverHero({
                 />
                 </div>
 
-                {/* Badge — visible from sm, compact on mobile; width fits content only */}
-                <div 
-                  className={`mb-3 w-fit max-w-full flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur-sm sm:mb-5 sm:px-4 sm:py-2 transition-all duration-1000 motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                  style={{ transitionDelay: "200ms" }}
-                >
+                {/* Badge — width fits content only; consistent spacing */}
+                <div className="mb-4 w-fit max-w-full flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur-sm sm:px-4 sm:py-2">
                   <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2 shrink-0">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75 motion-reduce:hidden" />
                     <span className="relative inline-flex h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-green-500" />
@@ -89,38 +133,27 @@ export function HomeCoverHero({
                   </span>
                 </div>
 
-                {/* Main headline — allow wrap on small screens so it fits */}
+                {/* Main headline — allow wrap on small screens */}
                 <h1
                   id="home-cover-title"
-                  className={`mb-3 text-2xl font-black uppercase tracking-tight text-white sm:mb-5 sm:text-3xl md:text-4xl lg:text-5xl transition-all duration-1000 motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                  style={{ transitionDelay: "300ms" }}
+                  className="mb-4 text-2xl font-black uppercase tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl"
                 >
                   A Safer, More Affordable
                   <span className="relative block sm:whitespace-nowrap">
-                  <span 
-                    className={`animate-pulse-subtle relative z-10 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(96,165,250,0.5)] transition-all duration-1000 motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:animate-none ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-                    style={{ transitionDelay: "600ms" }}
-                  >
-                    North County.
+                    <span className="relative z-10 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(96,165,250,0.5)]">
+                      North County.
+                    </span>
+                    <span className="absolute -inset-x-4 -inset-y-2 -z-10 bg-blue-400/30 blur-2xl motion-reduce:hidden" />
                   </span>
-                  {/* Glow effect behind North County */}
-                  <span className="absolute -inset-x-4 -inset-y-2 -z-10 bg-blue-400/30 blur-2xl motion-reduce:hidden" />
-                </span>
                 </h1>
 
-                {/* Description */}
-                <p 
-                  className={`mb-4 max-w-lg text-sm leading-relaxed text-white/80 sm:mb-6 sm:text-base md:text-lg lg:text-xl transition-all duration-1000 motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                  style={{ transitionDelay: "400ms" }}
-                >
+                {/* Description — consistent spacing */}
+                <p className="mb-4 max-w-lg text-sm leading-relaxed text-white/80 sm:text-base md:text-lg lg:text-xl">
                   Experienced leadership fighting for affordability, public safety, fire prevention, and fixing our roads.
                 </p>
 
-                {/* CTAs */}
-                <div 
-                  className={`flex flex-row flex-wrap items-center justify-start gap-2 sm:gap-4 transition-all duration-1000 motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                  style={{ transitionDelay: "500ms" }}
-                >
+                {/* CTAs — consistent spacing */}
+                <div className="flex flex-row flex-wrap items-center justify-start gap-3 sm:gap-4">
                   <a
                     href={donateUrl}
                     target="_blank"
@@ -152,6 +185,25 @@ export function HomeCoverHero({
           </div>
         </div>
       </div>
+
+      {/* Volume toggle — bottom right; video autoplays muted, click to unmute */}
+      <button
+        type="button"
+        onClick={toggleMute}
+        className="absolute bottom-5 right-5 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-colors hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-neutral-ink sm:bottom-6 sm:right-6 sm:h-12 sm:w-12"
+        aria-label={isMuted ? "Unmute video" : "Mute video"}
+      >
+        {isMuted ? (
+          <svg className="h-5 w-5 text-white sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+          </svg>
+        ) : (
+          <svg className="h-5 w-5 text-white sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072M11.536 4.464a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+          </svg>
+        )}
+      </button>
     </section>
   );
 }
