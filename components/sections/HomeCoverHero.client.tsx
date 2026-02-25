@@ -81,7 +81,7 @@ export function HomeCoverHero({
   return (
     <section
       aria-labelledby="home-cover-title"
-      className="relative isolate w-full overflow-hidden bg-neutral-ink aspect-video"
+      className="relative isolate flex w-full flex-col overflow-hidden bg-neutral-ink aspect-video"
     >
       {/* 1920×1080 (1080p) video background — autoplay muted; unmute via button */}
       <div className="absolute inset-0" aria-hidden>
@@ -103,13 +103,16 @@ export function HomeCoverHero({
         <div className="hero-float-3 absolute left-1/3 top-10 h-64 w-64 rounded-full bg-primary/10 blur-[60px]" />
       </div>
 
-      {/* Content — centered vertically; fixed-height scroll area so all content is visible and layout is stable */}
-      <div className="relative z-10 flex min-h-full flex-col items-center justify-center px-5 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
-        <div className="mx-auto w-full max-w-7xl">
-          <div className="flex min-h-0 min-w-0 items-center justify-start">
-            <div className="relative z-10 max-w-2xl text-left">
-              {/* Scroll area = hero height on all sizes so content never overflows and layout doesn't shift */}
-              <div className="max-h-[56.25vw] overflow-y-auto overscroll-contain py-0.5">
+      {/* Content — fills hero height; scroll area gets definite height so nothing is cut off on mobile */}
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8">
+        <div className="mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col">
+          <div className="flex min-h-0 flex-1 items-center justify-start">
+            <div className="relative z-10 flex min-h-0 w-full max-w-2xl flex-1 flex-col justify-center text-left">
+              {/* Scroll area: fixed max-height so it never exceeds hero; overflow scroll so all content is visible */}
+              <div
+                className="min-h-0 max-h-[min(56.25vw,80vh)] overflow-y-auto overflow-x-hidden overscroll-contain py-1"
+                style={{ WebkitOverflowScrolling: "touch" }}
+              >
                 {/* Logo — consistent spacing below */}
                 <div className="mb-4 w-[200px] sm:w-[260px] md:w-[320px] lg:w-[380px] xl:w-[440px]">
                 <Image
