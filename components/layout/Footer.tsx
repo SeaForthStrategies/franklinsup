@@ -1,9 +1,6 @@
 import Link from "next/link";
 
 export function Footer() {
-  const contactUrl =
-    "https://secure.franklinforsupervisor.com/contact?_gl=1%2A1hbffur%2A_gcl_au%2ANDA2MjI2MjM4LjE3Njk0NDU2NTI.";
-
   const socialLinks = [
     { label: "Facebook", href: "https://www.facebook.com/mayor.john.franklin/" },
     { label: "X", href: "https://x.com/mayorjohnfranklin" },
@@ -52,9 +49,9 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a className="text-white/75 hover:text-white" href={contactUrl}>
+                <Link className="text-white/75 hover:text-white" href="/contact">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

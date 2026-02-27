@@ -6,9 +6,6 @@ const AMOUNTS: Array<{ label: string; value?: number }> = [
   { label: "Other" },
 ];
 
-const CONTACT_URL =
-  "https://secure.franklinforsupervisor.com/contact?_gl=1%2A1hbffur%2A_gcl_au%2ANDA2MjI2MjM4LjE3Njk0NDU2NTI.";
-
 interface HomeSupportDonateProps {
   donateUrl: string;
   volunteerUrl: string;
@@ -54,7 +51,7 @@ export function HomeSupportDonate({
               Volunteer
             </a>
             <a
-              href={CONTACT_URL}
+              href="/contact"
               className="inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-black uppercase tracking-wide text-neutral-ink transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
             >
               Get updates

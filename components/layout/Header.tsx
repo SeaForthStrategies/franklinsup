@@ -6,9 +6,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import supervisorLogoPng from "@/Images/Supervisor_Logo_noBG_v2EL.png";
 
-const CONTACT_URL =
-  "https://secure.franklinforsupervisor.com/contact?_gl=1%2A1hbffur%2A_gcl_au%2ANDA2MjI2MjM4LjE3Njk0NDU2NTI.";
-
 /** Navigation items configuration */
 const NAV_ITEMS = [
   {
@@ -22,7 +19,7 @@ const NAV_ITEMS = [
   { label: "Issues", href: "/issues" },
   { label: "Endorsements", href: "/endorsements" },
   { label: "News", href: "/news" },
-  { label: "Contact", href: CONTACT_URL, external: true },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 /** Hook for focus trapping inside the drawer */

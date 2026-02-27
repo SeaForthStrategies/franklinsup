@@ -1,9 +1,23 @@
-import { redirect } from "next/navigation";
+import type { Metadata } from "next";
+import { TallyContactEmbed } from "@/components/forms/TallyContactEmbed.client";
 
-const CONTACT_URL =
-  "https://secure.franklinforsupervisor.com/contact?_gl=1%2A1hbffur%2A_gcl_au%2ANDA2MjI2MjM4LjE3Njk0NDU2NTI.";
+export const metadata: Metadata = {
+  title: "Contact – Leadership for San Diego County",
+  openGraph: {
+    title: "Contact – Leadership for San Diego County",
+    url: "https://franklinforsupervisor.com/contact",
+    siteName: "Franklin for Supervisor",
+    type: "website",
+  },
+};
 
 export default function ContactPage() {
-  redirect(CONTACT_URL);
+  return (
+    <section
+      className="relative min-h-[800px] w-full bg-neutral-base"
+      aria-label="Contact form"
+    >
+      <TallyContactEmbed />
+    </section>
+  );
 }
-

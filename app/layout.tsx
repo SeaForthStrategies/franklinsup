@@ -58,10 +58,10 @@ export default function RootLayout({
           Skip to content
         </a>
 
-        <div id="dev-preview-shell" className="min-h-screen bg-transparent text-neutral-ink flex flex-col">
+        <div id="dev-preview-shell" className="min-h-screen bg-transparent text-neutral-ink">
           <Header />
 
-          <main id="main-content" className="flex-1">
+          <main id="main-content">
             {children}
           </main>
 

@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 const DEFAULT_IMAGES = [
   "https://franklinforsupervisor.com/wp-content/uploads/2024/08/JohnShanna1EL.png",
   "https://franklinforsupervisor.com/wp-content/uploads/2023/07/DG5_0419-Copy-1024x683.jpg",
-  "https://franklinforsupervisor.com/wp-content/uploads/2024/07/347799573_644190660379563_4869575071748284670_n-1024x782.jpg",
+  "/mayor-franklin-carlsbad-event.png",
 ] as const;
 
 interface AboutHeroImagesProps {
