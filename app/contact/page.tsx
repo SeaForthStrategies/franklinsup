@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -11,13 +12,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+
   return (
     <section
       className="relative h-[100dvh] w-full overflow-hidden bg-neutral-base"
       aria-label="Contact form"
     >
-      <Script async src="https://tally.so/widgets/embed.js" strategy="afterInteractive" />
+      <Script
+        async
+        src="https://tally.so/widgets/embed.js"
+        strategy="afterInteractive"
+        nonce={nonce}
+      />
       <iframe
         data-tally-src="https://tally.so/r/QKAYel?transparentBackground=1"
         width="100%"
