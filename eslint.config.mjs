@@ -4,7 +4,7 @@ import typescript from "eslint-config-next/typescript";
 const config = [
   {
     // macOS Finder / AppleDouble artifacts can appear on external drives and break parsing.
-    ignores: ["**/.DS_Store", "**/._*", "**/._*/**"],
+    ignores: ["**/.DS_Store", "**/._*", "**/._*/**", "**/.next/**", "**/node_modules/**"],
   },
   // Equivalent of legacy:
   //   extends: ["next/core-web-vitals", "next/typescript"]

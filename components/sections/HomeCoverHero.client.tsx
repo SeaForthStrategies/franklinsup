@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { COVER_HERO_WHITE_LOGO_URL } from "@/components/sections/home-hero/coverHeroAssets";
 
@@ -67,7 +67,7 @@ export function HomeCoverHero({
   return (
     <section
       aria-label="Home hero"
-      className="hero-section-scaled relative isolate flex w-full flex-col overflow-hidden bg-neutral-ink aspect-video"
+      className="hero-section-scaled relative isolate block w-full overflow-hidden bg-neutral-ink aspect-video"
     >
       {/* Video background */}
       <div className="absolute inset-0" aria-hidden>
@@ -121,12 +121,10 @@ export function HomeCoverHero({
         </div>
       </div>
 
-      {/* Desktop hero — centered layout */}
-      <div className="absolute inset-0 z-10 hidden w-full flex-col items-center justify-center px-6 py-8 md:flex md:px-10 md:py-12 lg:px-12 lg:py-14">
-        <div className="mx-auto w-full max-w-7xl">
-          <div className="flex items-center justify-center">
-            <div className="relative z-10 w-full max-w-3xl text-center">
-              <div className="hero-content-inner">
+      {/* Desktop hero — centered layout: grid with one centered column so nothing blocks centering */}
+      <div className="absolute inset-0 z-10 hidden grid-cols-1 place-content-center place-items-center px-6 py-8 md:grid md:px-10 md:py-12 lg:px-12 lg:py-14 [grid-template-columns:minmax(0,min(100%,48rem))] md:justify-center">
+        <div className="relative z-10 w-full text-center">
+          <div className="hero-content-inner">
                 <div className="hero-logo mb-4">
                   <Image
                     src={COVER_HERO_WHITE_LOGO_URL}
@@ -154,7 +152,7 @@ export function HomeCoverHero({
                     <span className="absolute -inset-x-4 -inset-y-2 -z-10 bg-blue-400/30 blur-2xl motion-reduce:hidden" />
                   </span>
                 </h1>
-                <p className="hero-description mb-4 max-w-lg leading-relaxed text-white/80">
+                <p className="hero-description mb-4 max-w-lg leading-relaxed text-white/80 mx-auto">
                   Experienced leadership fighting for affordability, public safety, fire prevention, and fixing our roads.
                 </p>
                 <div className="hero-cta-row flex flex-row flex-wrap items-center justify-center gap-4">
@@ -185,8 +183,6 @@ export function HomeCoverHero({
                   </Link>
                 </div>
               </div>
-            </div>
-          </div>
         </div>
       </div>
 
