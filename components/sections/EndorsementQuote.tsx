@@ -9,8 +9,56 @@ interface EndorsementQuoteProps {
   tone?: "light" | "dark";
 }
 
+const INLINE_TITLES = [
+  "Vice President",
+  "Congressman",
+  "Congresswoman",
+  "Supervisor",
+  "Mayor",
+  "Councilmember",
+  "President",
+  "Assemblymember",
+  "Senator",
+  "Sheriff",
+  "Chief",
+  "Director",
+  "Chair",
+  "Commissioner",
+  "Judge",
+  "CEO",
+  "Founder",
+] as const;
+
+function splitAuthorName(fullName: string): { primaryName: string; inlineTitle?: string } {
+  for (const title of INLINE_TITLES) {
+    const index = fullName.indexOf(title);
+
+    if (index === -1) continue;
+
+    if (index === 0) {
+      const primaryName = fullName.slice(title.length).trim();
+      return {
+        primaryName: primaryName || fullName,
+        inlineTitle: title,
+      };
+    }
+
+    const primaryName = fullName.slice(0, index).trim();
+    const inlineTitle = fullName.slice(index).trim();
+
+    if (!primaryName || !inlineTitle) {
+      continue;
+    }
+
+    return { primaryName, inlineTitle };
+  }
+
+  return { primaryName: fullName };
+}
+
 export function EndorsementQuote({ quote, author, authorTitle, imageUrl, imageAlt, tone = "light" }: EndorsementQuoteProps) {
   const isDark = tone === "dark";
+  const { primaryName, inlineTitle } = splitAuthorName(author);
 
   return (
     <section className={isDark ? "relative overflow-hidden bg-primary-900 text-white" : "bg-neutral-surface"}>
@@ -55,10 +103,13 @@ export function EndorsementQuote({ quote, author, authorTitle, imageUrl, imageAl
               </blockquote>
               <cite className="mt-3 not-italic sm:mt-4">
                 <div className="font-heading text-xs font-black uppercase tracking-tight text-neutral-ink sm:text-sm md:text-base">
-                  {author}
+                  <span>{primaryName}</span>
+                  {inlineTitle && <span className="block">{inlineTitle}</span>}
                 </div>
                 {authorTitle && (
-                  <div className="mt-0.5 text-[10px] text-neutral-muted sm:mt-1 sm:text-xs md:text-sm">{authorTitle}</div>
+                  <div className="mt-0.5 text-[10px] text-neutral-muted sm:mt-1 sm:text-xs md:text-sm">
+                    {authorTitle}
+                  </div>
                 )}
               </cite>
             </div>

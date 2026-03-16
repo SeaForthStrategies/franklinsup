@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { EndorsementsGrid, ORGANIZATION_ENDORSEMENTS } from "@/components/sections/EndorsementsGrid";
+import { EndorsementsGrid } from "@/components/sections/EndorsementsGrid";
 import type { Endorsement } from "@/components/sections/EndorsementsGrid";
 import { EndorsementQuote } from "@/components/sections/EndorsementQuote";
 import { EndorsementsTopAnimations } from "@/components/sections/EndorsementsTopAnimations.client";
@@ -18,8 +18,41 @@ type WPEndorsement = {
     endorser_org?: string;
     sort_order?: number;
     headshot?: unknown;
+    category?: string;
   };
 };
+
+const INLINE_TITLES = [
+  "Vice President",
+  "Congressman",
+  "Congresswoman",
+  "Supervisor",
+  "Mayor",
+  "Councilmember",
+  "President",
+  "Assemblymember",
+  "Senator",
+  "Sheriff",
+  "Chief",
+  "Director",
+  "Chair",
+  "Commissioner",
+  "Judge",
+  "CEO",
+  "Founder",
+] as const;
+
+function combineNameAndTitle(name: string, title: string): string {
+  if (!title) return name;
+
+  const hasInlineTitle = INLINE_TITLES.some((t) => name.includes(t) || title.includes(t));
+
+  if (!hasInlineTitle) {
+    return name;
+  }
+
+  return `${name} ${title}`.trim();
+}
 
 async function getWPEndorsements(): Promise<WPEndorsement[]> {
   const base = process.env.WORDPRESS_URL ?? "https://franklinforsupervisor.com";
@@ -132,11 +165,15 @@ export default async function EndorsementsPage() {
   // (no CSS changes; just data)
   const wpPeopleEndorsements = await Promise.all(
     wpEndorsements.map(async (e): Promise<Endorsement | null> => {
-      const name = e.acf?.endorser_name || e.title.rendered;
+      const baseName = e.acf?.endorser_name || e.title.rendered;
       const org = e.acf?.endorser_org ?? "";
       const title = org || (e.acf?.endorser_title ?? "");
+      const rawCategory = e.acf?.category;
+      const category = typeof rawCategory === "string" ? rawCategory.trim() : "";
 
       const { mediaId, imageUrl } = extractHeadshot(e.acf?.headshot);
+
+      const name = combineNameAndTitle(baseName, title);
 
       // If ACF returns a direct URL, use it without an extra media fetch.
       if (imageUrl) {
@@ -146,6 +183,7 @@ export default async function EndorsementsPage() {
           title,
           imageUrl,
           imageAlt: name,
+          category: category || undefined,
         };
       }
 
@@ -173,6 +211,7 @@ export default async function EndorsementsPage() {
           title,
           imageUrl: fetchedUrl,
           imageAlt,
+          category: category || undefined,
         };
       } catch {
         return null;
@@ -182,6 +221,12 @@ export default async function EndorsementsPage() {
 
   const wpPeopleEndorsementsClean = wpPeopleEndorsements.filter(
     (endorsement): endorsement is Endorsement => Boolean(endorsement),
+  );
+
+  const leaders = wpPeopleEndorsementsClean.filter((e) => e.category === "Leaders");
+  const organizations = wpPeopleEndorsementsClean.filter((e) => e.category === "Organizations");
+  const mainEndorsements = wpPeopleEndorsementsClean.filter(
+    (e) => !e.category || e.category === "Endorsements",
   );
 
   return (
@@ -198,8 +243,8 @@ export default async function EndorsementsPage() {
             </h1>
 
             <EndorsementsTopAnimations
-              people={wpPeopleEndorsementsClean}
-              organizations={[]}
+              people={mainEndorsements}
+              organizations={organizations}
             />
           </div>
         </div>
@@ -213,16 +258,31 @@ export default async function EndorsementsPage() {
         </div>
 
         <div className="relative mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 sm:py-14 md:py-20 lg:px-8 lg:py-24">
-          <EndorsementsGrid endorsements={wpPeopleEndorsementsClean} variant="people" />
+          {mainEndorsements.length > 0 ? (
+            <EndorsementsGrid endorsements={mainEndorsements} variant="people" />
+          ) : null}
 
-          <div className="mt-10 sm:mt-14 md:mt-16">
-            <h2 className="text-center text-xl font-black uppercase tracking-tight text-white sm:text-2xl md:text-3xl">
-              Organizations
-            </h2>
-            <div className="mt-5 sm:mt-6 md:mt-8">
-              <EndorsementsGrid endorsements={ORGANIZATION_ENDORSEMENTS} variant="orgs" />
+          {leaders.length > 0 ? (
+            <div className="mt-10 sm:mt-14 md:mt-16">
+              <h2 className="text-center text-xl font-black uppercase tracking-tight text-white sm:text-2xl md:text-3xl">
+                Leaders
+              </h2>
+              <div className="mt-5 sm:mt-6 md:mt-8">
+                <EndorsementsGrid endorsements={leaders} variant="people" />
+              </div>
             </div>
-          </div>
+          ) : null}
+
+          {organizations.length > 0 ? (
+            <div className="mt-10 sm:mt-14 md:mt-16">
+              <h2 className="text-center text-xl font-black uppercase tracking-tight text-white sm:text-2xl md:text-3xl">
+                Organizations
+              </h2>
+              <div className="mt-5 sm:mt-6 md:mt-8">
+                <EndorsementsGrid endorsements={organizations} variant="orgs" />
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
 

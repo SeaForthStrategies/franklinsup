@@ -6,6 +6,8 @@ export interface Endorsement {
   title: string;
   imageUrl: string;
   imageAlt?: string;
+   // Optional ACF category from WordPress: "Endorsements" | "Leaders" | "Organizations"
+  category?: string;
 }
 
 export const ENDORSEMENTS: Endorsement[] = [
@@ -552,6 +554,53 @@ const ORGANIZATION_IDS = new Set([
 export const ORGANIZATION_ENDORSEMENTS = ENDORSEMENTS.filter((e) => ORGANIZATION_IDS.has(e.id));
 export const PEOPLE_ENDORSEMENTS = ENDORSEMENTS.filter((e) => !ORGANIZATION_IDS.has(e.id));
 
+const INLINE_TITLES = [
+  "Vice President",
+  "Congressman",
+  "Congresswoman",
+  "Supervisor",
+  "Mayor",
+  "Councilmember",
+  "President",
+  "Assemblymember",
+  "Senator",
+  "Sheriff",
+  "Chief",
+  "Director",
+  "Chair",
+  "Commissioner",
+  "Judge",
+  "CEO",
+  "Founder",
+] as const;
+
+function splitEndorsementName(fullName: string): { primaryName: string; inlineTitle?: string } {
+  for (const title of INLINE_TITLES) {
+    const index = fullName.indexOf(title);
+
+    if (index === -1) continue;
+
+    if (index === 0) {
+      const primaryName = fullName.slice(title.length).trim();
+      return {
+        primaryName: primaryName || fullName,
+        inlineTitle: title,
+      };
+    }
+
+    const primaryName = fullName.slice(0, index).trim();
+    const inlineTitle = fullName.slice(index).trim();
+
+    if (!primaryName || !inlineTitle) {
+      continue;
+    }
+
+    return { primaryName, inlineTitle };
+  }
+
+  return { primaryName: fullName };
+}
+
 interface EndorsementCardProps {
   endorsement: Endorsement;
   index: number;
@@ -560,6 +609,7 @@ interface EndorsementCardProps {
 
 function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) {
   const isOrg = variant === "orgs";
+  const { primaryName, inlineTitle } = splitEndorsementName(endorsement.name);
 
   return (
     <div
@@ -578,21 +628,24 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
             : "border border-white/10 bg-white/[0.06] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.08] hover:shadow-2xl",
         ].join(" ")}
       >
+        {/* Image area: fixed square so every card has the same size; image always fills it */}
         <div
           className={[
-            "relative w-full overflow-hidden",
+            "relative w-full flex-shrink-0 overflow-hidden",
             isOrg ? "aspect-square bg-white" : "aspect-square bg-white/[0.08]",
           ].join(" ")}
         >
           {isOrg ? (
-            <div className="absolute inset-4 sm:inset-5 md:inset-7">
-              <Image
-                src={endorsement.imageUrl}
-                alt={endorsement.imageAlt || `${endorsement.name}${endorsement.title ? ` - ${endorsement.title}` : ""}`}
-                fill
-                sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-                className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-              />
+            <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-4 md:p-5">
+              <div className="relative h-full w-full">
+                <Image
+                  src={endorsement.imageUrl}
+                  alt={endorsement.imageAlt || `${endorsement.name}${endorsement.title ? ` - ${endorsement.title}` : ""}`}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                  className="object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              </div>
             </div>
           ) : (
             <>
@@ -601,7 +654,7 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
                 alt={endorsement.imageAlt || `${endorsement.name}${endorsement.title ? ` - ${endorsement.title}` : ""}`}
                 fill
                 sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-                className="object-cover object-[50%_18%] sm:object-[50%_16%] transition-transform duration-500 group-hover:scale-[1.02]"
+                className="object-cover object-center size-full min-w-full min-h-full transition-transform duration-500 group-hover:scale-[1.02]"
               />
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/28" />
             </>
@@ -609,22 +662,19 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
         </div>
 
         {isOrg ? null : (
-          <div className="flex flex-1 flex-col p-3 sm:p-4 md:p-5">
+          <div className="flex min-h-0 flex-1 flex-col p-3 sm:p-4 md:p-5">
             <h3
               className={[
                 "font-heading text-sm font-black uppercase tracking-tight sm:text-base md:text-lg leading-tight text-white",
-                "overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]",
-                "min-h-[2.25rem] sm:min-h-[2.5rem] md:min-h-[3.25rem]",
               ].join(" ")}
             >
-              {endorsement.name}
+              <span>{primaryName}</span>
+              {inlineTitle && <span className="block">{inlineTitle}</span>}
             </h3>
             {endorsement.title ? (
               <p
                 className={[
                   "mt-0.5 text-[10px] leading-relaxed sm:mt-1 sm:text-xs md:text-sm text-white/75",
-                  "overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]",
-                  "min-h-[1.75rem] sm:min-h-[2.25rem] md:min-h-[2.75rem]",
                 ].join(" ")}
               >
                 {endorsement.title}
@@ -633,9 +683,7 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
               <p
                 aria-hidden="true"
                 className={[
-                  "mt-0.5 text-[10px] leading-relaxed sm:mt-1 sm:text-xs md:text-sm",
-                  "min-h-[1.75rem] sm:min-h-[2.25rem] md:min-h-[2.75rem]",
-                  "invisible",
+                  "mt-0.5 text-[10px] leading-relaxed sm:mt-1 sm:text-xs md:text-sm invisible",
                 ].join(" ")}
               >
                 &nbsp;
