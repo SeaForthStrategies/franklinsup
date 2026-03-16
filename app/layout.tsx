@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { connection } from "next/server";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
 import { DevOnlyPreviewSwitcher } from "@/components/dev/DevOnlyPreviewSwitcher.client";
 import faviconPng from "@/Images/Franklin Favicon.png";
 
@@ -51,6 +49,12 @@ export default async function RootLayout({
   await connection();
   return (
     <html lang="en" className={montserrat.variable}>
+      <head>
+        <link rel="preconnect" href="https://www.youtube.com" />
+        <link rel="preconnect" href="https://i.ytimg.com" />
+        <link rel="dns-prefetch" href="https://www.youtube.com" />
+        <link rel="dns-prefetch" href="https://i.ytimg.com" />
+      </head>
       <body>
         {process.env.NODE_ENV !== "production" ? <DevOnlyPreviewSwitcher /> : null}
         <a
@@ -59,16 +63,7 @@ export default async function RootLayout({
         >
           Skip to content
         </a>
-
-        <div id="dev-preview-shell" className="min-h-screen bg-transparent text-neutral-ink">
-          <Header />
-
-          <main id="main-content">
-            {children}
-          </main>
-
-          <Footer />
-        </div>
+        {children}
       </body>
     </html>
   );

@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { COVER_HERO_WHITE_LOGO_URL } from "@/components/sections/home-hero/coverHeroAssets";
 
 const HERO_VIDEO_ID = "wqzuN9F11Ow";
+const HERO_POSTER_URL = `https://img.youtube.com/vi/${HERO_VIDEO_ID}/maxresdefault.jpg`;
+const HERO_POSTER_FALLBACK = `https://img.youtube.com/vi/${HERO_VIDEO_ID}/sddefault.jpg`;
 
 type YTPlayerInstance = { mute: () => void; unMute: () => void; getPlayerState: () => number };
 
@@ -20,8 +22,26 @@ export function HomeCoverHero({
   endorsementsHref = "/endorsements",
 }: HomeCoverHeroProps) {
   const playerRef = useRef<YTPlayerInstance | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [posterVisible, setPosterVisible] = useState(true);
+  const [heroInView, setHeroInView] = useState(false);
 
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) setHeroInView(true);
+      },
+      { rootMargin: "100px", threshold: 0 }
+    );
+    io.observe(section);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!heroInView) return;
+
     const win = typeof window !== "undefined" ? (window as unknown as { YT?: { Player: new (id: string, config: unknown) => YTPlayerInstance } }) : null;
     const initPlayer = () => {
       if (!win?.YT?.Player) return;
@@ -41,7 +61,11 @@ export function HomeCoverHero({
           rel: 0,
           modestbranding: 1,
         },
-        events: {},
+        events: {
+          onStateChange: (e: { data: number }) => {
+            if (e.data === 1) setPosterVisible(false);
+          },
+        },
       });
     };
 
@@ -62,14 +86,37 @@ export function HomeCoverHero({
     return () => {
       delete (window as unknown as { onYouTubeIframeAPIReady?: () => void }).onYouTubeIframeAPIReady;
     };
-  }, []);
+  }, [heroInView]);
 
   return (
     <section
+      ref={sectionRef}
       aria-label="Home hero"
       className="hero-section-scaled relative isolate block w-full overflow-hidden bg-neutral-ink aspect-video"
     >
-      {/* Video background */}
+      {/* Poster image — shows until video is playing for fast LCP */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-neutral-ink transition-opacity duration-500"
+        style={{
+          opacity: posterVisible ? 1 : 0,
+          pointerEvents: posterVisible ? "auto" : "none",
+        }}
+      >
+        <img
+          src={HERO_POSTER_URL}
+          alt=""
+          className="h-full w-full object-cover"
+          fetchPriority="high"
+          decoding="async"
+          onError={(e) => {
+            const target = e.currentTarget;
+            if (target.src !== HERO_POSTER_FALLBACK) target.src = HERO_POSTER_FALLBACK;
+          }}
+        />
+      </div>
+
+      {/* Video background — loads only when hero is in view */}
       <div className="absolute inset-0" aria-hidden>
         <div
           id="hero-yt-player"
