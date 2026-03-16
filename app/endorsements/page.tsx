@@ -199,7 +199,7 @@ export default async function EndorsementsPage() {
 
             <EndorsementsTopAnimations
               people={wpPeopleEndorsementsClean}
-              organizations={ORGANIZATION_ENDORSEMENTS}
+              organizations={[]}
             />
           </div>
         </div>

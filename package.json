@@ -37,5 +37,15 @@
     "postcss": "^8.5.6",
     "tailwindcss": "3.4.17",
     "typescript": "^5.9.3"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeaForthStrategies/franklinsup.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SeaForthStrategies/franklinsup/issues"
+  },
+  "homepage": "https://github.com/SeaForthStrategies/franklinsup#readme"
 }

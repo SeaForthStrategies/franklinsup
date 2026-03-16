@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { COVER_HERO_WHITE_LOGO_URL } from "@/components/sections/home-hero/coverHeroAssets";
 
-const HERO_VIDEO_ID = "tc8NQdFXbEM";
+const HERO_VIDEO_ID = "wqzuN9F11Ow";
 
 type YTPlayerInstance = { mute: () => void; unMute: () => void; getPlayerState: () => number };
 
@@ -19,7 +19,6 @@ export function HomeCoverHero({
   donateUrl,
   endorsementsHref = "/endorsements",
 }: HomeCoverHeroProps) {
-  const [isMuted, setIsMuted] = useState(true);
   const playerRef = useRef<YTPlayerInstance | null>(null);
 
   useEffect(() => {
@@ -65,18 +64,6 @@ export function HomeCoverHero({
     };
   }, []);
 
-  const toggleMute = () => {
-    const p = playerRef.current;
-    if (!p?.getPlayerState) return;
-    if (isMuted) {
-      p.unMute();
-      setIsMuted(false);
-    } else {
-      p.mute();
-      setIsMuted(true);
-    }
-  };
-
   return (
     <section
       aria-label="Home hero"
@@ -91,24 +78,24 @@ export function HomeCoverHero({
       </div>
 
       {/* Dark overlay */}
-      <div className="pointer-events-none absolute inset-0 bg-neutral-ink/40" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-neutral-ink/60" aria-hidden />
 
       {/* Mobile hero — compact layout fitted to 16:9 */}
-      <div className="absolute inset-0 z-10 flex items-center justify-start px-3 py-3 [padding-bottom:calc(0.75rem+env(safe-area-inset-bottom))] [padding-left:calc(0.75rem+env(safe-area-inset-left))] [padding-right:calc(0.75rem+env(safe-area-inset-right))] sm:px-4 sm:py-4 md:hidden">
-        <div className="flex w-full max-w-[250px] flex-col items-start gap-2.5 text-left">
+      <div className="absolute inset-0 z-10 flex items-center justify-center px-3 py-3 [padding-bottom:calc(0.75rem+env(safe-area-inset-bottom))] [padding-left:calc(0.75rem+env(safe-area-inset-left))] [padding-right:calc(0.75rem+env(safe-area-inset-right))] sm:px-4 sm:py-4 md:hidden">
+        <div className="flex w-full max-w-[220px] flex-col items-center gap-2 text-center">
           <Image
             src={COVER_HERO_WHITE_LOGO_URL}
             alt="Franklin for Supervisor"
             width={280}
             height={122}
             priority
-            className="h-auto w-full max-w-[145px] drop-shadow-2xl"
+            className="mx-auto h-auto w-full max-w-[130px] drop-shadow-2xl"
           />
-          <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-white/90">
+          <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-white/90 whitespace-nowrap">
             San Diego County Supervisor • District 5
           </p>
           <h1
-            className="font-heading text-[17px] font-black uppercase leading-[1.03] tracking-tight text-white"
+            className="font-heading text-[15px] font-black uppercase leading-[1.05] tracking-tight text-white"
           >
             A Safer, More Affordable{" "}
             <span className="bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 bg-clip-text text-transparent">
@@ -134,11 +121,11 @@ export function HomeCoverHero({
         </div>
       </div>
 
-      {/* Desktop hero — original layout */}
+      {/* Desktop hero — centered layout */}
       <div className="absolute inset-0 z-10 hidden w-full flex-col items-center justify-center px-6 py-8 md:flex md:px-10 md:py-12 lg:px-12 lg:py-14">
         <div className="mx-auto w-full max-w-7xl">
-          <div className="flex items-center justify-start">
-            <div className="relative z-10 w-full max-w-3xl text-left">
+          <div className="flex items-center justify-center">
+            <div className="relative z-10 w-full max-w-3xl text-center">
               <div className="hero-content-inner">
                 <div className="hero-logo mb-4">
                   <Image
@@ -150,7 +137,7 @@ export function HomeCoverHero({
                     className="h-auto w-full drop-shadow-2xl"
                   />
                 </div>
-                <div className="hero-badge mb-4 flex w-fit items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                <div className="hero-badge mb-4 mx-auto flex w-fit items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-sm">
                   <span className="hero-badge-text font-bold uppercase tracking-wider text-white/90">
                     San Diego County Supervisor • District 5
                   </span>
@@ -170,7 +157,7 @@ export function HomeCoverHero({
                 <p className="hero-description mb-4 max-w-lg leading-relaxed text-white/80">
                   Experienced leadership fighting for affordability, public safety, fire prevention, and fixing our roads.
                 </p>
-                <div className="hero-cta-row flex flex-row flex-wrap items-center gap-4">
+                <div className="hero-cta-row flex flex-row flex-wrap items-center justify-center gap-4">
                   <a
                     href={donateUrl}
                     target="_blank"
@@ -203,24 +190,7 @@ export function HomeCoverHero({
         </div>
       </div>
 
-      {/* Volume toggle — bottom right */}
-      <button
-        type="button"
-        onClick={toggleMute}
-        className="hero-volume-btn absolute bottom-2 right-2 z-20 flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-colors hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-neutral-ink md:bottom-6 md:right-6 md:h-12 md:w-12"
-        aria-label={isMuted ? "Unmute video" : "Mute video"}
-      >
-        {isMuted ? (
-          <svg className="h-4 w-4 text-white md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-            <path strokeLinecap="round" strokeLinejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-          </svg>
-        ) : (
-          <svg className="h-4 w-4 text-white md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072M11.536 4.464a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-          </svg>
-        )}
-      </button>
+      {/* Volume toggle removed to keep video audio permanently muted */}
     </section>
   );
 }
