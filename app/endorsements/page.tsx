@@ -22,38 +22,6 @@ type WPEndorsement = {
   };
 };
 
-const INLINE_TITLES = [
-  "Vice President",
-  "Congressman",
-  "Congresswoman",
-  "Supervisor",
-  "Mayor",
-  "Councilmember",
-  "President",
-  "Assemblymember",
-  "Senator",
-  "Sheriff",
-  "Chief",
-  "Director",
-  "Chair",
-  "Commissioner",
-  "Judge",
-  "CEO",
-  "Founder",
-] as const;
-
-function combineNameAndTitle(name: string, title: string): string {
-  if (!title) return name;
-
-  const hasInlineTitle = INLINE_TITLES.some((t) => name.includes(t) || title.includes(t));
-
-  if (!hasInlineTitle) {
-    return name;
-  }
-
-  return `${name} ${title}`.trim();
-}
-
 async function getWPEndorsements(): Promise<WPEndorsement[]> {
   const base = process.env.WORDPRESS_URL ?? "https://franklinforsupervisor.com";
 
@@ -165,15 +133,13 @@ export default async function EndorsementsPage() {
   // (no CSS changes; just data)
   const wpPeopleEndorsements = await Promise.all(
     wpEndorsements.map(async (e): Promise<Endorsement | null> => {
-      const baseName = e.acf?.endorser_name || e.title.rendered;
+      const name = e.acf?.endorser_name || e.title.rendered;
       const org = e.acf?.endorser_org ?? "";
       const title = org || (e.acf?.endorser_title ?? "");
       const rawCategory = e.acf?.category;
       const category = typeof rawCategory === "string" ? rawCategory.trim() : "";
 
       const { mediaId, imageUrl } = extractHeadshot(e.acf?.headshot);
-
-      const name = combineNameAndTitle(baseName, title);
 
       // If ACF returns a direct URL, use it without an extra media fetch.
       if (imageUrl) {
