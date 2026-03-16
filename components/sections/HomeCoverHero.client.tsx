@@ -121,11 +121,11 @@ export function HomeCoverHero({
         </div>
       </div>
 
-      {/* Desktop hero — centered layout: grid with one centered column so nothing blocks centering */}
-      <div className="absolute inset-0 z-10 hidden grid-cols-1 place-content-center place-items-center px-6 py-8 md:grid md:px-10 md:py-12 lg:px-12 lg:py-14 [grid-template-columns:minmax(0,min(100%,48rem))] md:justify-center">
-        <div className="relative z-10 w-full text-center">
+      {/* Desktop hero — flex + centered inner wrapper so centering works in production and after cache */}
+      <div className="hero-desktop-overlay absolute inset-0 z-10 hidden px-6 py-8 md:flex md:px-10 md:py-12 lg:px-12 lg:py-14">
+        <div className="hero-desktop-overlay-inner relative z-10">
           <div className="hero-content-inner">
-                <div className="hero-logo mb-4">
+                <div className="hero-logo mx-auto mb-4">
                   <Image
                     src={COVER_HERO_WHITE_LOGO_URL}
                     alt="Franklin for Supervisor"

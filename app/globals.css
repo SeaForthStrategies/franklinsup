@@ -887,6 +887,23 @@
   width: 100%;
 }
 
+/* Desktop hero overlay: flex + centered wrapper so content is centered in all viewports and survives cache/build */
+@media (min-width: 768px) {
+  section.hero-section-scaled .hero-desktop-overlay {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  section.hero-section-scaled .hero-desktop-overlay .hero-desktop-overlay-inner {
+    width: 100%;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}
+
 @media (min-width: 768px) {
   .hero-section-scaled {
     min-height: clamp(300px, 56vw, 920px);
@@ -895,6 +912,8 @@
 
 .hero-logo {
   width: clamp(180px, 26vw, 560px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-badge .hero-badge-dot {
