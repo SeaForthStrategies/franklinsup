@@ -22,6 +22,25 @@ type WPEndorsement = {
   };
 };
 
+/** Normalize ACF value to a non-empty string (WP/ACF can return objects or other types). */
+function acfString(value: unknown): string {
+  if (value == null) return "";
+  if (typeof value === "string") return value.trim();
+  return "";
+}
+
+/** Only treat as "Organizations" when category is that, org is set, and there is no person name (so person endorsements never appear under Organizations). */
+function sectionCategory(acf: WPEndorsement["acf"]): "Leaders" | "Organizations" | undefined {
+  const category = acfString(acf?.category).toLowerCase();
+  const org = acfString(acf?.endorser_org);
+  const personName = acfString(acf?.endorser_name);
+
+  if (category === "leaders") return "Leaders";
+  // Organizations section only: category + org name set + no person name (person endorsements always go to main list)
+  if (category === "organizations" && org.length > 0 && personName.length === 0) return "Organizations";
+  return undefined;
+}
+
 async function getWPEndorsements(): Promise<WPEndorsement[]> {
   const base = process.env.WORDPRESS_URL ?? "https://franklinforsupervisor.com";
 
@@ -136,16 +155,7 @@ export default async function EndorsementsPage() {
       const name = e.acf?.endorser_name || e.title.rendered;
       const org = e.acf?.endorser_org ?? "";
       const title = org || (e.acf?.endorser_title ?? "");
-      const rawCategory = e.acf?.category;
-      const wpCategory = typeof rawCategory === "string" ? rawCategory.trim() : "";
-      // Only show under Organizations if WP category is "Organizations" AND endorser_org is set.
-      // New person endorsements that default to "Organizations" in WP (with no org) go to main list.
-      const category =
-        wpCategory === "Organizations" && org
-          ? "Organizations"
-          : wpCategory === "Leaders"
-            ? "Leaders"
-            : undefined;
+      const category = sectionCategory(e.acf);
 
       const { mediaId, imageUrl } = extractHeadshot(e.acf?.headshot);
 
