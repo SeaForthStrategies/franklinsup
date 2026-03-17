@@ -137,7 +137,15 @@ export default async function EndorsementsPage() {
       const org = e.acf?.endorser_org ?? "";
       const title = org || (e.acf?.endorser_title ?? "");
       const rawCategory = e.acf?.category;
-      const category = typeof rawCategory === "string" ? rawCategory.trim() : "";
+      const wpCategory = typeof rawCategory === "string" ? rawCategory.trim() : "";
+      // Only show under Organizations if WP category is "Organizations" AND endorser_org is set.
+      // New person endorsements that default to "Organizations" in WP (with no org) go to main list.
+      const category =
+        wpCategory === "Organizations" && org
+          ? "Organizations"
+          : wpCategory === "Leaders"
+            ? "Leaders"
+            : undefined;
 
       const { mediaId, imageUrl } = extractHeadshot(e.acf?.headshot);
 
@@ -149,7 +157,7 @@ export default async function EndorsementsPage() {
           title,
           imageUrl,
           imageAlt: name,
-          category: category || undefined,
+          category,
         };
       }
 
@@ -177,7 +185,7 @@ export default async function EndorsementsPage() {
           title,
           imageUrl: fetchedUrl,
           imageAlt,
-          category: category || undefined,
+          category,
         };
       } catch {
         return null;
@@ -192,7 +200,7 @@ export default async function EndorsementsPage() {
   const leaders = wpPeopleEndorsementsClean.filter((e) => e.category === "Leaders");
   const organizations = wpPeopleEndorsementsClean.filter((e) => e.category === "Organizations");
   const mainEndorsements = wpPeopleEndorsementsClean.filter(
-    (e) => !e.category || e.category === "Endorsements",
+    (e) => e.category !== "Leaders" && e.category !== "Organizations",
   );
 
   return (
