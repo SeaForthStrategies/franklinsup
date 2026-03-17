@@ -50,9 +50,9 @@ export default function IssuesPage() {
             lead:
               "We must tackle the rising cost of living by lowering taxes and making housing more affordable for working and middle class families.",
             bullets: [
-              "Oppose the Vehicle Milage Tax (VMT)",
+              "Oppose the Vehicle Mileage Tax (VMT)",
               "Oppose Sales Tax Increases",
-              "Oppose the Housing Sales Tax (Transfer Tax)",
+              "Oppose the Transfer Tax",
               "Protect Prop 13",
             ],
             body: [
@@ -91,7 +91,7 @@ export default function IssuesPage() {
             lead:
               "I’m proud that I was the first mayor to sign Summer Stephan’s petition to pass Prop 36 that will ensure law enforcement has the tools and support to crack down on crime. I've fought for years to expand funding and hire more deputies- and we did it.",
             bullets: [
-              "Oppose Dangerous Sanctuary City Policies that protect Murders, Rapists and Drug Dealers",
+              "Oppose Dangerous Sanctuary City Policies that protect murderers, rapists, and drug dealers",
               "No more early releases or parole for those that harm our children",
             ],
             body: [
