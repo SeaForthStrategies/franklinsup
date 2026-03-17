@@ -89,6 +89,10 @@ function OdometerNumber({ value }: { value: number }) {
 
 type HeadshotItem = { id: string; name: string; imageUrl: string };
 
+const HEADSHOT_SIZE = 96;
+const IMG_CLASS = "h-20 w-20 object-cover sm:h-24 sm:w-24";
+
+/** Two-slot rotator: only the hidden slot's image is updated so the visible image never changes src mid-transition (avoids glitches). */
 function HeadshotRotator({ endorsements }: { endorsements: Endorsement[] }) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const items: HeadshotItem[] = React.useMemo(
@@ -99,106 +103,127 @@ function HeadshotRotator({ endorsements }: { endorsements: Endorsement[] }) {
     [endorsements],
   );
 
-  const [index, setIndex] = React.useState(0);
-  const [showNext, setShowNext] = React.useState(false);
-  const [nextReady, setNextReady] = React.useState(true);
-
   const safeCount = items.length;
   const safeIndex = React.useCallback(
     (i: number) => (safeCount ? ((i % safeCount) + safeCount) % safeCount : 0),
     [safeCount],
   );
 
-  const current = items[safeIndex(index)];
-  const next = items[safeIndex(index + 1)];
+  // Double-buffer: two slots; we only update the slot that is hidden to avoid visible src changes.
+  const [leadSlot, setLeadSlot] = React.useState<0 | 1>(0); // which slot is on top (visible)
+  const [slot0Index, setSlot0Index] = React.useState(0);
+  const [slot1Index, setSlot1Index] = React.useState(1);
 
-  React.useEffect(() => {
-    if (prefersReducedMotion) return;
-    if (!next?.imageUrl) return;
+  const slot0IndexRef = React.useRef(slot0Index);
+  const slot1IndexRef = React.useRef(slot1Index);
+  slot0IndexRef.current = slot0Index;
+  slot1IndexRef.current = slot1Index;
 
-    let cancelled = false;
-    setNextReady(false);
+  const item0 = items[slot0Index];
+  const item1 = items[slot1Index];
 
-    const img = new window.Image();
-    img.decoding = "async";
-    img.src = next.imageUrl;
-
-    const done = () => {
-      if (!cancelled) setNextReady(true);
-    };
-
-    if (img.complete) {
-      done();
-      return;
-    }
-
-    img.onload = done;
-    img.onerror = done;
-    return () => {
-      cancelled = true;
-    };
-  }, [next?.imageUrl, prefersReducedMotion]);
-
+  // Advance: every holdMs, toggle which slot is on top (crossfade).
   React.useEffect(() => {
     if (prefersReducedMotion) return;
     if (safeCount < 2) return;
 
-    // Slightly faster cadence than before, still not dizzy.
     const holdMs = 1100;
-    const fadeMs = 200;
-    const bufferMs = 40;
-
-    let swapT: number | undefined;
-    let endT: number | undefined;
-
     const holdT = window.setTimeout(() => {
-      if (!nextReady) return;
-      setShowNext(true);
-
-      swapT = window.setTimeout(() => {
-        setIndex((i) => safeIndex(i + 1));
-        endT = window.setTimeout(() => setShowNext(false), bufferMs);
-      }, fadeMs);
+      setLeadSlot((prev) => (prev === 0 ? 1 : 0));
     }, holdMs);
 
-    return () => {
-      window.clearTimeout(holdT);
-      if (swapT) window.clearTimeout(swapT);
-      if (endT) window.clearTimeout(endT);
-    };
-  }, [index, nextReady, prefersReducedMotion, safeCount, safeIndex]);
+    return () => window.clearTimeout(holdT);
+  }, [leadSlot, prefersReducedMotion, safeCount]);
+
+  // After leadSlot changes, update the hidden slot after the crossfade (use refs so we only depend on leadSlot).
+  React.useEffect(() => {
+    if (safeCount < 2) return;
+
+    const fadeMs = 200;
+    const t = window.setTimeout(() => {
+      if (leadSlot === 1) {
+        const nextIdx = safeIndex(slot1IndexRef.current + 1);
+        setSlot0Index(nextIdx); // slot 0 was hidden; show next there
+      } else {
+        const nextIdx = safeIndex(slot0IndexRef.current + 1);
+        setSlot1Index(nextIdx); // slot 1 was hidden; show next there
+      }
+    }, fadeMs);
+
+    return () => window.clearTimeout(t);
+  }, [leadSlot, safeCount, safeIndex]);
+
+  if (safeCount === 0) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="relative h-20 w-20 overflow-hidden rounded-full bg-white/5 sm:h-24 sm:w-24" />
+      </div>
+    );
+  }
+
+  if (safeCount === 1 && item0) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="relative h-20 w-20 overflow-hidden rounded-full bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,.22)] ring-1 ring-white/20 sm:h-24 sm:w-24">
+          <Image
+            src={item0.imageUrl}
+            alt={item0.name}
+            width={HEADSHOT_SIZE}
+            height={HEADSHOT_SIZE}
+            sizes="96px"
+            className={IMG_CLASS}
+            priority
+          />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+            <div className="absolute inset-0 bg-[radial-gradient(80px_60px_at_30%_20%,rgba(255,255,255,.14),transparent_60%)]" />
+            <div className="absolute inset-0 ring-1 ring-inset ring-white/10" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center">
       <div className="relative h-20 w-20 overflow-hidden rounded-full bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,.22)] ring-1 ring-white/20 sm:h-24 sm:w-24">
-        {current ? (
-          <Image
-            src={current.imageUrl}
-            alt={current.name}
-            width={96}
-            height={96}
-            sizes="96px"
-            className="h-20 w-20 object-cover sm:h-24 sm:w-24"
-            priority={index === 0}
-          />
-        ) : null}
-
-        {!prefersReducedMotion && safeCount > 1 && next ? (
-          <div
-            className="absolute inset-0 transition-opacity duration-200 ease-out"
-            style={{ opacity: showNext && nextReady ? 1 : 0 }}
-            aria-hidden="true"
-          >
+        {/* Slot 0: only its src updates when this slot is hidden (no visible glitch) */}
+        <div
+          className="absolute inset-0 transition-opacity duration-200 ease-out"
+          style={{ opacity: leadSlot === 0 ? 1 : 0 }}
+          aria-hidden={leadSlot !== 0}
+        >
+          {item0 ? (
             <Image
-              src={next.imageUrl}
-              alt={next.name}
-              width={96}
-              height={96}
+              key={`slot0-${slot0Index}`}
+              src={item0.imageUrl}
+              alt={item0.name}
+              width={HEADSHOT_SIZE}
+              height={HEADSHOT_SIZE}
               sizes="96px"
-              className="h-20 w-20 object-cover sm:h-24 sm:w-24"
+              className={IMG_CLASS}
+              priority={slot0Index === 0}
             />
-          </div>
-        ) : null}
+          ) : null}
+        </div>
+        {/* Slot 1 */}
+        <div
+          className="absolute inset-0 transition-opacity duration-200 ease-out"
+          style={{ opacity: leadSlot === 1 ? 1 : 0 }}
+          aria-hidden={leadSlot !== 1}
+        >
+          {item1 ? (
+            <Image
+              key={`slot1-${slot1Index}`}
+              src={item1.imageUrl}
+              alt={item1.name}
+              width={HEADSHOT_SIZE}
+              height={HEADSHOT_SIZE}
+              sizes="96px"
+              className={IMG_CLASS}
+              priority={slot1Index === 0}
+            />
+          ) : null}
+        </div>
 
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(80px_60px_at_30%_20%,rgba(255,255,255,.14),transparent_60%)]" />
