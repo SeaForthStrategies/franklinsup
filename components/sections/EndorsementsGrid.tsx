@@ -554,6 +554,34 @@ const ORGANIZATION_IDS = new Set([
 export const ORGANIZATION_ENDORSEMENTS = ENDORSEMENTS.filter((e) => ORGANIZATION_IDS.has(e.id));
 export const PEOPLE_ENDORSEMENTS = ENDORSEMENTS.filter((e) => !ORGANIZATION_IDS.has(e.id));
 
+/**
+ * Titles that should be split onto their own line when they appear
+ * at the very start of a person's display string.
+ *
+ * These are only applied to **people** endorsements, never organizations.
+ */
+const LINE_BREAK_TITLES = [
+  "Congressman",
+  "Senator",
+  "Assessor",
+  "Recorder",
+  "Clerk",
+  "Treasurer",
+  "Tax Collector",
+  "Supervisor",
+  "Mayor",
+  "Councilman",
+  "Councilwoman",
+  "State Senator",
+  "Party Chair",
+  "Nominee",
+  "Trustee",
+  "Director",
+  "Board President",
+  "Central Committee Member",
+  "President Trustee",
+] as const;
+
 const INLINE_TITLES = [
   "Vice President",
   "Congressman",
@@ -573,6 +601,51 @@ const INLINE_TITLES = [
   "CEO",
   "Founder",
 ] as const;
+
+/**
+ * For people endorsements only:
+ * - If the `name` string starts with one of the known titles,
+ *   split into:
+ *   - line 1: title (e.g. "Mayor")
+ *   - line 2: name (e.g. "Dane White")
+ *   - line 3: any existing `endorsement.title` (e.g. "Escondido")
+ *
+ * If no known title prefix is found, we return `null` and fall back
+ * to the existing inline-title rendering.
+ */
+function splitLinesForPerson(
+  fullName: string,
+  extraLine?: string,
+): { titleLine: string; nameLine: string; extraLine?: string } | null {
+  const normalizedName = fullName.replace(/\s+/g, " ").trim();
+  const normalizedExtra = extraLine?.trim();
+
+  if (!normalizedName) return null;
+
+  for (const title of LINE_BREAK_TITLES) {
+    if (normalizedName === title || normalizedName.startsWith(`${title} `)) {
+      const remainder = normalizedName.slice(title.length).trim();
+
+      // If for some reason there's no remainder, fall back to default rendering.
+      if (!remainder) return null;
+
+      if (normalizedExtra) {
+        return {
+          titleLine: title,
+          nameLine: remainder,
+          extraLine: normalizedExtra,
+        };
+      }
+
+      return {
+        titleLine: title,
+        nameLine: remainder,
+      };
+    }
+  }
+
+  return null;
+}
 
 function splitEndorsementName(fullName: string): { primaryName: string; inlineTitle?: string } {
   for (const title of INLINE_TITLES) {
@@ -609,6 +682,7 @@ interface EndorsementCardProps {
 
 function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) {
   const isOrg = variant === "orgs";
+  const specialLines = !isOrg ? splitLinesForPerson(endorsement.name, endorsement.title) : null;
   const { primaryName, inlineTitle } = splitEndorsementName(endorsement.name);
 
   return (
@@ -663,31 +737,64 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
 
         {isOrg ? null : (
           <div className="flex min-h-0 flex-1 flex-col p-3 sm:p-4 md:p-5">
-            <h3
-              className={[
-                "font-heading text-sm font-black uppercase tracking-tight sm:text-base md:text-lg leading-tight text-white",
-              ].join(" ")}
-            >
-              <span>{primaryName}</span>
-              {inlineTitle && <span className="block">{inlineTitle}</span>}
-            </h3>
-            {endorsement.title ? (
-              <p
-                className={[
-                  "mt-0.5 text-[10px] leading-relaxed sm:mt-1 sm:text-xs md:text-sm text-white/75",
-                ].join(" ")}
-              >
-                {endorsement.title}
-              </p>
+            {specialLines ? (
+              <>
+                <h3
+                  className={[
+                    "font-heading text-sm font-black uppercase tracking-tight sm:text-base md:text-lg leading-tight text-white",
+                  ].join(" ")}
+                >
+                  <span>{specialLines.titleLine}</span>
+                  <span className="block">{specialLines.nameLine}</span>
+                </h3>
+                {specialLines.extraLine ? (
+                  <p
+                    className={[
+                      "mt-0.5 text-[10px] leading-relaxed sm:mt-1 sm:text-xs md:text-sm text-white/75",
+                    ].join(" ")}
+                  >
+                    {specialLines.extraLine}
+                  </p>
+                ) : (
+                  <p
+                    aria-hidden="true"
+                    className={[
+                      "mt-0.5 text-[10px] leading-relaxed sm:mt-1 sm:text-xs md:text-sm invisible",
+                    ].join(" ")}
+                  >
+                    &nbsp;
+                  </p>
+                )}
+              </>
             ) : (
-              <p
-                aria-hidden="true"
-                className={[
-                  "mt-0.5 text-[10px] leading-relaxed sm:mt-1 sm:text-xs md:text-sm invisible",
-                ].join(" ")}
-              >
-                &nbsp;
-              </p>
+              <>
+                <h3
+                  className={[
+                    "font-heading text-sm font-black uppercase tracking-tight sm:text-base md:text-lg leading-tight text-white",
+                  ].join(" ")}
+                >
+                  <span>{primaryName}</span>
+                  {inlineTitle && <span className="block">{inlineTitle}</span>}
+                </h3>
+                {endorsement.title ? (
+                  <p
+                    className={[
+                      "mt-0.5 text-[10px] leading-relaxed sm:mt-1 sm:text-xs md:text-sm text-white/75",
+                    ].join(" ")}
+                  >
+                    {endorsement.title}
+                  </p>
+                ) : (
+                  <p
+                    aria-hidden="true"
+                    className={[
+                      "mt-0.5 text-[10px] leading-relaxed sm:mt-1 sm:text-xs md:text-sm invisible",
+                    ].join(" ")}
+                  >
+                    &nbsp;
+                  </p>
+                )}
+              </>
             )}
           </div>
         )}
