@@ -29,15 +29,20 @@ function acfString(value: unknown): string {
   return "";
 }
 
-/** Only treat as "Organizations" when category is that, org is set, and there is no person name (so person endorsements never appear under Organizations). */
-function sectionCategory(acf: WPEndorsement["acf"]): "Leaders" | "Organizations" | undefined {
+/** Only treat as "Organizations" when category is that, org is set, and there is no person name. Use both ACF endorser_name and post title so person endorsements (name in title only) never appear under Organizations. */
+function sectionCategory(
+  acf: WPEndorsement["acf"],
+  titleRendered: string,
+): "Leaders" | "Organizations" | undefined {
   const category = acfString(acf?.category).toLowerCase();
   const org = acfString(acf?.endorser_org);
-  const personName = acfString(acf?.endorser_name);
+  const personNameFromAcf = acfString(acf?.endorser_name);
+  const personNameFromTitle = typeof titleRendered === "string" ? titleRendered.trim() : "";
+  const hasPersonName = personNameFromAcf.length > 0 || personNameFromTitle.length > 0;
 
   if (category === "leaders") return "Leaders";
-  // Organizations section only: category + org name set + no person name (person endorsements always go to main list)
-  if (category === "organizations" && org.length > 0 && personName.length === 0) return "Organizations";
+  // Organizations section only: category + org set + no person name (from ACF or post title)
+  if (category === "organizations" && org.length > 0 && !hasPersonName) return "Organizations";
   return undefined;
 }
 
@@ -155,7 +160,7 @@ export default async function EndorsementsPage() {
       const name = e.acf?.endorser_name || e.title.rendered;
       const org = e.acf?.endorser_org ?? "";
       const title = org || (e.acf?.endorser_title ?? "");
-      const category = sectionCategory(e.acf);
+      const category = sectionCategory(e.acf, e.title.rendered);
 
       const { mediaId, imageUrl } = extractHeadshot(e.acf?.headshot);
 
