@@ -78,15 +78,11 @@ export default function AboutPage() {
               <h2 className="text-xl font-black normal-case tracking-tight text-primary sm:text-2xl md:text-3xl">Personal Life</h2>
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-neutral-slate sm:mt-4 sm:space-y-4 sm:text-base">
                 <p>
-                  John graduated from the American University in Washington, D.C. where he earned a Bachelor of Arts degree. In Washington,
-                  D.C., he worked on Capitol Hill for two members of the United States House of Representatives as a policy advisor.
-                </p>
-                <p>
-                  John met his wife Shanna and fell in love in Vista. They proudly call Vista home and will celebrate thirteen years of
+                  John met his wife Shanna and fell in love in Vista. They proudly call Vista home and will celebrate fourteen years of
                   marriage.
                 </p>
                 <p>
-                  Opening the doors to his own business in Vista in 2011, today John &amp; Shanna work together in the family business which
+                  Opening the doors to their business in Vista in 2011, today John &amp; Shanna work together in the family business which
                   serves non-profit organizations, public leaders and private companies, providing business management and administration
                   services. The firm also specializes in marketing and public communications.
                 </p>

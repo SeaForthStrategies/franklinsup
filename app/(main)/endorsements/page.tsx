@@ -46,29 +46,47 @@ function sectionCategory(
   return undefined;
 }
 
+const WP_PER_PAGE = 100;
+
+async function fetchOnePage(
+  baseUrl: string,
+  page: number,
+): Promise<{ data: WPEndorsement[]; total: number }> {
+  const url = `${baseUrl}&page=${page}`;
+  const res = await fetch(url, { next: { revalidate: 60 } });
+  if (!res.ok) return { data: [], total: 0 };
+  const data = (await res.json()) as WPEndorsement[];
+  const total = parseInt(res.headers.get("x-wp-total") ?? "0", 10) || data.length;
+  return { data, total };
+}
+
 async function getWPEndorsements(): Promise<WPEndorsement[]> {
   const base = process.env.WORDPRESS_URL ?? "https://franklinforsupervisor.com";
-
+  const fields = "id,date,title,acf";
   const endpoints = [
-    `${base}/wp-json/wp/v2/endorsement?per_page=100&_fields=id,date,title,acf&acf_format=standard`,
-    `${base}/wp-json/wp/v2/endorsements?per_page=100&_fields=id,date,title,acf&acf_format=standard`,
+    `${base}/wp-json/wp/v2/endorsement?per_page=${WP_PER_PAGE}&_fields=${fields}&acf_format=standard`,
+    `${base}/wp-json/wp/v2/endorsements?per_page=${WP_PER_PAGE}&_fields=${fields}&acf_format=standard`,
   ];
 
-  for (const url of endpoints) {
+  for (const baseUrl of endpoints) {
     try {
-      const res = await fetch(url, { next: { revalidate: 60 } });
+      const all: WPEndorsement[] = [];
+      let page = 1;
+      let total = 1;
 
-      if (!res.ok) {
-        if (process.env.NODE_ENV !== "production") {
-          console.log("[endorsements] fetch failed", { url, status: res.status });
-        }
-        continue;
+      while (all.length < total) {
+        const { data, total: headerTotal } = await fetchOnePage(baseUrl, page);
+        if (data.length === 0 && page === 1) break;
+        all.push(...data);
+        if (headerTotal > 0) total = headerTotal;
+        else total = all.length;
+        if (data.length < WP_PER_PAGE) break;
+        page += 1;
       }
 
-      const data = (await res.json()) as WPEndorsement[];
+      if (all.length === 0) continue;
 
-      // Keep endorsements in creation order: oldest first, newest last.
-      data.sort((a, b) => {
+      all.sort((a, b) => {
         const aTime = Number.isNaN(Date.parse(a.date)) ? 0 : Date.parse(a.date);
         const bTime = Number.isNaN(Date.parse(b.date)) ? 0 : Date.parse(b.date);
         if (aTime !== bTime) return aTime - bTime;
@@ -76,13 +94,13 @@ async function getWPEndorsements(): Promise<WPEndorsement[]> {
       });
 
       if (process.env.NODE_ENV !== "production") {
-        console.log("[endorsements] fetch success", { url, count: data.length });
+        console.log("[endorsements] fetch success", { url: baseUrl, count: all.length });
       }
 
-      return data;
+      return all;
     } catch (error) {
       if (process.env.NODE_ENV !== "production") {
-        console.log("[endorsements] fetch error", { url, error });
+        console.log("[endorsements] fetch error", { url: baseUrl, error });
       }
     }
   }
