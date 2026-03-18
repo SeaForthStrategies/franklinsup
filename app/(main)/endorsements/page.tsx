@@ -5,6 +5,7 @@ import type { Endorsement } from "@/components/sections/EndorsementsGrid";
 import { EndorsementQuote } from "@/components/sections/EndorsementQuote";
 import { EndorsementsTopAnimations } from "@/components/sections/EndorsementsTopAnimations.client";
 import { SectionDivider } from "@/components/ui/SectionDivider";
+import { TallyPopupButton } from "@/components/forms/TallyPopupButton.client";
 
 export const revalidate = 60;
 
@@ -253,6 +254,10 @@ export default async function EndorsementsPage() {
               people={mainEndorsements}
               organizations={organizations}
             />
+
+            <div className="mt-8 flex justify-center">
+              <TallyPopupButton label="Contact" />
+            </div>
           </div>
         </div>
       </section>

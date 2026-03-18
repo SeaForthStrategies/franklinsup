@@ -2,36 +2,27 @@
 
 import { useEffect } from "react";
 
-const TALLY_SCRIPT = "https://tally.so/widgets/embed.js";
-
-function loadTallyEmbeds() {
-  if (typeof window === "undefined") return;
-  if (typeof (window as unknown as { Tally?: { loadEmbeds: () => void } }).Tally !== "undefined") {
-    (window as unknown as { Tally: { loadEmbeds: () => void } }).Tally.loadEmbeds();
-    return;
-  }
-  document.querySelectorAll('iframe[data-tally-src]:not([src])').forEach((el) => {
-    const iframe = el as HTMLIFrameElement;
-    if (iframe.dataset.tallySrc) iframe.src = iframe.dataset.tallySrc;
-  });
-}
-
 export function TallyEmbedLoader() {
   useEffect(() => {
-    const w = window as unknown as { Tally?: { loadEmbeds: () => void } };
-    if (w.Tally) {
-      loadTallyEmbeds();
-      return;
-    }
-    if (document.querySelector(`script[src="${TALLY_SCRIPT}"]`)) {
-      loadTallyEmbeds();
-      return;
-    }
-    const s = document.createElement("script");
-    s.src = TALLY_SCRIPT;
-    s.onload = loadTallyEmbeds;
-    s.onerror = loadTallyEmbeds;
-    document.body.appendChild(s);
+    // Tally's embed loader needs the script in the page head, plus a call to `Tally.loadEmbeds()`.
+    let cancelled = false;
+
+    const tryLoad = () => {
+      if (cancelled) return;
+      const w = window as unknown as { Tally?: { loadEmbeds?: () => void } };
+      if (typeof w.Tally?.loadEmbeds === "function") {
+        w.Tally.loadEmbeds();
+        return;
+      }
+      // Wait briefly in case the head script hasn't executed yet.
+      window.setTimeout(tryLoad, 100);
+    };
+
+    tryLoad();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return null;
