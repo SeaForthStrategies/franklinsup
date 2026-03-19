@@ -408,14 +408,15 @@ export default async function FeaturedItemPage({ params }: PageProps) {
           <div className="lg:col-span-2">
             {hasHeroImage(item) ? (
               <div className="overflow-hidden rounded-2xl border border-neutral-border bg-neutral-base shadow-card sm:rounded-3xl">
-                <Image
-                  src={item.heroImageUrl}
-                  alt={item.heroImageAlt}
-                  width={791}
-                  height={1024}
-                  sizes="(max-width: 1024px) 100vw, 66vw"
-                  className="h-auto w-full"
-                />
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={item.heroImageUrl}
+                    alt={item.heroImageAlt}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 66vw"
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
               </div>
             ) : (
               <div className="rounded-2xl border border-neutral-border bg-neutral-surface p-6 text-sm text-neutral-muted sm:rounded-3xl">

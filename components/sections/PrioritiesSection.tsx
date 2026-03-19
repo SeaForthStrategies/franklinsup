@@ -243,16 +243,16 @@ export function PrioritiesSection({
                   <div className="mt-4 sm:mt-6">
                     <div
                       className={[
-                        "overflow-hidden rounded-lg bg-neutral-base sm:rounded-xl",
+                        "relative aspect-[16/10] overflow-hidden rounded-lg bg-neutral-base sm:rounded-xl",
                         borderless ? "" : "border border-neutral-border",
                       ].join(" ")}
                     >
                       <Image
                         src={activeCard.imageUrl}
                         alt={activeCard.imageAlt}
-                        width={1200}
-                        height={750}
-                        className="h-auto w-full"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 66vw"
+                        className="h-full w-full object-cover object-center"
                       />
                     </div>
                     <p className="mt-2 text-xs text-neutral-muted sm:mt-3 sm:text-sm">

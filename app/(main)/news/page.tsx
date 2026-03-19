@@ -3,6 +3,7 @@ import { RecordNewsSection } from "@/components/sections/RecordNewsSection";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import Image from "next/image";
 import Link from "next/link";
+import { YoutubeThumbFill } from "@/components/ui/YoutubeThumbFill.client";
 import { RECORD_NEWS_LEAD, RECORD_NEWS_RAIL } from "@/src/content/recordNews";
 import { FEATURED_IN } from "@/src/content/featuredIn";
 
@@ -280,7 +281,6 @@ export default function NewsPage() {
           <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-4">
             {stateOfCityVideos.map((v) => {
               const id = getYouTubeId(v.url);
-              const thumbUrl = id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg` : null;
 
               return (
                 <a
@@ -291,14 +291,12 @@ export default function NewsPage() {
                   className="group flex h-full flex-col overflow-hidden rounded-xl border border-neutral-border bg-neutral-surface shadow-card transition-all hover:-translate-y-0.5 hover:shadow-md sm:rounded-2xl"
                 >
                   <div className="relative h-48 overflow-hidden bg-neutral-surface sm:h-52 lg:h-56">
-                    {thumbUrl ? (
-                      <Image
-                        src={thumbUrl}
+                    {id ? (
+                      <YoutubeThumbFill
+                        videoId={id}
                         alt={v.title}
-                        fill
-                        unoptimized
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="object-cover object-center scale-[1.12] sm:scale-100"
+                        className="h-full w-full object-cover object-center sm:scale-[1.02]"
                       />
                     ) : null}
                     <div className="absolute bottom-2 left-2 inline-flex items-center gap-1.5 rounded-full bg-neutral-surface/90 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-neutral-ink backdrop-blur sm:bottom-3 sm:left-3 sm:gap-2 sm:px-3 sm:py-1 sm:text-xs">
