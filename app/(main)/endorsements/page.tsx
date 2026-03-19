@@ -13,19 +13,52 @@ type WPEndorsement = {
   date: string;
   title: { rendered: string };
   acf: {
-    endorser_name?: string;
-    endorser_title?: string;
-    endorser_org?: string;
+    endorser_name?: unknown;
+    endorser_title?: unknown;
+    endorser_org?: unknown;
     sort_order?: number;
     headshot?: unknown;
-    category?: string;
+    category?: unknown;
   };
 };
 
 /** Normalize ACF value to a non-empty string (WP/ACF can return objects or other types). */
 function acfString(value: unknown): string {
   if (value == null) return "";
-  if (typeof value === "string") return value.trim();
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    return trimmed;
+  }
+  if (typeof value === "number") return String(value).trim();
+  if (typeof value === "boolean") return value ? "true" : "false";
+
+  if (Array.isArray(value)) {
+    // ACF sometimes returns arrays for text fields depending on configuration.
+    for (const item of value) {
+      const s = acfString(item);
+      if (s) return s;
+    }
+    return "";
+  }
+
+  if (typeof value === "object") {
+    const obj = value as Record<string, unknown>;
+
+    // Try common label-ish keys first.
+    const commonKeys = ["value", "label", "name", "title", "text", "display", "rendered"];
+    for (const key of commonKeys) {
+      const s = acfString(obj[key]);
+      if (s) return s;
+    }
+
+    // Fallback: scan values for the first non-empty string.
+    for (const v of Object.values(obj)) {
+      const s = acfString(v);
+      if (s) return s;
+    }
+
+    return "";
+  }
   return "";
 }
 
@@ -34,15 +67,21 @@ function sectionCategory(
   acf: WPEndorsement["acf"],
   titleRendered: string,
 ): "Leaders" | "Organizations" | undefined {
-  const category = acfString(acf?.category).toLowerCase();
-  const org = acfString(acf?.endorser_org);
+  // WordPress ACF sometimes returns `category` as numeric codes (e.g. [8], [9]) rather than strings
+  // like "leaders"/"organizations".
+  const categoryCode = acfString(acf?.category).toLowerCase();
   const personNameFromAcf = acfString(acf?.endorser_name);
-  const personNameFromTitle = typeof titleRendered === "string" ? titleRendered.trim() : "";
-  const hasPersonName = personNameFromAcf.length > 0 || personNameFromTitle.length > 0;
+  // For distinguishing people vs organizations, rely on ACF person-name field.
+  // Post titles are not a reliable signal here because they can be org names.
+  const hasPersonName = personNameFromAcf.length > 0;
 
-  if (category === "leaders") return "Leaders";
-  // Organizations section only: category + org set + no person name (from ACF or post title)
-  if (category === "organizations" && org.length > 0 && !hasPersonName) return "Organizations";
+  // Category codes observed from WP payload:
+  // - "9" => Leaders
+  // - "8" => Organizations
+  if (categoryCode === "9") return "Leaders";
+
+  // Organizations section only: numeric category code + no person name in ACF.
+  if (categoryCode === "8" && !hasPersonName) return "Organizations";
   return undefined;
 }
 
@@ -175,9 +214,9 @@ export default async function EndorsementsPage() {
   // (no CSS changes; just data)
   const wpPeopleEndorsements = await Promise.all(
     wpEndorsements.map(async (e): Promise<Endorsement | null> => {
-      const name = e.acf?.endorser_name || e.title.rendered;
-      const org = e.acf?.endorser_org ?? "";
-      const title = org || (e.acf?.endorser_title ?? "");
+      const name = acfString(e.acf?.endorser_name) || e.title.rendered;
+      const org = acfString(e.acf?.endorser_org);
+      const title = org || acfString(e.acf?.endorser_title);
       const category = sectionCategory(e.acf, e.title.rendered);
 
       const { mediaId, imageUrl } = extractHeadshot(e.acf?.headshot);
@@ -230,11 +269,28 @@ export default async function EndorsementsPage() {
     (endorsement): endorsement is Endorsement => Boolean(endorsement),
   );
 
-  const leaders = wpPeopleEndorsementsClean.filter((e) => e.category === "Leaders");
-  const organizations = wpPeopleEndorsementsClean.filter((e) => e.category === "Organizations");
-  const mainEndorsements = wpPeopleEndorsementsClean.filter(
+  let leaders = wpPeopleEndorsementsClean.filter((e) => e.category === "Leaders");
+  let organizations = wpPeopleEndorsementsClean.filter((e) => e.category === "Organizations");
+  let mainEndorsements = wpPeopleEndorsementsClean.filter(
     (e) => e.category !== "Leaders" && e.category !== "Organizations",
   );
+
+  // Safety: if a specific person endorsement accidentally lands in the Organizations
+  // bucket (due to inconsistent ACF shapes), move it back to the end of the
+  // "people" area so it renders before the Organizations cards.
+  const normalizeName = (s: string) => s.replace(/\s+/g, " ").trim().toLowerCase();
+  const JEN_DEMEO = "jen demeo";
+
+  const jenFromOrgs = organizations.find((e) => {
+    const name = normalizeName(e.name);
+    const title = normalizeName(e.title);
+    return name.includes(JEN_DEMEO) || title.includes(JEN_DEMEO);
+  });
+
+  if (jenFromOrgs) {
+    organizations = organizations.filter((e) => e.id !== jenFromOrgs.id);
+    leaders = [...leaders, jenFromOrgs];
+  }
 
   return (
     <>
