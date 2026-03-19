@@ -63,14 +63,6 @@ export const FEATURED_IN = [
         duration: "11:40",
         outlet: "Fox 5",
       },
-      {
-        videoId: "cbNWiTCfbXk",
-        title: "Vista Mayoral Candidate Interview",
-        description:
-          "I appeared on Fox 5 News at 1 p.m. to discuss my vision for Vista and why I was running for Mayor.",
-        duration: "5:00",
-        outlet: "Fox 5",
-      },
     ] as VideoAppearance[],
   },
   {

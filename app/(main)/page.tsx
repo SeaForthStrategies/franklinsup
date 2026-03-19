@@ -26,7 +26,7 @@ export default function Home() {
       <HomeStoryStack
         items={[
           {
-            title: "Experience & Focused",
+            title: "Experienced & Focused",
             body: "After 14 years of elected public service, I’m ready to meet the challenges our region faces. I’m a husband, a local small business-owner, a Mayor, and a proud member of the North County community.",
             imageUrl:
               "https://franklinforsupervisor.com/wp-content/uploads/2025/03/334951701_160180913515747_5557203737502548974_n.jpg",

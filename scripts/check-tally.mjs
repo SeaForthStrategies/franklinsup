@@ -43,7 +43,6 @@ async function run() {
   }
 
   for (const r of results) {
-    // eslint-disable-next-line no-console
     console.log(`${r.ok ? "PASS" : "FAIL"}: ${r.name}${r.detail ? ` — ${r.detail}` : ""}`);
   }
 

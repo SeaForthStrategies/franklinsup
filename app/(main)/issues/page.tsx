@@ -41,6 +41,7 @@ export default function IssuesPage() {
       <SectionDivider variant="wave2" />
 
       <PrioritiesSection
+        sectionAnchorId="priorities"
         borderless
         cards={[
           {

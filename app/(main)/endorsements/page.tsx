@@ -65,7 +65,6 @@ function acfString(value: unknown): string {
 /** Only treat as "Organizations" when category is that, org is set, and there is no person name. Use both ACF endorser_name and post title so person endorsements (name in title only) never appear under Organizations. */
 function sectionCategory(
   acf: WPEndorsement["acf"],
-  titleRendered: string,
 ): "Leaders" | "Organizations" | undefined {
   // WordPress ACF sometimes returns `category` as numeric codes (e.g. [8], [9]) rather than strings
   // like "leaders"/"organizations".
@@ -220,7 +219,7 @@ export default async function EndorsementsPage() {
       const name = acfString(e.acf?.endorser_name) || e.title.rendered;
       const org = acfString(e.acf?.endorser_org);
       const title = org || acfString(e.acf?.endorser_title);
-      const category = sectionCategory(e.acf, e.title.rendered);
+      const category = sectionCategory(e.acf);
 
       const { mediaId, imageUrl } = extractHeadshot(e.acf?.headshot);
 
@@ -274,10 +273,6 @@ export default async function EndorsementsPage() {
 
   let leaders = wpPeopleEndorsementsClean.filter((e) => e.category === "Leaders");
   let organizations = wpPeopleEndorsementsClean.filter((e) => e.category === "Organizations");
-  let mainEndorsements = wpPeopleEndorsementsClean.filter(
-    (e) => e.category !== "Leaders" && e.category !== "Organizations",
-  );
-
   // Safety: if a specific person endorsement accidentally lands in the Organizations
   // bucket (due to inconsistent ACF shapes), move it back to the end of the
   // "people" area so it renders before the Organizations cards.

@@ -73,10 +73,10 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
                   "group relative block h-full min-h-[240px] overflow-hidden rounded-2xl border border-neutral-border bg-neutral-surface shadow-card sm:min-h-[300px] sm:rounded-3xl",
                   idx === CARDS.length - 1 ? "sm:col-span-2 lg:col-span-1" : "",
                   "transition-all duration-300 hover:-translate-y-2 hover:border-primary/25 hover:shadow-2xl",
-                  "focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary-900",
+                  "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-primary-900",
                 ].join(" ")}
               >
-                <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1.5 bg-secondary" />
+                <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1.5 bg-primary" />
 
                 {/* Background image */}
                 <div aria-hidden="true" className="absolute inset-0">
@@ -98,13 +98,13 @@ export function HomeIconIssues({ learnMoreHref = "/issues" }: HomeIconIssuesProp
                 </div>
 
                 <div className="relative z-10 flex h-full flex-col p-6 sm:p-8 lg:p-9">
-                  <div className="min-w-0">
+                  <div className="flex h-full min-w-0 flex-col">
                     <h3 className="font-heading text-lg font-black uppercase tracking-tight text-neutral-ink sm:text-xl md:text-2xl">
                       {c.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-neutral-muted sm:mt-3 sm:text-base md:text-lg">{c.body}</p>
 
-                    <div className="mt-auto pt-5 inline-flex items-center gap-2 text-xs font-black uppercase tracking-wide text-primary transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-secondary sm:pt-7 sm:text-sm">
+                    <div className="mt-auto inline-flex items-center gap-2 pt-5 text-xs font-black uppercase tracking-wide text-primary transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-primary-900 sm:pt-7 sm:text-sm">
                       Learn more <span aria-hidden="true">→</span>
                     </div>
                   </div>

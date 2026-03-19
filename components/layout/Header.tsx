@@ -16,7 +16,14 @@ const NAV_ITEMS = [
       { label: "About John", href: "/about" },
     ],
   },
-  { label: "Issues", href: "/issues" },
+  {
+    label: "Issues",
+    href: "/issues",
+    children: [
+      { label: "My take", href: "/issues" },
+      { label: "My priorities", href: "/issues#priorities" },
+    ],
+  },
   { label: "Endorsements", href: "/endorsements" },
   { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },

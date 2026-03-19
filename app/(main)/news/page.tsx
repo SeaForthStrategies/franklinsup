@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { RecordNewsSection } from "@/components/sections/RecordNewsSection";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import Image from "next/image";
+import Link from "next/link";
 import { RECORD_NEWS_LEAD, RECORD_NEWS_RAIL } from "@/src/content/recordNews";
+import { FEATURED_IN } from "@/src/content/featuredIn";
 
 export const metadata: Metadata = {
   title: "News & Commentary | Franklin for Supervisor 2026",
@@ -72,14 +74,6 @@ export default function NewsPage() {
         "A look inside VisTAY House and the practical, compassion-first steps to help foster youth avoid homelessness.",
     },
     {
-      title: "FOX 5 San Diego: interview on priorities and the issues facing local communities",
-      url: "https://www.youtube.com/watch?v=cbNWiTCfbXk",
-      sourceName: "FOX 5 San Diego",
-      dateLabel: "FOX 5 segment",
-      dateTime: "2022-11-01",
-      summary: "A short conversation about leadership, priorities, and delivering real results.",
-    },
-    {
       title: "KUSI News: Vista considers tiny home options",
       url: "https://fox5sandiego.com/news/local-news/north-county/vista-considering-tiny-home-options/",
       sourceName: "KUSI News",
@@ -95,29 +89,13 @@ export default function NewsPage() {
       dateTime: "2024-03-06",
       summary: "Coverage on expanded shelter capacity and concrete steps to help people move off the streets.",
     },
-    {
-      title: "San Diego Union-Tribune: reporting on transparency and taxpayer accountability in a proposed park purchase",
-      url: "https://www.sandiegouniontribune.com/2023/08/14/vista-reverses-course-will-proceed-with-appraisal-of-proposed-park/",
-      sourceName: "San Diego Union-Tribune",
-      dateLabel: "Aug 14, 2023",
-      dateTime: "2023-08-14",
-      summary: "Coverage highlighting a call for an appraisal, clear policy, and responsible stewardship of public dollars.",
-    },
-    {
-      title: "San Diego Union-Tribune: roundup of local votes and regional updates",
-      url: "https://www.sandiegouniontribune.com/2022/12/18/how-they-voted-dec-18-no-sandag-rep-for-vista-escondido-council-to-appoint-vacant-seat-school-boards-elect-new-officers/",
-      sourceName: "San Diego Union-Tribune",
-      dateLabel: "Dec 18, 2022",
-      dateTime: "2022-12-18",
-      summary: "A broad roundup of regional items that included Vista-related updates.",
-    },
   ] as const;
 
   const coverageSorted = [...coverage].sort((a, b) => b.dateTime.localeCompare(a.dateTime));
 
   return (
     <div className="min-h-screen bg-primary">
-      <section aria-labelledby="news-hub-title" className="relative overflow-hidden py-12 sm:py-16 md:py-20">
+      <section aria-labelledby="news-hub-title" className="relative overflow-hidden py-14 sm:py-16 md:py-20">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary to-primary" />
           <div className="absolute -top-24 left-[-12%] h-[240px] w-[500px] -skew-y-6 sm:h-[300px] sm:w-[720px] md:h-[360px] md:w-[920px]">
@@ -146,14 +124,26 @@ export default function NewsPage() {
               Coverage, commentary, and video updates — organized in one place.
             </p>
 
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 sm:mt-6 sm:gap-2">
-              {["San Diego Union-Tribune", "KPBS", "FOX 5", "KUSI"].map((label) => (
-                <span
-                  key={label}
-                  className="inline-flex items-center rounded-full border border-neutral-base/20 bg-neutral-base/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-neutral-base/85 backdrop-blur sm:px-3 sm:py-1 sm:text-xs"
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:mt-7 sm:gap-x-7 sm:gap-y-4">
+              {FEATURED_IN.map((item) => (
+                <Link
+                  key={item.slug}
+                  href={`/featured/${item.slug}`}
+                  aria-label={`${item.name} coverage`}
+                  className="group relative inline-flex h-10 w-[140px] items-center justify-center sm:h-12 sm:w-[170px] md:h-14 md:w-[190px]"
                 >
-                  {label}
-                </span>
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 rounded-2xl bg-white/75 blur-2xl transition-opacity duration-200 group-hover:opacity-100"
+                  />
+                  <Image
+                    src={item.logoUrl}
+                    alt={item.name}
+                    width={520}
+                    height={140}
+                    className="relative z-10 h-full w-full object-contain opacity-90 transition-opacity duration-200 group-hover:opacity-100"
+                  />
+                </Link>
               ))}
             </div>
           </header>
@@ -161,17 +151,17 @@ export default function NewsPage() {
           <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:gap-5 md:grid-cols-3">
             {[
               {
-                title: "Coverage",
-                body: "Reputable reporting across housing, public safety, and community priorities.",
-                href: "#coverage-title",
-                cta: "Read coverage",
-                delay: "motion-safe:[animation-delay:120ms]",
-              },
-              {
                 title: "Op-eds & commentary",
                 body: "Published commentary on policy, accountability, and results.",
                 href: "#recordnews-title",
                 cta: "Read commentary",
+                delay: "motion-safe:[animation-delay:120ms]",
+              },
+              {
+                title: "Coverage",
+                body: "Reputable reporting across housing, public safety, and community priorities.",
+                href: "#coverage-title",
+                cta: "Read coverage",
                 delay: "motion-safe:[animation-delay:200ms]",
               },
               {
@@ -185,8 +175,8 @@ export default function NewsPage() {
               <section
                 key={card.title}
                 className={[
-                  "rounded-xl border border-neutral-base/15 bg-neutral-base/10 p-4 shadow-card backdrop-blur sm:rounded-2xl sm:p-6",
-                  "min-h-[180px] sm:min-h-[210px]",
+                  "rounded-xl border border-neutral-base/15 bg-neutral-base/10 p-5 shadow-card backdrop-blur sm:rounded-2xl sm:p-6",
+                  "min-h-[190px] sm:min-h-[220px]",
                   "flex flex-col justify-between text-center",
                   "motion-safe:animate-[fadeInUp_650ms_ease-out_1] motion-safe:[animation-fill-mode:both]",
                   card.delay,
@@ -201,7 +191,7 @@ export default function NewsPage() {
 
                 <a
                   href={card.href}
-                  className="mx-auto mt-4 inline-flex w-max items-center justify-center rounded-full border border-neutral-base/25 bg-neutral-base/10 px-4 py-2.5 text-xs font-black uppercase tracking-wide text-neutral-base shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-neutral-base/15 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary sm:mt-6 sm:px-5 sm:py-3 sm:text-sm"
+                  className="mx-auto mt-5 inline-flex w-max items-center justify-center rounded-full border border-neutral-base/25 bg-neutral-base/10 px-4 py-2.5 text-xs font-black uppercase tracking-wide text-neutral-base shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-neutral-base/15 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-primary sm:mt-6 sm:px-5 sm:py-3 sm:text-sm"
                 >
                   {card.cta}
                 </a>
@@ -213,12 +203,25 @@ export default function NewsPage() {
 
       <SectionDivider variant="wave1" />
 
-      <section aria-labelledby="coverage-title" className="py-12 sm:py-16 md:py-20">
+      <RecordNewsSection
+        donateUrl="https://secure.franklinforsupervisor.com/15?_gl=1*1jmx4dj*_gcl_au*NDI0MzU5NjY1LjE3NjQ2OTQ1NTM."
+        lead={RECORD_NEWS_LEAD}
+        rail={RECORD_NEWS_RAIL}
+        eyebrow=""
+        title="Op-eds & commentary"
+        description="Published commentary on the issues — direct, clear, and on the record."
+        tone="dark"
+        showBackground={false}
+      />
+
+      <SectionDivider variant="wave2" />
+
+      <section aria-labelledby="coverage-title" className="py-14 sm:py-16 md:py-20">
         <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Match the visual language of the op-eds block below */}
           <header className="max-w-3xl">
             <h2 id="coverage-title" className="mt-3 text-2xl font-black uppercase tracking-tight text-neutral-base sm:text-3xl md:text-4xl lg:text-5xl">
-              News coverage featuring John Franklin
+              News coverage featuring me
             </h2>
 
             <p className="mt-3 text-sm leading-relaxed text-neutral-base/80 sm:mt-4 sm:text-base md:text-lg">
@@ -226,11 +229,11 @@ export default function NewsPage() {
             </p>
           </header>
 
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:gap-5 md:gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
             {coverageSorted.map((item) => (
               <article
                 key={item.url}
-                className="relative flex min-h-[220px] flex-col overflow-hidden rounded-xl border border-neutral-border bg-neutral-surface shadow-card transition-all hover:-translate-y-0.5 hover:shadow-md sm:min-h-[260px] sm:rounded-2xl"
+                className="relative flex h-full min-h-[230px] flex-col overflow-hidden rounded-xl border border-neutral-border bg-neutral-surface shadow-card transition-all hover:-translate-y-0.5 hover:shadow-md sm:min-h-[270px] sm:rounded-2xl"
               >
                 <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary to-secondary opacity-95 sm:h-1.5" />
 
@@ -245,7 +248,7 @@ export default function NewsPage() {
                     {item.title}
                   </h3>
 
-                  {item.summary ? <p className="line-clamp-3 text-xs text-neutral-muted sm:text-sm md:text-base">{item.summary}</p> : null}
+                  {item.summary ? <p className="line-clamp-3 text-xs leading-relaxed text-neutral-muted sm:text-sm md:text-base">{item.summary}</p> : null}
 
                   <a
                     href={item.url}
@@ -262,22 +265,9 @@ export default function NewsPage() {
         </div>
       </section>
 
-      <SectionDivider variant="wave2" />
-
-      <RecordNewsSection
-        donateUrl="https://secure.franklinforsupervisor.com/15?_gl=1*1jmx4dj*_gcl_au*NDI0MzU5NjY1LjE3NjQ2OTQ1NTM."
-        lead={RECORD_NEWS_LEAD}
-        rail={RECORD_NEWS_RAIL}
-        eyebrow=""
-        title="Op-eds & commentary"
-        description="Published commentary on the issues — direct, clear, and on the record."
-        tone="dark"
-        showBackground={false}
-      />
-
       <SectionDivider variant="wave1" />
 
-      <section aria-labelledby="state-of-city-title" className="py-12 sm:py-16 md:py-20">
+      <section aria-labelledby="state-of-city-title" className="py-14 sm:py-16 md:py-20">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <header className="max-w-3xl">
             <h2 id="state-of-city-title" className="mt-3 text-2xl font-black uppercase tracking-tight text-neutral-base sm:text-3xl md:text-4xl lg:text-5xl">
@@ -290,7 +280,7 @@ export default function NewsPage() {
           <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-4">
             {stateOfCityVideos.map((v) => {
               const id = getYouTubeId(v.url);
-              const thumbUrl = id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null;
+              const thumbUrl = id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg` : null;
 
               return (
                 <a
@@ -298,27 +288,27 @@ export default function NewsPage() {
                   href={v.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group overflow-hidden rounded-xl border border-neutral-border bg-neutral-surface shadow-card transition-all hover:-translate-y-0.5 hover:shadow-md sm:rounded-2xl"
+                  className="group flex h-full flex-col overflow-hidden rounded-xl border border-neutral-border bg-neutral-surface shadow-card transition-all hover:-translate-y-0.5 hover:shadow-md sm:rounded-2xl"
                 >
-                  <div className="relative aspect-video bg-[#0b1733]">
+                  <div className="relative h-48 overflow-hidden bg-neutral-surface sm:h-52 lg:h-56">
                     {thumbUrl ? (
                       <Image
                         src={thumbUrl}
                         alt={v.title}
                         fill
+                        unoptimized
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="object-cover"
+                        className="object-cover object-center"
                       />
                     ) : null}
-                    <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/40" />
                     <div className="absolute bottom-2 left-2 inline-flex items-center gap-1.5 rounded-full bg-neutral-surface/90 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-neutral-ink backdrop-blur sm:bottom-3 sm:left-3 sm:gap-2 sm:px-3 sm:py-1 sm:text-xs">
                       Watch <span aria-hidden="true">→</span>
                     </div>
                   </div>
-                  <div className="p-4 sm:p-5">
+                  <div className="flex flex-1 flex-col p-4 sm:p-5">
                     <div className="text-[10px] font-black uppercase tracking-widest text-primary/80 sm:text-xs">Video</div>
                     <div className="mt-1.5 text-sm font-black text-neutral-ink sm:mt-2 sm:text-base">{v.title}</div>
-                    <div className="mt-1.5 text-xs text-neutral-muted sm:mt-2 sm:text-sm">{v.label}</div>
+                    <div className="mt-auto pt-2 text-xs text-neutral-muted sm:pt-3 sm:text-sm">{v.label}</div>
                   </div>
                 </a>
               );

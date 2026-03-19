@@ -24,6 +24,7 @@ interface PriorityCardImage extends PriorityCardBase {
 type PriorityCard = PriorityCardText | PriorityCardImage;
 
 interface PrioritiesSectionProps {
+  sectionAnchorId?: string;
   title?: string;
   subtitle?: string;
   cards: PriorityCard[];
@@ -31,6 +32,7 @@ interface PrioritiesSectionProps {
 }
 
 export function PrioritiesSection({
+  sectionAnchorId,
   title = "Solutions That Put Families First",
   subtitle = "Clear commitments on affordability, homelessness, public safety, fire prevention, and fixing our roads.",
   cards,
@@ -72,7 +74,11 @@ export function PrioritiesSection({
   }, [cards]);
 
   return (
-    <section aria-labelledby="priorities-title" className="relative isolate overflow-hidden bg-neutral-base py-12 sm:py-16 md:py-20">
+    <section
+      id={sectionAnchorId}
+      aria-labelledby="priorities-title"
+      className="relative isolate overflow-hidden bg-neutral-base py-12 sm:py-16 md:py-20"
+    >
       {/* Soft gradient background blending from news section */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-base via-neutral-base to-neutral-surface" />
@@ -109,7 +115,7 @@ export function PrioritiesSection({
                   className={[
                     "w-full rounded-xl bg-neutral-surface px-3 py-2.5 text-sm font-black uppercase tracking-tight text-neutral-ink shadow-sm sm:rounded-2xl sm:px-4 sm:py-3 sm:text-base",
                     borderless ? "" : "border border-neutral-border",
-                    "focus-visible:ring-2 focus-visible:ring-secondary-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-base",
+                    "focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-base",
                   ].join(" ")}
                 >
                   {cards.map((card) => (
@@ -151,8 +157,8 @@ export function PrioritiesSection({
                       borderless ? "" : "border border-neutral-border",
                       "shadow-sm hover:shadow-md",
                       "h-[72px]",
-                      isActive ? "ring-2 ring-secondary-500/25" : "ring-1 ring-transparent",
-                      "focus-visible:ring-2 focus-visible:ring-secondary-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-base",
+                      isActive ? "ring-2 ring-primary/25" : "ring-1 ring-transparent",
+                      "focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-base",
                     ].join(" ")}
                   >
                     <span
@@ -177,8 +183,8 @@ export function PrioritiesSection({
                         className={[
                           "inline-flex h-7 w-7 flex-none items-center justify-center rounded-full border shadow-sm transition-colors duration-200",
                           isActive
-                            ? "border-transparent bg-secondary-500 text-white"
-                            : "border-neutral-border bg-neutral-base text-neutral-ink group-hover:border-secondary-500/25",
+                            ? "border-transparent bg-primary text-white"
+                            : "border-neutral-border bg-neutral-base text-neutral-ink group-hover:border-primary/25",
                         ].join(" ")}
                       >
                         <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
@@ -224,7 +230,7 @@ export function PrioritiesSection({
                   <div className="text-[10px] font-black uppercase tracking-widest text-neutral-slate/80 sm:text-xs">Solutions</div>
 
                   <div className="inline-flex items-center gap-1.5 rounded-full border border-neutral-border bg-neutral-base px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-neutral-slate/80 sm:gap-2 sm:px-3 sm:py-1 sm:text-xs">
-                    <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-secondary-500 sm:h-2 sm:w-2" />
+                    <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-primary sm:h-2 sm:w-2" />
                     {activeIndex >= 0 ? `Selected ${activeIndex + 1}/${cards.length}` : "Selected"}
                   </div>
                 </div>

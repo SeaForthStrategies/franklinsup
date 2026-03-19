@@ -52,16 +52,5 @@ export const RECORD_NEWS_RAIL: RecordNewsItem[] = [
     dateLabel: "Sep 30, 2025",
     dateTime: "2025-09-30",
   },
-  {
-    title: "Terra Lawson-Remer’s Property Transfer Tax Hike Will Worsen the Housing Crisis",
-    url: "https://voiceofsandiego.org/2025/04/25/terra-lawson-remers-property-transfer-tax-hike-will-worsen-the-housing-crisis/",
-    imageUrl:
-      "https://franklinforsupervisor.com/wp-content/uploads/2026/01/Terra-Lawson-Remers-Property-Transfer-Tax-Hike-Will-Worsen-the-Housing-Crisis-.jpg",
-    imageAlt: "Housing event",
-    sourceIconUrl: SOURCE_ICON_UTSD,
-    sourceName: "Voice of San Diego",
-    dateLabel: "Apr 25, 2025",
-    dateTime: "2025-04-25",
-  },
 ];
 

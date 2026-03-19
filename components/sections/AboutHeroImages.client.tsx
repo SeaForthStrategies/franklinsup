@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 const DEFAULT_IMAGES = [
   "https://franklinforsupervisor.com/wp-content/uploads/2024/08/JohnShanna1EL.png",
   "https://franklinforsupervisor.com/wp-content/uploads/2023/07/DG5_0419-Copy-1024x683.jpg",
+  "/about-john-portrait.png",
   "/mayor-franklin-carlsbad-event.png",
 ] as const;
 
@@ -60,7 +61,7 @@ export function AboutHeroImages({ images = DEFAULT_IMAGES, slideIntervalMs = 800
   const shouldRotate = isBelowDesktop && !reduceMotion && slides.length > 1;
 
   return (
-    <div className="mx-auto mt-8 grid max-w-6xl gap-3 px-4 sm:mt-10 sm:gap-4 sm:px-6 md:mt-12 md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:px-8">
+    <div className="mx-auto mt-8 grid max-w-6xl gap-3 px-4 sm:mt-10 sm:gap-4 sm:px-6 md:mt-12 md:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:px-8">
       <figure className="relative overflow-hidden rounded-2xl border border-white/18 bg-black/25 shadow-2xl backdrop-blur-sm sm:rounded-3xl">
         <div className="relative aspect-[16/12] bg-neutral-ink">
           {shouldRotate ? (
@@ -144,6 +145,36 @@ export function AboutHeroImages({ images = DEFAULT_IMAGES, slideIntervalMs = 800
               alt=""
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover object-[50%_28%] sm:object-[50%_24%]"
+            />
+          )}
+          <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/25" />
+        </div>
+      </figure>
+
+      <figure className="relative overflow-hidden rounded-2xl border border-white/18 bg-black/25 shadow-2xl backdrop-blur-sm sm:rounded-3xl">
+        <div className="relative aspect-[16/12] bg-neutral-ink">
+          {shouldRotate ? (
+            slides.map((src, idx) => (
+              <Image
+                key={src}
+                src={src}
+                alt=""
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className={[
+                  "object-cover object-[50%_28%] sm:object-[50%_24%]",
+                  "transition-opacity duration-1000",
+                  idx === (active + 3) % slides.length ? "opacity-100" : "opacity-0",
+                ].join(" ")}
+              />
+            ))
+          ) : (
+            <Image
+              src={slides[3] ?? DEFAULT_IMAGES[3] ?? slides[0] ?? DEFAULT_IMAGES[0]}
+              alt=""
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               className="object-cover object-[50%_28%] sm:object-[50%_24%]"
             />
           )}

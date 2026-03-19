@@ -116,8 +116,10 @@ function HeadshotRotator({ endorsements }: { endorsements: Endorsement[] }) {
 
   const slot0IndexRef = React.useRef(slot0Index);
   const slot1IndexRef = React.useRef(slot1Index);
-  slot0IndexRef.current = slot0Index;
-  slot1IndexRef.current = slot1Index;
+  React.useEffect(() => {
+    slot0IndexRef.current = slot0Index;
+    slot1IndexRef.current = slot1Index;
+  }, [slot0Index, slot1Index]);
 
   const item0 = items[slot0Index];
   const item1 = items[slot1Index];

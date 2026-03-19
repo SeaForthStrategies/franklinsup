@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const TALLY_EMBED_BASE =
   "https://tally.so/embed/QKAYel?transparentBackground=1&formEventsForwarding=1";
@@ -22,11 +22,7 @@ function buildTallyEmbedUrl(): string {
 }
 
 export function TallyContactEmbed() {
-  const [embedUrl, setEmbedUrl] = useState(TALLY_EMBED_BASE);
-
-  useEffect(() => {
-    setEmbedUrl(buildTallyEmbedUrl());
-  }, []);
+  const [embedUrl] = useState(buildTallyEmbedUrl);
 
   return (
     <iframe
@@ -36,7 +32,7 @@ export function TallyContactEmbed() {
       frameBorder="0"
       marginHeight={0}
       marginWidth={0}
-      title="Contact Mayor John Franklin"
+      title="Contact me"
       className="absolute inset-0 h-full w-full"
     />
   );

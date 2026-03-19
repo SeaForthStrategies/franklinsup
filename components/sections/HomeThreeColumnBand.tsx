@@ -62,7 +62,7 @@ export function HomeThreeColumnBand({ donateUrl }: HomeThreeColumnBandProps) {
                   </Link>
                   <Link
                     href="/endorsements"
-                    className="inline-flex items-center justify-center rounded-full border-2 border-secondary/60 px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-ink transition-all hover:-translate-y-0.5 hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-neutral-base"
+                    className="inline-flex items-center justify-center rounded-full border-2 border-primary/40 bg-white px-6 py-2.5 text-sm font-black uppercase tracking-wide text-neutral-ink transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:bg-neutral-base focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-neutral-base"
                   >
                     See endorsements <span aria-hidden="true">→</span>
                   </Link>
@@ -107,7 +107,7 @@ export function HomeThreeColumnBand({ donateUrl }: HomeThreeColumnBandProps) {
                 <div className="mt-5 sm:mt-6">
                   <Link
                     href="/issues"
-                    className="inline-flex items-center justify-center rounded-full border-2 border-secondary/60 px-4 py-2 text-xs font-black uppercase tracking-wide text-neutral-ink transition-all hover:-translate-y-0.5 hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-neutral-base sm:px-6 sm:py-2.5 sm:text-sm"
+                    className="inline-flex items-center justify-center rounded-full border-2 border-primary/40 bg-white px-4 py-2 text-xs font-black uppercase tracking-wide text-neutral-ink transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:bg-neutral-base focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-neutral-base sm:px-6 sm:py-2.5 sm:text-sm"
                   >
                     Explore the issues <span aria-hidden="true">→</span>
                   </Link>

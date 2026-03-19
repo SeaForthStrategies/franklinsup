@@ -40,7 +40,7 @@ export function CallToAction({
                 href={primaryCta.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-black uppercase tracking-wide text-white transition-colors hover:bg-secondary-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto sm:px-7 sm:text-base"
+                className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-black uppercase tracking-wide text-white transition-colors hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto sm:px-7 sm:text-base"
               >
                 {primaryCta.label}
               </a>
@@ -50,7 +50,7 @@ export function CallToAction({
                   href={secondaryCta.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center rounded-full border-2 border-secondary/70 px-6 py-3 text-sm font-black uppercase tracking-wide text-neutral-ink transition-colors hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-neutral-base sm:w-auto sm:px-7 sm:text-base"
+                  className="inline-flex w-full items-center justify-center rounded-full border-2 border-primary/40 bg-white px-6 py-3 text-sm font-black uppercase tracking-wide text-neutral-ink transition-colors hover:border-primary/60 hover:bg-neutral-base focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-neutral-base sm:w-auto sm:px-7 sm:text-base"
                 >
                   {secondaryCta.label}
                 </a>
