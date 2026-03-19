@@ -131,7 +131,7 @@ export default function NewsPage() {
                   key={item.slug}
                   href={`/featured/${item.slug}`}
                   aria-label={`${item.name} coverage`}
-                  className="group relative inline-flex h-10 w-[140px] items-center justify-center sm:h-12 sm:w-[170px] md:h-14 md:w-[190px]"
+                  className="group relative inline-flex h-10 w-[140px] items-center justify-center overflow-hidden rounded-xl px-2 sm:h-12 sm:w-[170px] sm:px-2.5 md:h-14 md:w-[190px] md:px-3"
                 >
                   <span
                     aria-hidden="true"
@@ -142,7 +142,7 @@ export default function NewsPage() {
                     alt={item.name}
                     width={520}
                     height={140}
-                    className="relative z-10 h-full w-full object-cover object-center opacity-90 transition-opacity duration-200 group-hover:opacity-100"
+                    className="relative z-10 h-full w-full object-contain object-center opacity-90 transition-opacity duration-200 group-hover:opacity-100"
                   />
                 </Link>
               ))}
