@@ -120,7 +120,7 @@ export function HomeCoverHero({
       <div className="absolute inset-0" aria-hidden>
         <div
           id="hero-yt-player"
-          className="absolute inset-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full"
+          className="pointer-events-none absolute inset-0 h-full w-full touch-none [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full [&>iframe]:pointer-events-none"
         />
       </div>
 

@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { FEATURED_IN } from "@/src/content/featuredIn";
 
 export const metadata: Metadata = {
   title: "About – Leadership for San Diego County",
@@ -14,7 +12,6 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const newsLogos = FEATURED_IN.filter((item) => item.slug !== "franklin-for-supervisor");
   const heroImage = "/about-john-portrait.png";
   const galleryImages = [
     "https://franklinforsupervisor.com/wp-content/uploads/2023/07/DG5_0419-Copy-1024x683.jpg",
@@ -145,50 +142,6 @@ export default function AboutPage() {
                 </figure>
               </div>
             </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-neutral-border/60 bg-neutral-base">
-        <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-12 md:py-14 lg:px-8 lg:py-16">
-          <div className="mx-auto max-w-5xl rounded-3xl border border-neutral-border/80 bg-neutral-surface p-5 shadow-card sm:p-6 md:p-8">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <h2 className="text-2xl font-black normal-case tracking-tight text-primary sm:text-3xl">News &amp; commentary</h2>
-                <p className="mt-2 max-w-2xl text-sm text-neutral-slate sm:text-base">Read local coverage and commentary about my work in North County.</p>
-              </div>
-            </div>
-            <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-              {newsLogos.map((item, idx) => (
-                <Link
-                  key={item.slug}
-                  href={`/featured/${item.slug}`}
-                  aria-label={`${item.name} coverage`}
-                  className={[
-                    "group relative flex min-h-20 items-center justify-center overflow-hidden rounded-xl border border-neutral-border bg-white px-4 py-4 transition-all duration-300",
-                    "hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-                    idx % 2 === 0 ? "sm:translate-y-1" : "sm:-translate-y-1",
-                  ].join(" ")}
-                >
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-blue-100/70 via-white/10 to-red-100/45 opacity-80 transition-opacity duration-300 group-hover:opacity-100"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-primary/10"
-                  />
-                  <Image
-                    src={item.logoUrl}
-                    alt={item.name}
-                    width={520}
-                    height={140}
-                    className="relative z-10 h-10 w-full object-cover object-center opacity-100 drop-shadow-[0_1px_1px_rgba(0,0,0,0.15)] transition duration-300 group-hover:scale-[1.02] sm:h-11"
-                    unoptimized
-                  />
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </section>
