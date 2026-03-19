@@ -82,7 +82,10 @@ function sectionCategory(
 
   // Organizations section only: numeric category code + no person name in ACF.
   if (categoryCode === "8" && !hasPersonName) return "Organizations";
-  return undefined;
+
+  // All other (non-organization) endorsements should be treated as leaders/people
+  // because the UI shows only Leaders + Organizations.
+  return "Leaders";
 }
 
 const WP_PER_PAGE = 100;

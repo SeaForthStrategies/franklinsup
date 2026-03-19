@@ -728,7 +728,9 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
                 alt={endorsement.imageAlt || `${endorsement.name}${endorsement.title ? ` - ${endorsement.title}` : ""}`}
                 fill
                 sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-                className="object-cover object-center size-full min-w-full min-h-full transition-transform duration-500 group-hover:scale-[1.02]"
+                // With `fill`, we rely on the parent wrapper sizing. Avoid extra `size-*`/`min-*`
+                // Tailwind utilities that can cause inconsistent layout in some preview/cached states.
+                className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
               />
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/28" />
             </>
