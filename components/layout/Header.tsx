@@ -13,7 +13,7 @@ const NAV_ITEMS = [
     href: "/about",
     children: [
       { label: "District 5", href: "/district-5" },
-      { label: "About", href: "/about" },
+      { label: "About John", href: "/about" },
     ],
   },
   { label: "Issues", href: "/issues" },
