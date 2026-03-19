@@ -298,7 +298,7 @@ export default function NewsPage() {
                         fill
                         unoptimized
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="object-cover object-center"
+                        className="object-cover object-center scale-[1.12] sm:scale-100"
                       />
                     ) : null}
                     <div className="absolute bottom-2 left-2 inline-flex items-center gap-1.5 rounded-full bg-neutral-surface/90 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-neutral-ink backdrop-blur sm:bottom-3 sm:left-3 sm:gap-2 sm:px-3 sm:py-1 sm:text-xs">
