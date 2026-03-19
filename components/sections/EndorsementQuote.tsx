@@ -6,6 +6,7 @@ interface EndorsementQuoteProps {
   authorTitle?: string;
   imageUrl: string;
   imageAlt?: string;
+  imageObjectPosition?: string;
   tone?: "light" | "dark";
 }
 
@@ -56,7 +57,15 @@ function splitAuthorName(fullName: string): { primaryName: string; inlineTitle?:
   return { primaryName: fullName };
 }
 
-export function EndorsementQuote({ quote, author, authorTitle, imageUrl, imageAlt, tone = "light" }: EndorsementQuoteProps) {
+export function EndorsementQuote({
+  quote,
+  author,
+  authorTitle,
+  imageUrl,
+  imageAlt,
+  imageObjectPosition = "50% 22%",
+  tone = "light",
+}: EndorsementQuoteProps) {
   const isDark = tone === "dark";
   const { primaryName, inlineTitle } = splitAuthorName(author);
 
@@ -92,7 +101,8 @@ export function EndorsementQuote({ quote, author, authorTitle, imageUrl, imageAl
                 alt={imageAlt || author}
                 fill
                 sizes="(min-width: 1024px) 260px, (min-width: 640px) 220px, 220px"
-                className="object-cover object-[50%_22%] drop-shadow-[0_18px_30px_rgba(2,6,23,0.45)] will-change-transform transform-gpu"
+                className="object-cover drop-shadow-[0_18px_30px_rgba(2,6,23,0.45)] will-change-transform transform-gpu"
+                style={{ objectPosition: imageObjectPosition }}
                 priority
               />
             </div>
