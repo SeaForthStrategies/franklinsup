@@ -306,7 +306,7 @@ export default async function EndorsementsPage() {
             </h1>
 
             <EndorsementsTopAnimations
-              people={mainEndorsements}
+              people={leaders}
               organizations={organizations}
             />
           </div>
@@ -321,10 +321,6 @@ export default async function EndorsementsPage() {
         </div>
 
         <div className="relative mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 sm:py-14 md:py-20 lg:px-8 lg:py-24">
-          {mainEndorsements.length > 0 ? (
-            <EndorsementsGrid endorsements={mainEndorsements} variant="people" />
-          ) : null}
-
           {leaders.length > 0 ? (
             <div className="mt-10 sm:mt-14 md:mt-16">
               <h2 className="text-center text-xl font-black uppercase tracking-tight text-white sm:text-2xl md:text-3xl">
