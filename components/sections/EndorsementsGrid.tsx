@@ -678,9 +678,10 @@ interface EndorsementCardProps {
   endorsement: Endorsement;
   index: number;
   variant: "people" | "orgs";
+  loading?: "lazy" | "eager";
 }
 
-function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) {
+function EndorsementCard({ endorsement, index, variant, loading }: EndorsementCardProps) {
   const isOrg = variant === "orgs";
   const specialLines = !isOrg ? splitLinesForPerson(endorsement.name, endorsement.title) : null;
   const { primaryName, inlineTitle } = splitEndorsementName(endorsement.name);
@@ -719,6 +720,7 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
                   sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
                   // Use cover so logos/headshots reliably fill the square.
                   className="object-cover object-center w-full h-full transition-transform duration-300 group-hover:scale-[1.02]"
+                  loading={loading}
                 />
               </div>
             </div>
@@ -732,6 +734,7 @@ function EndorsementCard({ endorsement, index, variant }: EndorsementCardProps) 
                 // With `fill`, we rely on the parent wrapper sizing. Avoid extra `size-*`/`min-*`
                 // Tailwind utilities that can cause inconsistent layout in some preview/cached states.
                 className="object-cover object-center w-full h-full transition-transform duration-500 group-hover:scale-[1.02]"
+                loading={loading}
               />
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/28" />
             </>
@@ -812,10 +815,20 @@ interface EndorsementsGridProps {
 }
 
 export function EndorsementsGrid({ endorsements = [], variant = "people" }: EndorsementsGridProps) {
+  const bottomEagerCount = 12;
+  const eagerThreshold = Math.max(0, endorsements.length - bottomEagerCount);
+  const shouldEagerByName = (name: string) => name.toLowerCase().includes("darrell issa");
+
   return (
     <div className="grid auto-rows-fr grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 md:gap-6 lg:gap-8 xl:grid-cols-4">
       {endorsements.map((endorsement, index) => (
-        <EndorsementCard key={endorsement.id} endorsement={endorsement} index={index} variant={variant} />
+        <EndorsementCard
+          key={endorsement.id}
+          endorsement={endorsement}
+          index={index}
+          variant={variant}
+          loading={index >= eagerThreshold || shouldEagerByName(endorsement.name) ? "eager" : "lazy"}
+        />
       ))}
     </div>
   );
