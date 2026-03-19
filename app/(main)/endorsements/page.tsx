@@ -353,8 +353,9 @@ export default async function EndorsementsPage() {
       <EndorsementQuote
         quote="Mayor Franklin is a common sense thinker who doesn’t take no for an answer. I’ve known him for 21 years. He’s a problem solver who gets to the source of the problem and finds solutions. He believes in accountability and transparency. He’s got my vote!"
         author="Congressman Darrell Issa"
-        imageUrl="https://franklinforsupervisor.com/wp-content/uploads/2025/02/272330064_479135523575125_5456602968414208822_n.jpg"
-        imageObjectPosition="50% 30%"
+        imageUrl="https://franklinforsupervisor.com/wp-content/uploads/2026/02/Congressman-Darrell-Issa-1.jpg"
+        imageObjectPosition="50% 50%"
+        imageFit="cover"
         tone="dark"
       />
     </>

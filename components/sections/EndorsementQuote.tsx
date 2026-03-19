@@ -7,6 +7,7 @@ interface EndorsementQuoteProps {
   imageUrl: string;
   imageAlt?: string;
   imageObjectPosition?: string;
+  imageFit?: "cover" | "contain";
   tone?: "light" | "dark";
 }
 
@@ -64,6 +65,7 @@ export function EndorsementQuote({
   imageUrl,
   imageAlt,
   imageObjectPosition = "50% 22%",
+  imageFit = "cover",
   tone = "light",
 }: EndorsementQuoteProps) {
   const isDark = tone === "dark";
@@ -85,23 +87,16 @@ export function EndorsementQuote({
 
           <div className="grid gap-5 rounded-2xl border border-neutral-border bg-neutral-base p-5 shadow-card sm:grid-cols-[180px_1fr] sm:gap-6 sm:rounded-3xl sm:p-6 md:grid-cols-[220px_1fr] md:gap-8 md:p-8 lg:grid-cols-[260px_1fr]">
             <div className="relative mx-auto aspect-square w-full max-w-[180px] overflow-hidden rounded-xl bg-neutral-surface sm:mx-0 sm:max-w-none sm:rounded-2xl animate-[fadeInScale_0.5s_ease-out_backwards] will-change-transform transform-gpu">
-              {/* Backdrop (keeps the frame looking intentional) */}
-              <Image
-                src={imageUrl}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 260px, (min-width: 640px) 220px, 220px"
-                className="object-cover scale-110 blur-2xl opacity-30 will-change-transform transform-gpu"
-              />
-              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/20" />
-
-              {/* Foreground (fills the frame cleanly) */}
               <Image
                 src={imageUrl}
                 alt={imageAlt || author}
-                fill
-                sizes="(min-width: 1024px) 260px, (min-width: 640px) 220px, 220px"
-                className="object-cover drop-shadow-[0_18px_30px_rgba(2,6,23,0.45)] will-change-transform transform-gpu"
+                width={1024}
+                height={1024}
+                sizes="(min-width: 1024px) 260px, (min-width: 640px) 220px, 180px"
+                className={[
+                  imageFit === "contain" ? "object-contain p-2 sm:p-3" : "object-cover",
+                  "h-full w-full drop-shadow-[0_18px_30px_rgba(2,6,23,0.45)] will-change-transform transform-gpu",
+                ].join(" ")}
                 style={{ objectPosition: imageObjectPosition }}
                 priority
               />
