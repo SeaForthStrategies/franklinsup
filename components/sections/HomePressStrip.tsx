@@ -14,7 +14,7 @@ export function HomePressStrip() {
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/14 to-transparent" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3 sm:gap-4">
           <p className="text-[10px] font-black uppercase tracking-widest text-neutral-muted sm:text-xs">Featured in</p>
           <div className="h-px flex-1 bg-gradient-to-r from-primary/0 via-primary/15 to-primary/0" />
@@ -71,7 +71,7 @@ export function HomePressStrip() {
                   alt={FEATURED_IN[0].name}
                   width={520}
                   height={140}
-                  className="h-10 lg:h-12 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
+                  className="h-8 md:h-10 lg:h-12 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
                 />
               </Link>
             </div>
@@ -87,7 +87,7 @@ export function HomePressStrip() {
                 alt={FEATURED_IN[1].name}
                 width={520}
                 height={140}
-                className="h-14 lg:h-16 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
+                className="h-11 md:h-14 lg:h-16 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
               />
             </Link>
 
@@ -103,7 +103,7 @@ export function HomePressStrip() {
                   alt={FEATURED_IN[2].name}
                   width={520}
                   height={140}
-                  className="h-10 lg:h-12 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
+                  className="h-8 md:h-10 lg:h-12 w-auto opacity-90 transition-opacity duration-200 group-hover:opacity-100"
                 />
               </Link>
             </div>

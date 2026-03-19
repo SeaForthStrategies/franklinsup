@@ -141,7 +141,7 @@ export default function NewsPage() {
                     alt={item.name}
                     width={520}
                     height={140}
-                    className="relative z-10 h-full w-full object-contain opacity-90 transition-opacity duration-200 group-hover:opacity-100"
+                    className="relative z-10 h-full w-full object-cover object-center opacity-90 transition-opacity duration-200 group-hover:opacity-100"
                   />
                 </Link>
               ))}

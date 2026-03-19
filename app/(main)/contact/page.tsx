@@ -16,7 +16,7 @@ export default function ContactPage() {
   return (
     <>
       <Script src="https://tally.so/widgets/embed.js" strategy="beforeInteractive" />
-      <div className="min-h-[600px] w-full">
+      <div className="min-h-[60vh] w-full sm:min-h-[600px]">
         <iframe
           data-tally-src="https://tally.so/embed/QKAYel?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
           loading="lazy"
@@ -26,7 +26,7 @@ export default function ContactPage() {
           marginHeight={0}
           marginWidth={0}
           title="Contact me"
-          className="min-h-[200px] w-full"
+          className="min-h-[60vh] w-full sm:min-h-[600px]"
         />
       </div>
       <TallyEmbedLoader />

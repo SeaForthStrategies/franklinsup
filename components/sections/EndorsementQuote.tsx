@@ -7,7 +7,6 @@ interface EndorsementQuoteProps {
   imageUrl: string;
   imageAlt?: string;
   imageObjectPosition?: string;
-  imageFit?: "cover" | "contain";
   tone?: "light" | "dark";
 }
 
@@ -65,7 +64,6 @@ export function EndorsementQuote({
   imageUrl,
   imageAlt,
   imageObjectPosition = "50% 22%",
-  imageFit = "cover",
   tone = "light",
 }: EndorsementQuoteProps) {
   const isDark = tone === "dark";
@@ -79,7 +77,7 @@ export function EndorsementQuote({
         </div>
       ) : null}
 
-      <div className="relative mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 sm:py-14 md:py-20 lg:px-8 lg:py-24">
+      <div className="relative mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:py-20 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-4xl">
           <h2 className={isDark ? "mb-6 text-2xl font-black uppercase tracking-tight text-white sm:mb-8 sm:text-3xl md:text-4xl" : "mb-6 text-2xl font-black uppercase tracking-tight text-neutral-ink sm:mb-8 sm:text-3xl md:text-4xl"}>
             Here&apos;s why:
@@ -94,7 +92,7 @@ export function EndorsementQuote({
                 height={1024}
                 sizes="(min-width: 1024px) 260px, (min-width: 640px) 220px, 180px"
                 className={[
-                  imageFit === "contain" ? "object-contain p-2 sm:p-3" : "object-cover",
+                  "object-cover",
                   "h-full w-full drop-shadow-[0_18px_30px_rgba(2,6,23,0.45)] will-change-transform transform-gpu",
                 ].join(" ")}
                 style={{ objectPosition: imageObjectPosition }}

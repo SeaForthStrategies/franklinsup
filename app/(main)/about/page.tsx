@@ -87,7 +87,7 @@ export default function AboutPage() {
       </section>
 
       <section className="border-t border-neutral-border/60 bg-neutral-surface">
-        <div className="mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 sm:py-14 md:py-16 lg:px-8 lg:py-20">
+        <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:py-16 lg:px-8 lg:py-20">
           <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-12 lg:gap-8">
             <article className="rounded-3xl border border-neutral-border bg-neutral-base p-5 shadow-card sm:p-6 md:p-8 lg:col-span-8">
               <h2 className="text-2xl font-black normal-case tracking-tight text-primary sm:text-3xl">My public service</h2>
@@ -150,7 +150,7 @@ export default function AboutPage() {
       </section>
 
       <section className="border-t border-neutral-border/60 bg-neutral-base">
-        <div className="mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 sm:py-12 md:py-14 lg:px-8 lg:py-16">
+        <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-12 md:py-14 lg:px-8 lg:py-16">
           <div className="mx-auto max-w-5xl rounded-3xl border border-neutral-border/80 bg-neutral-surface p-5 shadow-card sm:p-6 md:p-8">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
               <div>
@@ -183,7 +183,7 @@ export default function AboutPage() {
                     alt={item.name}
                     width={520}
                     height={140}
-                    className="relative z-10 h-10 w-auto max-w-[85%] object-contain opacity-100 drop-shadow-[0_1px_1px_rgba(0,0,0,0.15)] transition duration-300 group-hover:scale-[1.02] sm:h-11"
+                    className="relative z-10 h-10 w-full object-cover object-center opacity-100 drop-shadow-[0_1px_1px_rgba(0,0,0,0.15)] transition duration-300 group-hover:scale-[1.02] sm:h-11"
                     unoptimized
                   />
                 </Link>

@@ -297,7 +297,7 @@ export default async function EndorsementsPage() {
           <div className="absolute inset-0 bg-[radial-gradient(900px_260px_at_50%_-10%,rgba(59,130,246,.35),transparent_60%)]" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="text-balance text-3xl font-black uppercase tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               Endorsements
@@ -318,7 +318,7 @@ export default async function EndorsementsPage() {
           <div className="absolute inset-0 bg-[radial-gradient(1100px_520px_at_50%_0%,rgba(239,68,68,.18),transparent_62%)]" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 sm:py-14 md:py-20 lg:px-8 lg:py-24">
+        <div className="relative mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:py-20 lg:px-8 lg:py-24">
           {leaders.length > 0 ? (
             <div className="mt-10 sm:mt-14 md:mt-16">
               <h2 className="text-center text-xl font-black uppercase tracking-tight text-white sm:text-2xl md:text-3xl">
@@ -350,7 +350,6 @@ export default async function EndorsementsPage() {
         author="Congressman Darrell Issa"
         imageUrl="https://franklinforsupervisor.com/wp-content/uploads/2026/02/Congressman-Darrell-Issa-1.jpg"
         imageObjectPosition="50% 50%"
-        imageFit="cover"
         tone="dark"
       />
     </>

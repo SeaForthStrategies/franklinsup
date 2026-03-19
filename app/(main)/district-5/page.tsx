@@ -32,7 +32,7 @@ export default function District5Page() {
           <div className="absolute -top-28 right-[-10%] h-[300px] w-[500px] rounded-full bg-blue-200/16 blur-3xl sm:h-[420px] sm:w-[740px]" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 sm:py-14 md:py-16 lg:px-8 lg:py-20">
+        <div className="relative mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:py-16 lg:px-8 lg:py-20">
           <header className="mx-auto max-w-3xl text-center motion-reduce:animate-none animate-[fadeInUp_0.6s_ease-out_backwards]">
             <h1 className="text-balance text-2xl font-black uppercase tracking-tight text-primary sm:text-3xl md:text-4xl lg:text-5xl">
               About District 5
@@ -60,7 +60,7 @@ export default function District5Page() {
       </section>
 
       <section className="border-t border-neutral-border/60 bg-neutral-surface">
-        <div className="mx-auto w-full max-w-7xl px-5 py-8 sm:px-6 sm:py-12 md:py-16 lg:px-8 lg:py-20">
+        <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-12 md:py-16 lg:px-8 lg:py-20">
           <div className="mx-auto w-full max-w-6xl grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10">
             <div className="order-2 space-y-5 sm:space-y-8 lg:order-1 lg:col-span-7">
               <article className="relative overflow-hidden rounded-xl border border-neutral-border bg-neutral-base p-4 shadow-card sm:rounded-2xl sm:p-5 md:rounded-3xl md:p-7">
@@ -109,27 +109,20 @@ export default function District5Page() {
                 <p className="mt-2 text-sm leading-relaxed text-neutral-slate">
                   This map shows the full district footprint from coastal North County to inland communities.
                 </p>
-                <div className="mt-4 flex-1 rounded-xl border border-neutral-border bg-neutral-surface p-2 sm:rounded-2xl sm:p-3 md:p-4">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-neutral-border bg-neutral-surface sm:rounded-xl md:rounded-2xl">
+                <div className="mt-4 overflow-hidden rounded-xl border border-neutral-border bg-neutral-surface shadow-sm sm:rounded-2xl">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-neutral-surface">
                     <Image
                       src="https://franklinforsupervisor.com/wp-content/uploads/2026/02/Screenshot-2026-02-02-at-10.55.02-AM.png"
                       alt="District 5 map"
                       fill
                       loading="lazy"
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
-                      className="h-full w-full object-contain object-center"
+                      className="h-full w-full object-cover object-center"
                     />
                   </div>
                 </div>
-                <div className="mt-4">
-                  <Link
-                    href="https://www.sdcounty.ca.gov/content/sdc/redistricting/2021-redistricting-map-and-data.html"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex h-11 w-full items-center justify-center rounded-xl border border-primary/20 px-4 text-sm font-bold text-primary transition hover:border-primary/40 hover:bg-primary/5"
-                  >
-                    View county district map
-                  </Link>
+                <div className="mt-3 text-xs font-semibold uppercase tracking-wide text-neutral-slate/75 sm:text-sm">
+                  District boundaries shown for quick reference.
                 </div>
               </article>
             </aside>
