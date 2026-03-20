@@ -170,82 +170,6 @@ export function Header() {
     setOpenAccordion((prev) => (prev === label ? null : label));
   }, []);
 
-  const desktopLeftItems = NAV_ITEMS.slice(0, 2);
-  const desktopCenterItem = NAV_ITEMS[2];
-  const desktopRightItems = NAV_ITEMS.slice(3);
-
-  const renderDesktopItem = (item: (typeof NAV_ITEMS)[number]) => {
-    if ("children" in item) {
-      return (
-        <li
-          key={item.label}
-          className="site-nav-desktop-dropdown"
-          onMouseEnter={() => handleDropdownEnter(item.label)}
-          onMouseLeave={handleDropdownLeave}
-        >
-          <button
-            className="site-nav-link site-nav-dropdown-trigger"
-            aria-expanded={desktopDropdownOpen === item.label}
-            aria-haspopup="true"
-            onClick={() =>
-              setDesktopDropdownOpen((prev) =>
-                prev === item.label ? null : item.label
-              )
-            }
-          >
-            <span>{item.label}</span>
-            <span aria-hidden="true" className="site-nav-dropdown-caret">
-              <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-                <path
-                  d="M6 8l4 4 4-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </button>
-          {desktopDropdownOpen === item.label && (
-            <ul
-              className="site-nav-desktop-submenu"
-              role="list"
-              onMouseEnter={() => handleDropdownEnter(item.label)}
-              onMouseLeave={handleDropdownLeave}
-            >
-              {item.children.map((child) => (
-                <li key={child.label}>
-                  <Link
-                    className="site-nav-sublink"
-                    href={child.href}
-                    onClick={handleLinkClick}
-                  >
-                    {child.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
-      );
-    }
-
-    return (
-      <li key={item.label}>
-        {"external" in item && item.external ? (
-          <a className="site-nav-link" href={item.href} onClick={handleLinkClick}>
-            {item.label}
-          </a>
-        ) : (
-          <Link className="site-nav-link" href={item.href} onClick={handleLinkClick}>
-            {item.label}
-          </Link>
-        )}
-      </li>
-    );
-  };
-
   return (
     <header className="site-header">
       <div className="site-container">
@@ -265,17 +189,75 @@ export function Header() {
             </Link>
 
             {/* Desktop Navigation (≥1280px) */}
-            <nav className="site-nav-desktop" aria-label="Desktop primary navigation">
-              <ul className="site-nav-desktop-side site-nav-desktop-side--left" role="list">
-                {desktopLeftItems.map((item) => renderDesktopItem(item))}
-              </ul>
-              <ul className="site-nav-desktop-center" role="list">
-                {renderDesktopItem(desktopCenterItem)}
-              </ul>
-              <ul className="site-nav-desktop-side site-nav-desktop-side--right" role="list">
-                {desktopRightItems.map((item) => renderDesktopItem(item))}
-              </ul>
-            </nav>
+            <ul className="site-nav-desktop" role="list">
+              {NAV_ITEMS.map((item) =>
+                "children" in item ? (
+                  <li
+                    key={item.label}
+                    className="site-nav-desktop-dropdown"
+                    onMouseEnter={() => handleDropdownEnter(item.label)}
+                    onMouseLeave={handleDropdownLeave}
+                  >
+                    <button
+                      className="site-nav-link site-nav-dropdown-trigger"
+                      aria-expanded={desktopDropdownOpen === item.label}
+                      aria-haspopup="true"
+                      onClick={() =>
+                        setDesktopDropdownOpen((prev) =>
+                          prev === item.label ? null : item.label
+                        )
+                      }
+                    >
+                      <span>{item.label}</span>
+                      <span aria-hidden="true" className="site-nav-dropdown-caret">
+                        <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                          <path
+                            d="M6 8l4 4 4-4"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+                    {desktopDropdownOpen === item.label && (
+                      <ul
+                        className="site-nav-desktop-submenu"
+                        role="list"
+                        onMouseEnter={() => handleDropdownEnter(item.label)}
+                        onMouseLeave={handleDropdownLeave}
+                      >
+                        {item.children.map((child) => (
+                          <li key={child.label}>
+                            <Link
+                              className="site-nav-sublink"
+                              href={child.href}
+                              onClick={handleLinkClick}
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ) : (
+                  <li key={item.label}>
+                    {"external" in item && item.external ? (
+                      <a className="site-nav-link" href={item.href} onClick={handleLinkClick}>
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link className="site-nav-link" href={item.href} onClick={handleLinkClick}>
+                        {item.label}
+                      </Link>
+                    )}
+                  </li>
+                )
+              )}
+            </ul>
 
             {/* Desktop CTAs (≥1280px) */}
             <div className="site-nav-ctas-desktop">
