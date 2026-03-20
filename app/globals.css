@@ -400,27 +400,15 @@
 
     .site-header .site-nav-bar {
       width: 100%;
-      margin-left: 0;
-      margin-right: 0;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
       gap: clamp(1.25rem, 2.5vw, 2rem);
     }
 
-    .site-header .site-brand,
-    .site-header .site-nav-ctas-desktop {
-      flex: 0 0 clamp(190px, 20vw, 320px);
-    }
-
-    .site-header .site-brand {
-      justify-content: flex-start;
-    }
-
-    .site-header .site-nav-ctas-desktop {
-      justify-content: flex-end;
-    }
-
     .site-header .site-nav-desktop {
-      flex: 1 1 auto;
+      min-width: 0;
+      justify-self: center;
     }
 
     .site-header .site-logo {
@@ -444,6 +432,7 @@
 
     .site-nav-ctas-desktop {
       gap: clamp(0.75rem, 1.25vw, 1.25rem);
+      justify-self: end;
     }
 
     .site-nav-ctas-desktop .site-cta {
