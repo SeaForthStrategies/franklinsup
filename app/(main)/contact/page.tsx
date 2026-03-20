@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen w-full bg-primary">
+    <div className="min-h-screen w-full bg-primary px-4 sm:px-6 lg:px-8">
       <iframe
         src="https://tally.so/embed/QKAYel?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
         loading="lazy"
