@@ -402,6 +402,20 @@
       gap: clamp(1.25rem, 2.5vw, 2rem);
     }
 
+    /* Keep nav truly centered by balancing left/right columns */
+    .site-header .site-brand,
+    .site-header .site-nav-ctas-desktop {
+      flex: 0 0 clamp(180px, 20vw, 320px);
+    }
+
+    .site-header .site-brand {
+      justify-content: flex-start;
+    }
+
+    .site-header .site-nav-ctas-desktop {
+      justify-content: flex-end;
+    }
+
     .site-header .site-logo {
       width: clamp(160px, 18vw, 280px);
     }
