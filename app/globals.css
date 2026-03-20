@@ -280,20 +280,35 @@
      ============================================================================ */
   .site-nav-desktop {
     display: none;
-    list-style: none;
-    margin: 0;
-    padding: 0;
   }
 
   @media (min-width: 1280px) {
     .site-nav-desktop {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      flex: 1;
+      gap: clamp(0.75rem, 1.5vw, 1.5rem);
+      min-width: 0;
+    }
+
+    .site-nav-desktop-side,
+    .site-nav-desktop-center {
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex: 1;
-      /* Fluid gap that shrinks as viewport narrows */
-      gap: clamp(0.5rem, 1.5vw, 1.5rem);
-      flex-wrap: nowrap; /* CRITICAL: Never wrap */
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: clamp(0.5rem, 1.2vw, 1.25rem);
+      flex-wrap: nowrap;
+    }
+
+    .site-nav-desktop-side--left {
+      justify-content: flex-end;
+    }
+
+    .site-nav-desktop-side--right {
+      justify-content: flex-start;
     }
   }
 
@@ -399,29 +414,21 @@
     }
 
     .site-header .site-nav-bar {
+      width: max-content;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
       gap: clamp(1.25rem, 2.5vw, 2rem);
     }
 
-    /* Keep nav truly centered by balancing left/right columns */
     .site-header .site-brand,
+    .site-header .site-nav-desktop,
     .site-header .site-nav-ctas-desktop {
-      flex: 0 0 clamp(180px, 20vw, 320px);
-    }
-
-    .site-header .site-brand {
-      justify-content: flex-start;
-    }
-
-    .site-header .site-nav-ctas-desktop {
-      justify-content: flex-end;
+      flex: 0 0 auto;
     }
 
     .site-header .site-logo {
       width: clamp(160px, 18vw, 280px);
-    }
-
-    .site-nav-desktop {
-      gap: clamp(0.75rem, 2vw, 2rem);
     }
 
     .site-nav-link {
