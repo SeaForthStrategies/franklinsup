@@ -252,7 +252,7 @@ export function PrioritiesSection({
                         alt={activeCard.imageAlt}
                         fill
                         sizes="(max-width: 1024px) 100vw, 66vw"
-                        className="h-full w-full object-cover object-center"
+                        className="h-full w-full object-contain object-center"
                       />
                     </div>
                     <p className="mt-2 text-xs text-neutral-muted sm:mt-3 sm:text-sm">

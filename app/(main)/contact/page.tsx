@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
-import { TallyEmbedLoader } from "@/components/forms/TallyEmbedLoader.client";
 
 export const metadata: Metadata = {
   title: "Contact me",
@@ -14,22 +12,18 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <>
-      <Script src="https://tally.so/widgets/embed.js" strategy="beforeInteractive" />
-      <div className="min-h-[60vh] w-full sm:min-h-[600px]">
-        <iframe
-          data-tally-src="https://tally.so/embed/QKAYel?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-          loading="lazy"
-          width="100%"
-          height="200"
-          frameBorder="0"
-          marginHeight={0}
-          marginWidth={0}
-          title="Contact me"
-          className="min-h-[60vh] w-full sm:min-h-[600px]"
-        />
-      </div>
-      <TallyEmbedLoader />
-    </>
+    <div className="w-full">
+      <iframe
+        src="https://tally.so/embed/QKAYel?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+        loading="lazy"
+        width="100%"
+        height="1000"
+        frameBorder="0"
+        marginHeight={0}
+        marginWidth={0}
+        title="Contact me"
+        className="min-h-screen w-full border-0"
+      />
+    </div>
   );
 }
