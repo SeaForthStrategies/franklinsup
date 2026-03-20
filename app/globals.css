@@ -414,17 +414,28 @@
     }
 
     .site-header .site-nav-bar {
-      width: max-content;
-      margin-left: auto;
-      margin-right: auto;
-      justify-content: center;
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      justify-content: space-between;
       gap: clamp(1.25rem, 2.5vw, 2rem);
     }
 
     .site-header .site-brand,
-    .site-header .site-nav-desktop,
     .site-header .site-nav-ctas-desktop {
-      flex: 0 0 auto;
+      flex: 0 0 clamp(190px, 20vw, 320px);
+    }
+
+    .site-header .site-brand {
+      justify-content: flex-start;
+    }
+
+    .site-header .site-nav-ctas-desktop {
+      justify-content: flex-end;
+    }
+
+    .site-header .site-nav-desktop {
+      flex: 1 1 auto;
     }
 
     .site-header .site-logo {
