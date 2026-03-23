@@ -7,8 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import { COVER_HERO_WHITE_LOGO_URL } from "@/components/sections/home-hero/coverHeroAssets";
 
 const HERO_VIDEO_ID = "wqzuN9F11Ow";
-const HERO_POSTER_URL = `https://img.youtube.com/vi/${HERO_VIDEO_ID}/maxresdefault.jpg`;
-const HERO_POSTER_FALLBACK = `https://img.youtube.com/vi/${HERO_VIDEO_ID}/sddefault.jpg`;
+const HERO_POSTER_URL = `https://i.ytimg.com/vi/${HERO_VIDEO_ID}/maxresdefault.jpg`;
+const HERO_POSTER_FALLBACK = `https://i.ytimg.com/vi/${HERO_VIDEO_ID}/sddefault.jpg`;
 
 type YTPlayerInstance = { mute: () => void; unMute: () => void; getPlayerState: () => number };
 
@@ -24,6 +24,7 @@ export function HomeCoverHero({
   const playerRef = useRef<YTPlayerInstance | null>(null);
   const sectionRef = useRef<HTMLElement | null>(null);
   const [posterVisible, setPosterVisible] = useState(true);
+  const [posterSrc, setPosterSrc] = useState(HERO_POSTER_URL);
   const [heroInView, setHeroInView] = useState(false);
 
   useEffect(() => {
@@ -74,10 +75,15 @@ export function HomeCoverHero({
       return;
     }
 
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScript = document.getElementsByTagName("script")[0];
-    firstScript?.parentNode?.insertBefore(tag, firstScript);
+    const existingScript = document.querySelector<HTMLScriptElement>(
+      'script[src="https://www.youtube.com/iframe_api"]'
+    );
+    if (!existingScript) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScript = document.getElementsByTagName("script")[0];
+      firstScript?.parentNode?.insertBefore(tag, firstScript);
+    }
 
     (window as unknown as { onYouTubeIframeAPIReady: () => void }).onYouTubeIframeAPIReady = () => {
       initPlayer();
@@ -103,15 +109,16 @@ export function HomeCoverHero({
           pointerEvents: posterVisible ? "auto" : "none",
         }}
       >
-        <img
-          src={HERO_POSTER_URL}
+        <Image
+          src={posterSrc}
           alt=""
-          className="h-full w-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
           fetchPriority="high"
-          decoding="async"
-          onError={(e) => {
-            const target = e.currentTarget;
-            if (target.src !== HERO_POSTER_FALLBACK) target.src = HERO_POSTER_FALLBACK;
+          priority
+          onError={() => {
+            if (posterSrc !== HERO_POSTER_FALLBACK) setPosterSrc(HERO_POSTER_FALLBACK);
           }}
         />
       </div>
