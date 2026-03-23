@@ -81,6 +81,11 @@ export function HomeCoverHero({
     if (!existingScript) {
       const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
+      const nonce =
+        document
+          .querySelector<HTMLMetaElement>('meta[name="csp-nonce"]')
+          ?.getAttribute("content") ?? "";
+      if (nonce) tag.nonce = nonce;
       const firstScript = document.getElementsByTagName("script")[0];
       firstScript?.parentNode?.insertBefore(tag, firstScript);
     }

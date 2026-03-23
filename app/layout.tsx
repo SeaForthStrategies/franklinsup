@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { DevOnlyPreviewSwitcher } from "@/components/dev/DevOnlyPreviewSwitcher.client";
@@ -45,9 +46,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const nonce = (await headers()).get("x-nonce") ?? "";
+
   return (
     <html lang="en" className={montserrat.variable}>
       <head>
+        {nonce ? <meta name="csp-nonce" content={nonce} /> : null}
         <link rel="preconnect" href="https://www.youtube.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
