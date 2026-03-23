@@ -29,7 +29,15 @@ function OdometerNumber({ value }: { value: number }) {
 
   React.useEffect(() => {
     const el = containerRef.current;
-    if (!el) return;
+    if (!el) {
+      setIsVisible(true);
+      return;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -42,7 +50,16 @@ function OdometerNumber({ value }: { value: number }) {
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+
+    // Fallback for production/browser cases where observer callbacks are delayed or skipped.
+    const fallback = window.setTimeout(() => {
+      setIsVisible(true);
+    }, 900);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(fallback);
+    };
   }, []);
 
   React.useEffect(() => {
