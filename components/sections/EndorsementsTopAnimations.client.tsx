@@ -20,69 +20,42 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
-function OdometerDigit({
-  digit,
-  animate,
-  delayMs,
-  reducedMotion,
-}: {
-  digit: number;
-  animate: boolean;
-  delayMs: number;
-  reducedMotion: boolean;
-}) {
-  return (
-    <span className="relative inline-block h-[1em] w-[0.75em] overflow-hidden align-baseline tabular-nums">
-      <span
-        className="absolute left-0 top-0 flex flex-col leading-none transition-transform duration-[1200ms] ease-[cubic-bezier(.2,.85,.2,1)]"
-        style={{
-          transform: animate ? `translateY(-${digit}em)` : "translateY(0em)",
-          transitionDelay: reducedMotion ? "0ms" : `${delayMs}ms`,
-          transitionDuration: reducedMotion ? "0ms" : undefined,
-        }}
-        aria-hidden="true"
-      >
-        {Array.from({ length: 10 }).map((_, i) => (
-          <span key={i} className="h-[1em] leading-none">
-            {i}
-          </span>
-        ))}
-      </span>
-      <span className="sr-only">{digit}</span>
-    </span>
-  );
-}
-
 function OdometerNumber({ value }: { value: number }) {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const [animate, setAnimate] = React.useState(false);
+  const [displayValue, setDisplayValue] = React.useState(0);
+  const safeTarget = Math.max(0, Math.floor(value));
 
   React.useEffect(() => {
-    if (prefersReducedMotion) return;
-    const t = window.setTimeout(() => setAnimate(true), 220);
-    return () => window.clearTimeout(t);
-  }, [prefersReducedMotion]);
+    if (prefersReducedMotion) {
+      setDisplayValue(safeTarget);
+      return;
+    }
 
-  const text = Math.max(0, Math.floor(value)).toString();
+    setDisplayValue(0);
+    const durationMs = 1200;
+    const start = performance.now();
+    let rafId = 0;
+
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(1, elapsed / durationMs);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(Math.round(safeTarget * eased));
+      if (progress < 1) {
+        rafId = window.requestAnimationFrame(tick);
+      }
+    };
+
+    rafId = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(rafId);
+  }, [prefersReducedMotion, safeTarget]);
 
   return (
     <div
       className="flex items-end justify-center text-4xl font-black tracking-tight text-white sm:text-5xl md:text-6xl"
-      aria-label={`${text} endorsements`}
+      aria-label={`${displayValue} endorsements`}
     >
-      {text.split("").map((ch, idx) => {
-        const digit = Number.parseInt(ch, 10);
-        if (Number.isNaN(digit)) return null;
-        return (
-          <OdometerDigit
-            key={`${idx}-${ch}`}
-            digit={digit}
-            animate={prefersReducedMotion ? true : animate}
-            delayMs={idx * 95}
-            reducedMotion={prefersReducedMotion}
-          />
-        );
-      })}
+      <span className="tabular-nums">{displayValue}</span>
     </div>
   );
 }
