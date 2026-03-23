@@ -23,11 +23,36 @@ function usePrefersReducedMotion() {
 function OdometerNumber({ value }: { value: number }) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [displayValue, setDisplayValue] = React.useState(0);
+  const [isVisible, setIsVisible] = React.useState(false);
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
   const safeTarget = Math.max(0, Math.floor(value));
+
+  React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.2 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   React.useEffect(() => {
     if (prefersReducedMotion) {
       setDisplayValue(safeTarget);
+      return;
+    }
+
+    if (!isVisible) {
+      setDisplayValue(0);
       return;
     }
 
@@ -48,10 +73,11 @@ function OdometerNumber({ value }: { value: number }) {
 
     rafId = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(rafId);
-  }, [prefersReducedMotion, safeTarget]);
+  }, [isVisible, prefersReducedMotion, safeTarget]);
 
   return (
     <div
+      ref={containerRef}
       className="flex items-end justify-center text-4xl font-black tracking-tight text-white sm:text-5xl md:text-6xl"
       aria-label={`${displayValue} endorsements`}
     >
